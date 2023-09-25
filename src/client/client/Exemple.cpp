@@ -7,7 +7,6 @@ void Exemple::setX (int x) {
     // Create an object from "shared" library
     state::Exemple y {};
     y.setX(x);
-    y.setY(12);
 
     this->x = x;
 }
