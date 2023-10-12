@@ -10,6 +10,7 @@ void testSFML() {
 // Fin test SFML
 
 #include <state.h>
+#include <cstring>
 
 using namespace std;
 using namespace state;
