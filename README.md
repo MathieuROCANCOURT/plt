@@ -11,7 +11,7 @@ Nous allons implémenter un Monopoly sur le modèle du Monopoly France de la ver
 
 ## Ressources
 
-Les ressources visuelles de notre projet sont constitués de logo représentant une gare, une ampoule symbolisant la carte propriété de service d'électricité, un robinet symbolisant la carte de propriété de service d'eau, des dés, un appartement, un hôtel. Nous disposons également d'une planche de 6 pions. 
+Les ressources visuelles de notre projet sont constitués de logo représentant une gare, une tour symbolisant la carte propriété de service télécoms, une antenne parabolique symbolisant la carte de propriété de service satellite, des dés, un appartement, un hôtel. Nous disposons également de deux planches de 3 pions. 
 Ensuite, nous disposons d'une photo du plateau de jeu, une photo du recto des cartes caisse de communauté et chance, des photos de chacun des versos de ces mêmes cartes, des photos de chacune des cartes de propriétés (villes classiques, gares et services).
 
 L'ensemble de ces photos et images se trouvent dans le dossier     .
