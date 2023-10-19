@@ -6,7 +6,6 @@
 void testSFML() {
     sf::Texture texture;
 }
-
 // Fin test SFML
 
 #include <state.h>
@@ -24,6 +23,5 @@ int main(int argc, char *argv[]) {
     } else {
         cout << "It works !" << endl;
     }
-
     return 0;
 }
