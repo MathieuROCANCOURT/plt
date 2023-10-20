@@ -1,6 +1,8 @@
 #include "Bank.h"
 
 using namespace std;
-using namespace state;
+namespace state{
 
 state::Bank::Bank() {}
+
+}
