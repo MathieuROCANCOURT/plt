@@ -3,4 +3,4 @@
 using namespace std;
 using namespace state;
 
-Bank::Bank() {}
+state::Bank::Bank() {}
