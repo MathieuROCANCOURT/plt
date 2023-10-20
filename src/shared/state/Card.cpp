@@ -2,3 +2,5 @@
 
 using namespace std;
 using namespace state;
+
+Card::Card() {}
