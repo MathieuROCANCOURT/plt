@@ -1,8 +1,13 @@
 #include "Bank.h"
 
 using namespace std;
+#include <vector>
 namespace state{
 
-state::Bank::Bank() {}
+    Bank::Bank() {
+        this->nbApart;
+        this->nbHostel;
+        this->bankProperties;
+    }
 
 }
