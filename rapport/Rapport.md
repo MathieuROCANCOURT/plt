@@ -7,16 +7,16 @@
 
 # Monopoly France (Vers. 2008)
 ## Règles du jeu
-Nous allons implémenter un Monopoly sur le modèle du Monopoly France de la version 2008. Les principales modifications par rapport à la règle original sont l'absence d'hypothèque et d'enchère. Les autres modifications apportés sont détaillés dans le fichier suivant: https://github.com/MathieuROCANCOURT/plt/blob/master/rapport/Regles_MonopolyFrance_Adaptees.pdf.
+Nous allons implémenter un Monopoly sur le modèle du Monopoly France de la version 2008. Les principales modifications par rapport à la règle original sont l'absence d'hypothèque et d'enchère. Les autres modifications apportées sont détaillées dans le fichier suivant: https://github.com/MathieuROCANCOURT/plt/blob/master/rapport/Regles_MonopolyFrance_Adaptees.pdf.
 
 ## Ressources
-Les ressources visuelles de notre projet sont constitués de logo représentant une gare, une tour symbolisant la carte propriété de service télécoms, une antenne parabolique symbolisant la carte de propriété de service satellite, des dés, un appartement, un hôtel. Nous disposons également de deux planches de 3 pions. 
+Les ressources visuelles de notre projet sont constituées de logo représentant une gare, une tour symbolisant la carte propriété de service télécoms, une antenne parabolique symbolisant la carte de propriété de service satellite, des dés, un appartement, un hôtel. Nous disposons également de deux planches de 3 pions. 
 Ensuite, nous disposons d'une photo du plateau de jeu, une photo du recto des cartes caisse de communauté et chance, des photos de chacun des versos de ces mêmes cartes, des photos de chacune des cartes de propriétés (villes classiques, gares et services).
 
 L'ensemble de ces photos et images se trouvent dans le dossier https://github.com/MathieuROCANCOURT/plt/tree/master/res.
 
-Afin de représenter quelles sont les propriétés possédées par un joueur, nous souhaitons représenter une grille, telle que sur la "ProprietesMonopoly.drawio.ong", où chaque case correspond à une des propriétés disponibles dans le jeu. Les 3 premières lignes de case représentent les propriétés classiques. Sur la dernière ligne, les deux cases de gauches représentent les services et les quatre cases de droite représentent les gares.
-Cette grille de case sera disponible pour chaque joueur correspondant à ce qu'il possède. Si un des autres joueurs possède une propriété, alors l'intérieur de la case coorespondante est grisée. Si le joueur possède une des propriétés classiques, l'intérieur de la case correspondante se colore de la couleur de la case. Si le joueur possède un service ou une gare, la case se rempli avec le logo correspondant présenté ci-dessus.
+Afin de représenter quelles sont les propriétés possédées par un joueur, nous souhaitons représenter une grille, telle que sur la "ProprietesMonopoly.drawio.png", où chaque case correspond à une des propriétés disponibles dans le jeu. Les 3 premières lignes de case représentent les propriétés classiques. Sur la dernière ligne, les deux cases de gauches représentent les services et les quatre cases de droite représentent les gares.
+Cette grille de case sera disponible pour chaque joueur correspondant à ce qu'il possède. Si un des autres joueurs possède une propriété, alors l'intérieur de la case correspondante est grisé. Si le joueur possède une des propriétés classiques, l'intérieur de la case correspondante se colore de la couleur de la case. Si le joueur possède un service ou une gare, la case se rempli avec le logo correspondant présenté ci-dessus.
 
 # Description et conception des états
 
@@ -28,9 +28,9 @@ Un état du jeu est toujours constitué d’un visuel du plateau. Ce visuel ne c
 
 Il y a un nombre de joueurs compris entre 2 et 6 et ne variant pas au cours d’une même partie.
 Chaque joueur possède donc un statut : il a gagné, il a perdu, il est en train de jouer et n’est pas en prison, il est en train de jouer mais est en prison.
-A tout moment du jeu correspond le tour d’un des joueurs ou un état d'absence de joueur (avant le démarrage d’une partie) ou de jeu terminé.
+À tout moment du jeu correspond le tour d’un des joueurs ou un état d'absence de joueur (avant le démarrage d’une partie) ou de jeu terminé.
 
-Enfin, à chaque tour de chaque joueur est associé une valeur obtenue aux dés vallant entre 2 et 12 ainsi qu’un booléen indiquant s’il s’agit d’un double ou non.
+Enfin, à chaque tour de chaque joueur est associé une valeur obtenue aux dés valant entre 2 et 12 ainsi qu’un booléen indiquant s’il s’agit d’un double ou non.
 
 L’état du jeu conserve également le nombre de double fait lors d’un tour d’un joueur (le troisième double d’affilé conduit le joueur directement en prison).
 
@@ -44,7 +44,7 @@ Pour une même partie, un joueur possède un nom fixé ainsi qu’un pion qui lu
 
 Chaque joueur possède à tout moment une position correspondant à l’une des cases du plateau (la différence est faite entre une simple visite en prison et être en prison), sauf s’il a perdu.
 
-Ensuite un joueur à plusieurs possessions: la liste des propriétés qu’il a acheté (et n’a pas échangé), le nombre de cartes “Vous êtes libéré de prison” qu’il possède, vallant entre 0 et 2, le nombre total d’appartement qu’il possède, vallant entre 0 et 32, et le nombre total d’hôtels qu’il possède vallant entre 0 et 12, sur l’ensemble de ses propriétés.
+Ensuite, un joueur à plusieurs possessions: la liste des propriétés qu’il a achetée (et n’a pas échangée), le nombre de cartes “Vous êtes libéré de prison” qu’il possède, valant entre 0 et 2, le nombre total d’appartement qu’il possède, valant entre 0 et 32, et le nombre total d’hôtels qu’il possède valant entre 0 et 12, sur l’ensemble de ses propriétés.
 
 ## Propriétés 
 
@@ -59,6 +59,6 @@ Les propriétés de type services, possèdent un nombre de services possédés p
 
 ## Decks communauté et chance
 
-Enfin, il existe deux deck de 16 cartes chacunes : le deck des cartes “caisse de communauté” et le deck des cartes “chance”. A chaque état du jeu correspond donc un ordre des cartes à l’intérieur de ces deux piles. Les cartes “Vous êtes libéré de prison” ( une par deck) seront retirés du deck lorsqu’un joueur la tire et tant qu’il la possède.
+Enfin, il existe deux decks de 16 cartes chacune : le deck des cartes “caisse de communauté” et le deck des cartes “chance”. À chaque état du jeu correspond donc un ordre des cartes à l’intérieur de ces deux piles. Les cartes “Vous êtes libéré de prison” (une par deck) seront retirées du deck lorsqu’un joueur la tire et tant qu’il la possède.
 
 
