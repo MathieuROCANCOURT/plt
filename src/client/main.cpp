@@ -24,7 +24,12 @@ int main(int argc, char *argv[]) {
 
             sf::RenderWindow window;
             sf::Texture plateauTexture;
-            sf::Texture brouetteTexture;
+            sf::Texture hatTexture;
+            sf::Texture chaussureTexture;
+            sf::Texture dogTexture;
+            sf::Texture carTexture;
+            sf::Texture boatTexture;
+            sf::Texture ironTexture;
 
 
             vector<std::string> liste = {"Player 1", "Player 2", "Player 3", "Player 4", "Player 5", "Player 6"};
@@ -35,7 +40,27 @@ int main(int argc, char *argv[]) {
                 return EXIT_FAILURE;
             }
             // Chargement des jetons
-            if (!brouetteTexture.loadFromFile("./../res/wheelbarrow.jpeg")) {
+            if (!hatTexture.loadFromFile("./../res/hat.png")) {
+                cout << "Error load file." << endl;
+                return EXIT_FAILURE;
+            }
+            if (!chaussureTexture.loadFromFile("./../res/shoe.png")) {
+                cout << "Error load file." << endl;
+                return EXIT_FAILURE;
+            }
+            if (!dogTexture.loadFromFile("./../res/dog.png")) {
+                cout << "Error load file." << endl;
+                return EXIT_FAILURE;
+            }
+            if (!carTexture.loadFromFile("./../res/car.png")) {
+                cout << "Error load file." << endl;
+                return EXIT_FAILURE;
+            }
+            if (!boatTexture.loadFromFile("./../res/boat.png")) {
+                cout << "Error load file." << endl;
+                return EXIT_FAILURE;
+            }
+            if (!ironTexture.loadFromFile("./../res/iron.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
@@ -52,10 +77,20 @@ int main(int argc, char *argv[]) {
 
             // Generate sprite
             sf::Sprite plateau(plateauTexture);
-            sf::Sprite brouette(brouetteTexture);
+            sf::Sprite hat(hatTexture);
+            sf::Sprite chaussure(chaussureTexture);
+            sf::Sprite dog(dogTexture);
+            sf::Sprite car(carTexture);
+            sf::Sprite boat(boatTexture);
+            sf::Sprite iron(ironTexture);
 
             // Move the picture
-            brouette.move(100, 100);
+            hat.move(size.x - 80, size.y - 20);
+            chaussure.move(size.x - 80, size.y - 55);
+            dog.move(size.x - 80, size.y - 85);
+            car.move(size.x - 35, size.y - 25);
+            boat.move(size.x - 45, size.y - 55);
+            iron.move(size.x - 35, size.y - 80);
 
             // création de la fenêtre
             window.create(sf::VideoMode(size.x * 2, size.y), "Monopoly");
@@ -94,15 +129,6 @@ int main(int argc, char *argv[]) {
                     }
                 }
 
-                // Detect position pressed left click
-                if (event.type == sf::Event::MouseButtonPressed) {
-                    if (event.mouseButton.button == sf::Mouse::Left) {
-                        std::cout << "the left button was pressed" << std::endl;
-                        std::cout << "mouse x: " << event.mouseButton.x << std::endl;
-                        std::cout << "mouse y: " << event.mouseButton.y << std::endl;
-                    }
-                }
-
                 // effacement de la fenêtre en noir
                 window.clear(sf::Color::White);
 
@@ -115,7 +141,7 @@ int main(int argc, char *argv[]) {
                         sf::FloatRect textRect = rectangle.getGlobalBounds();
                         if (textRect.contains(x, y)) {
                             if (selectedText != nullptr) {
-                                selectedText->setFillColor(sf::Color::Yellow); // On remet sa couleur à noir
+                                selectedText->setFillColor(sf::Color::Yellow); // On remet sa couleur en jaune
                             }
                             selectedText = &rectangle;
                             selectedText->setFillColor(sf::Color::Green); // On change sa couleur en vert
@@ -133,8 +159,22 @@ int main(int argc, char *argv[]) {
                     window.draw(texte);
                 }
 
+                sf::CircleShape square(20.f, 4);
+                square.setFillColor(sf::Color::White);
+                square.setOutlineColor(sf::Color{0xFF5D8FFF});
+                square.setOutlineThickness(2);
+                square.move(size.x * 1.5, size.y / 2);
+                square.rotate(45);
+
+                window.draw(square);
+
                 window.draw(plateau);
-                window.draw(brouette);
+                window.draw(chaussure);
+                window.draw(hat);
+                window.draw(dog);
+                window.draw(car);
+                window.draw(boat);
+                window.draw(iron);
                 window.display();
             }
         }
