@@ -5,10 +5,12 @@
 
 
 #include <state.h>
+#include "render.h"
 #include <cstring>
 
 using namespace std;
 using namespace state;
+using namespace render;
 
 int main(int argc, char *argv[]) {
     if (argc == 2) {
@@ -25,7 +27,7 @@ int main(int argc, char *argv[]) {
             sf::RenderWindow window;
             sf::Texture plateauTexture;
             sf::Texture hatTexture;
-            sf::Texture chaussureTexture;
+            sf::Texture shoeTexture;
             sf::Texture dogTexture;
             sf::Texture carTexture;
             sf::Texture boatTexture;
@@ -44,7 +46,7 @@ int main(int argc, char *argv[]) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!chaussureTexture.loadFromFile("./../res/shoe.png")) {
+            if (!shoeTexture.loadFromFile("./../res/shoe.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
@@ -78,42 +80,42 @@ int main(int argc, char *argv[]) {
             // Generate sprite
             sf::Sprite plateau(plateauTexture);
             sf::Sprite hat(hatTexture);
-            sf::Sprite chaussure(chaussureTexture);
+            sf::Sprite shoe(shoeTexture);
             sf::Sprite dog(dogTexture);
             sf::Sprite car(carTexture);
             sf::Sprite boat(boatTexture);
             sf::Sprite iron(ironTexture);
 
             // Move the picture
-            hat.move(size.x - 80, size.y - 20);
-            chaussure.move(size.x - 80, size.y - 55);
-            dog.move(size.x - 80, size.y - 85);
-            car.move(size.x - 35, size.y - 25);
-            boat.move(size.x - 45, size.y - 55);
-            iron.move(size.x - 35, size.y - 80);
+            hat.move(float (size.x) - 80, float (size.y) - 20);
+            shoe.move(float (size.x) - 80, float (size.y) - 55);
+            dog.move(float (size.x) - 80, float (size.y) - 85);
+            car.move(float (size.x) - 35, float (size.y) - 25);
+            boat.move(float (size.x) - 45, float (size.y) - 55);
+            iron.move(float (size.x) - 35, float (size.y) - 80);
 
             // création de la fenêtre
             window.create(sf::VideoMode(size.x * 2, size.y), "Monopoly");
             window.setVerticalSyncEnabled(true);
 
             // Add liste de texte
-            vector<sf::Text> textes;
+            vector<sf::Text> texts;
             vector<sf::RectangleShape> rectangles;
             for (int i = 0; i < liste.size(); i++) {
                 sf::RectangleShape rectangle;
                 rectangle.setSize(sf::Vector2f (95, 40));
-                rectangle.setPosition(size.x + i * 110 + 10, 5);
+                rectangle.setPosition(float(size.x) + i * 110 + 10, 5);
                 rectangle.setFillColor(sf::Color::Yellow);
                 rectangle.setOutlineColor(sf::Color::Black);
                 rectangle.setOutlineThickness(5);
 
-                sf::Text texte;
-                texte.setFont(font);
-                texte.setString(liste[i]);
-                texte.setCharacterSize(20);
-                texte.setFillColor(sf::Color::Black);
-                texte.setPosition(size.x + i * 110 + 20, 10);
-                textes.push_back(texte);
+                sf::Text text;
+                text.setFont(font);
+                text.setString(liste[i]);
+                text.setCharacterSize(20);
+                text.setFillColor(sf::Color::Black);
+                text.setPosition(float(size.x) + i * 110 + 20, 10);
+                texts.push_back(text);
                 rectangles.push_back(rectangle);
             }
 
@@ -155,7 +157,7 @@ int main(int argc, char *argv[]) {
                 for (auto &rectangle: rectangles) {
                     window.draw(rectangle);
                 }
-                for (auto &texte: textes) {
+                for (auto &texte: texts) {
                     window.draw(texte);
                 }
 
@@ -163,13 +165,13 @@ int main(int argc, char *argv[]) {
                 square.setFillColor(sf::Color::White);
                 square.setOutlineColor(sf::Color{0xFF5D8FFF});
                 square.setOutlineThickness(2);
-                square.move(size.x * 1.5, size.y / 2);
+                square.move(float(size.x) * 1.5, float(size.y) / 2);
                 square.rotate(45);
 
                 window.draw(square);
 
                 window.draw(plateau);
-                window.draw(chaussure);
+                window.draw(shoe);
                 window.draw(hat);
                 window.draw(dog);
                 window.draw(car);
