@@ -42,27 +42,27 @@ int main(int argc, char *argv[]) {
                 return EXIT_FAILURE;
             }
             // Chargement des jetons
-            if (!hatTexture.loadFromFile("./../res/hat.png")) {
+            if (!hatTexture.loadFromFile("./../res/Tokens/hat.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!shoeTexture.loadFromFile("./../res/shoe.png")) {
+            if (!shoeTexture.loadFromFile("./../res/Tokens/shoe.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!dogTexture.loadFromFile("./../res/dog.png")) {
+            if (!dogTexture.loadFromFile("./../res/Tokens/dog.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!carTexture.loadFromFile("./../res/car.png")) {
+            if (!carTexture.loadFromFile("./../res/Tokens/car.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!boatTexture.loadFromFile("./../res/boat.png")) {
+            if (!boatTexture.loadFromFile("./../res/Tokens/boat.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!ironTexture.loadFromFile("./../res/iron.png")) {
+            if (!ironTexture.loadFromFile("./../res/Tokens/iron.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
@@ -141,7 +141,7 @@ int main(int argc, char *argv[]) {
 
                     for (auto &rectangle: rectangles) {
                         sf::FloatRect textRect = rectangle.getGlobalBounds();
-                        if (textRect.contains(x, y)) {
+                        if (textRect.contains(float(x), float(y))) {
                             if (selectedText != nullptr) {
                                 selectedText->setFillColor(sf::Color::Yellow); // On remet sa couleur en jaune
                             }
