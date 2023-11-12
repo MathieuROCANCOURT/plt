@@ -7,7 +7,7 @@
 
 # Monopoly France (Vers. 2008)
 ## Règles du jeu
-Nous allons implémenter un Monopoly sur le modèle du Monopoly France de la version 2008. Les principales modifications par rapport à la règle original sont l'absence d'hypothèque et d'enchère. Les autres modifications apportées sont détaillées dans le fichier suivant: https://github.com/MathieuROCANCOURT/plt/blob/master/rapport/Regles_MonopolyFrance_Adaptees.pdf.
+Nous allons implémenter un Monopoly sur le modèle du Monopoly France de la version 2008. Les principales modifications par rapport à la règle original sont l'absence d'hypothèque et d'enchère. Les autres modifications apportées sont détaillées dans le fichier suivant : https://github.com/MathieuROCANCOURT/plt/blob/master/rapport/Regles_MonopolyFrance_Adaptees.pdf.
 
 ## Ressources
 Les ressources visuelles de notre projet sont constituées de logo représentant une gare, une tour symbolisant la carte propriété de service télécoms, une antenne parabolique symbolisant la carte de propriété de service satellite, des dés, un appartement, un hôtel. Nous disposons également de deux planches de 3 pions. 
@@ -16,7 +16,7 @@ Ensuite, nous disposons d'une photo du plateau de jeu, une photo du recto des ca
 L'ensemble de ces photos et images se trouvent dans le dossier https://github.com/MathieuROCANCOURT/plt/tree/master/res.
 
 Afin de représenter quelles sont les propriétés possédées par un joueur, nous souhaitons représenter une grille, telle que sur la "ProprietesMonopoly.drawio.png", où chaque case correspond à une des propriétés disponibles dans le jeu. Les 3 premières lignes de case représentent les propriétés classiques. Sur la dernière ligne, les deux cases de gauches représentent les services et les quatre cases de droite représentent les gares.
-Cette grille de case sera disponible pour chaque joueur correspondant à ce qu'il possède. Si un des autres joueurs possède une propriété, alors l'intérieur de la case correspondante est grisé. Si le joueur possède une des propriétés classiques, l'intérieur de la case correspondante se colore de la couleur de la case. Si le joueur possède un service ou une gare, la case se rempli avec le logo correspondant présenté ci-dessus.
+Cette grille de case sera disponible pour chaque joueur correspondant à ce qu'il possède. Si un des autres joueurs possède une propriété, alors la case correspondante est grisée à l’intérieure. Si le joueur possède une des propriétés classiques, l'intérieur de la case correspondante se colore de la couleur de la case. Si le joueur possède un service ou une gare, la case se rempli avec le logo correspondant présenté ci-dessus.
 
 # Description et conception des états
 
@@ -36,7 +36,7 @@ L’état du jeu conserve également le nombre de double fait lors d’un tour d
 
 ## Banque
 
-Une autre entité étant présente à tout moment de la partie est la banque. Cette dernière possède un nombre d'appartements, un nombre d'hôtels et une liste de propriétés. En effet, au début de chaque partie, la banque est en possession de la totalité des propriétés, des 32 appartements et des 12 hôtels, ces valeurs ne peuvent être négatives. A chaque état suivant, la banque possède l’intégralité des propriétés, appartements et hôtels non encore vendu ou retourné à la banque.
+Une autre entité étant présente à tout moment de la partie est la banque. Cette dernière possède un nombre d'appartements, un nombre d'hôtels et une liste de propriétés. En effet, au début de chaque partie, la banque est en possession de la totalité des propriétés, des 32 appartements et des 12 hôtels, ces valeurs ne peuvent être négatives. À chaque état suivant, la banque possède l’intégralité des propriétés, appartements et hôtels non encore vendu ou retourné à la banque.
 
 ## Joueur 
 
@@ -44,7 +44,7 @@ Pour une même partie, un joueur possède un nom fixé ainsi qu’un pion qui lu
 
 Chaque joueur possède à tout moment une position correspondant à l’une des cases du plateau (la différence est faite entre une simple visite en prison et être en prison), sauf s’il a perdu.
 
-Ensuite, un joueur à plusieurs possessions: la liste des propriétés qu’il a achetée (et n’a pas échangée), le nombre de cartes “Vous êtes libéré de prison” qu’il possède, valant entre 0 et 2, le nombre total d’appartement qu’il possède, valant entre 0 et 32, et le nombre total d’hôtels qu’il possède valant entre 0 et 12, sur l’ensemble de ses propriétés.
+Ensuite un joueur à plusieurs possessions : la liste des propriétés qu’il a achetées (et n’a pas échangées), le nombre de cartes “Vous êtes libéré de prison” qu’il possède, valant entre 0 et 2, le nombre total d’appartement qu’il possède, valant entre 0 et 32, et le nombre total d’hôtels qu’il possède valant entre 0 et 12, sur l’ensemble de ses propriétés.
 
 ## Propriétés 
 
@@ -59,6 +59,45 @@ Les propriétés de type services, possèdent un nombre de services possédés p
 
 ## Decks communauté et chance
 
-Enfin, il existe deux decks de 16 cartes chacune : le deck des cartes “caisse de communauté” et le deck des cartes “chance”. À chaque état du jeu correspond donc un ordre des cartes à l’intérieur de ces deux piles. Les cartes “Vous êtes libéré de prison” (une par deck) seront retirées du deck lorsqu’un joueur la tire et tant qu’il la possède.
+Enfin, il existe deux decks de 16 cartes chacune : le deck des cartes “caisse de communauté” et le deck des cartes “chance”. À chaque état du jeu correspond donc un ordre des cartes à l’intérieur de ces deux piles. Les cartes “Vous êtes libéré de prison” (une par deck) seront retirés du deck lorsqu’un joueur la tire et tant qu’il la possède.
 
+# Rendu : Stratégie et Conception
+## Stratégie de rendu d'un état
 
+Un état est fixé par 4 éléments : un terrain, les pions, les informations des joueurs et de la banque et les actions des joueurs.
+Pour le rendu de cet état, nous avons fait le choix d'utiliser la librairie graphique SFML. Par conséquent, notre affichage est composé de 4 surfaces :
+
+* Une surface pour l'élément statique qui est le plateau.
+* Une surface pour les éléments mobiles les pions.
+* Une surface pour les informations des joueurs et de la banque.
+* Une surface pour les éléments d'intéraction des actions du joueur.
+
+Le plateau est fait à partir d'un fichier image "Plateau_monopoly_resize.jpg" avec toutes les informations affichées. Si on souhaite changer de plateau, il faut changer l'image avec environ la même taille ou légèrement plus grande pour éviter que la fenêtre sort de l'écran.
+Les pions sont aussi des images, mais qui fallait mettre en transparence pour éviter l'affichage du fond blanc. Si on souhaite changer de pion, il faut changer l'image avec approximativement la même taille ou légèrement plus petite pour éviter que l'image du pion déborde de la case.
+
+Lorsqu'un évènement se produit, un changement d'état est effectué et alors, l'affichage doit être modifié en conséquence et mis à jour.
+
+## Conception logicielle
+### StateLayer
+
+Cette classe agit en tant qu'intermédiaire entre les packages state et render.
+La classe StateLayer a pour constructeur l'état à l'instant du jeu qui est currentState, la police pour les textes et la fenêtre.
+
+### GameBoard
+
+La classe GameBoard permet d'implémenter la texture et le sprite du plateau.
+
+### ButtonPlayer et ButtonGamePlay
+
+Ces 2 classes permettent de faire des boutons pour que le joueur puisse intéragir avec l'interface graphique.
+La classe ButtonGamePlay permet quelle action le joueur veut faire sur son tour et un menu et la classe ButtonPlayer offre la possibilité de sélectionner sur quel joueur le joueur souhaite obtenir des informations.
+
+### ShowValues
+
+Cette classe permet d'afficher les valeurs des joueurs et de la banque (nombre d'appartements, nombre d'hôtels, montant de l'argent possédés et les propriétés).
+
+### Tokens
+
+Cette classe permet d'afficher les jetons sur le plateau avec leurs textures et leurs sprites.
+
+![render.dia](https://github.com/MathieuROCANCOURT/plt/blob/SFML/res/render.png "render")
