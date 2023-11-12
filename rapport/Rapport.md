@@ -100,4 +100,4 @@ Cette classe permet d'afficher les valeurs des joueurs et de la banque (nombre d
 
 Cette classe permet d'afficher les jetons sur le plateau avec leurs textures et leurs sprites.
 
-![render.dia](/home/mathieu/CLionProjects/plt/res/render.png "render.dia")
+![render.dia](https://github.com/MathieuROCANCOURT/plt/blob/SFML/res/render.png "render")
