@@ -64,16 +64,16 @@ Enfin, il existe deux decks de 16 cartes chacune : le deck des cartes “caisse 
 # Rendu : Stratégie et Conception
 ## Stratégie de rendu d'un état
 
-Un état est fixé par 4 éléments : un terrain, les pions, les informations des joueurs et de la banque et les actions des joueurs.
+Un état est fixé par 4 éléments : un plateau, les pions, les informations des joueurs et de la banque et les actions des joueurs.
 Pour le rendu de cet état, nous avons fait le choix d'utiliser la librairie graphique SFML. Par conséquent, notre affichage est composé de 4 surfaces :
 
 * Une surface pour l'élément statique qui est le plateau.
-* Une surface pour les éléments mobiles les pions.
+* Une surface pour les éléments mobiles qui sont les pions.
 * Une surface pour les informations des joueurs et de la banque.
 * Une surface pour les éléments d'intéraction des actions du joueur.
 
 Le plateau est fait à partir d'un fichier image "Plateau_monopoly_resize.jpg" avec toutes les informations affichées. Si on souhaite changer de plateau, il faut changer l'image avec environ la même taille ou légèrement plus grande pour éviter que la fenêtre sort de l'écran.
-Les pions sont aussi des images, mais qui fallait mettre en transparence pour éviter l'affichage du fond blanc. Si on souhaite changer de pion, il faut changer l'image avec approximativement la même taille ou légèrement plus petite pour éviter que l'image du pion déborde de la case.
+Les pions sont aussi des images, mais il a fallut les mettre en transparence pour éviter l'affichage du fond blanc. Si on souhaite changer de pion, il faut changer l'image avec approximativement la même taille ou légèrement plus petite pour éviter que l'image du pion déborde de la case.
 
 Lorsqu'un évènement se produit, un changement d'état est effectué et alors, l'affichage doit être modifié en conséquence et mis à jour.
 
@@ -90,7 +90,7 @@ La classe GameBoard permet d'implémenter la texture et le sprite du plateau.
 ### ButtonPlayer et ButtonGamePlay
 
 Ces 2 classes permettent de faire des boutons pour que le joueur puisse intéragir avec l'interface graphique.
-La classe ButtonGamePlay permet quelle action le joueur veut faire sur son tour et un menu et la classe ButtonPlayer offre la possibilité de sélectionner sur quel joueur le joueur souhaite obtenir des informations.
+La classe ButtonGamePlay permet au joueur de choisir quelle(s) action(s) il veut faire sur son tour, et accéder à un menu et la classe ButtonPlayer offre la possibilité de sélectionner sur quel joueur le joueur souhaite obtenir des informations.
 
 ### ShowValues
 
@@ -98,6 +98,6 @@ Cette classe permet d'afficher les valeurs des joueurs et de la banque (nombre d
 
 ### Tokens
 
-Cette classe permet d'afficher les jetons sur le plateau avec leurs textures et leurs sprites.
+Cette classe permet d'afficher les pions sur le plateau avec leurs textures et leurs sprites.
 
 ![render.dia](https://github.com/MathieuROCANCOURT/plt/blob/SFML/res/render.png "render")
