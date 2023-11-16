@@ -19,6 +19,14 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(argv[1], "state") == 0) {
             cout << R"(Veillez utiliser les commandes "make unittest" et "make code-coverage" depuis le dossier build)"
                  << endl;
+
+
+            State* myState =  new State();
+            int nbP = 3;
+            myState->State::modifyNbPlayer(nbP);
+
+
+
         }
     } else {
         cout << "It works !" << endl;

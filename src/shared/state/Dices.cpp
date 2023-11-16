@@ -6,6 +6,18 @@ using namespace std;
 using namespace state;
 
 
+void Dices::setIsDouble(bool isDouble) {
+    this->isDouble = isDouble;
+}
 
+void Dices::setScore(int) {
+    this->score = score;
+}
 
+int Dices::getScore() {
+    return this->score;
+}
 
+bool Dices::getIsDouble() {
+    return this->isDouble;
+}
