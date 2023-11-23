@@ -6,6 +6,8 @@ using namespace std;
 using namespace state;
 
 
+Dices::Dices() : isDouble(false), score(0){ }
+
 void Dices::setIsDouble(bool isDouble) {
     this->isDouble = isDouble;
 }
@@ -21,3 +23,5 @@ int Dices::getScore() {
 bool Dices::getIsDouble() {
     return this->isDouble;
 }
+
+

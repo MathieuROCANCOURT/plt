@@ -21,9 +21,9 @@ void State::addPlayer(Player player) {
     this->listPlayer.push_back(player);
 
     //test non effectue
-    for (Player i : this->listPlayer){
-        cout << i << endl;
-    }
+    //for (Player i : this->listPlayer){
+      //  cout << i << endl;
+    //}
 
 }
 
@@ -45,7 +45,7 @@ void State::modifyNbDouble(bool isDouble) {
         if (this->nbDouble<3){
             this->nbDouble += 1;
         }
-        else{ cout << "le nombre de doubles est supérieur à 3 pour le tour d'un même joueur"}
+        else{ cout << "le nombre de doubles est supérieur à 3 pour le tour d'un même joueur"<<endl;}
     }
     if(!isDouble){
         this->nbDouble = 0;
@@ -60,7 +60,7 @@ void State::modifyPosition(Player player, int position) {
     }
 
     // test non effectue
-    cout << "le joueur" << player << "est sur la case "<< player.getPosition() << endl;
+    cout << "le joueur est sur la case "<< player.getPosition() << endl;
 }
 
 void State::modifyTurn(Playing tour) {
@@ -77,7 +77,7 @@ void State::modifyMoney(Player player, int value) {
     player.setMoney(moneyOfPlayer);
 
     //test non effectué
-    cout << "le joueur" << player << "possède "<< player.getMoney() << "euros" << endl;
+    cout << "le joueur possède "<< player.getMoney() << "euros" << endl;
 
 }
 
@@ -87,33 +87,40 @@ void State::addPropertyBank(Property property) {
 
     //test non effectué
     cout << "les propriete de la banque sont" << endl;
-    for (Player i : this->bank.getbankProperties()) {
-        cout << i << endl;
-    }
+    //for (Player i : this->bank.getbankProperties()) {
+      //  cout << i << endl;
+    //}
 }
 
 void State::removePropertyBank(Property property) {
 
-//    const vector<Property> &myListOfBankProperties = this->bank.getbankProperties();
-//    std::vector<Property>::iterator it = std::find(myListOfBankProperties.begin(), myListOfBankProperties.end(),
-//                                                   property);
-//
-//    if (it != myListOfBankProperties.end()) { // Si l'élément est trouvé dans le vecteur
-//        this->bank.eraseFromBankProperties(it);// Supprime l'élément à cette position
-//        std::cout << "Element supprime !" << std::endl;
-//    } else {
-//        std::cout << "Element non trouve dans le vecteur." << std::endl;
-//    }
+    const vector<Property> &myListOfBankProperties = this->bank.getBankProperties();
+    auto it = std::find(myListOfBankProperties.begin(), myListOfBankProperties.end(),
+                                                   property);
+
+    if (it != myListOfBankProperties.end()) { // Si l'élément est trouvé dans le vecteur
+
+        // On obtient l'index à partir de l'itérateur trouvé pour modifier le vecteur original
+        int index = std::distance(myListOfBankProperties.begin(), it);
+
+        // On obtient un itérateur non-constant pour bankProperties
+        auto bankIterator = this->bank.getBankProperties().begin() + index;
+
+        this->bank.eraseFromBankProperties(bankIterator);// Supprime l'élément à cette position
+        std::cout << "Element supprime !" << std::endl;
+    } else {
+        std::cout << "Element non trouve dans le vecteur." << std::endl;
+    }
 }
 
 void State::addPropertyPlayer(Player player, Property property) {
     player.addToPlayerProperties(property);
 
     //test non effectué
-    cout << "les propriete du joueur " << player << endl;
-    for (Player i : player.getPlayerProperties()) {
-        cout << i << endl;
-    }
+    //cout << "les propriete du joueur " << player << endl;
+    //for (Player i : player.getPlayerProperties()) {
+      //  cout << i << endl;
+    //}
 }
 
 void State::moveCardInDeckLuck() {
@@ -138,6 +145,31 @@ void State::gameStatus(Player player, GameStatus status) {
 
 }
 
+void State::removePropertyPlayer(Player player, Property property) {
+
+    for(auto& currentPlayer : listPlayer) {
+        if (currentPlayer.getName() == player.getName()){
+            const vector<Property> &myListOfPlayerProperties = currentPlayer.getPlayerProperties();
+            auto it = std::find(myListOfPlayerProperties.begin(), myListOfPlayerProperties.end(),
+                                property);
+
+            if (it != myListOfPlayerProperties.end()) { // Si l'élément est trouvé dans le vecteur
+
+                // On obtient l'index à partir de l'itérateur trouvé pour modifier le vecteur original
+                int index = std::distance(myListOfPlayerProperties.begin(), it);
+
+                // On obtient un itérateur non-constant pour bankProperties
+                auto bankIterator = currentPlayer.getPlayerProperties().begin() + index;
+
+                currentPlayer.eraseFromPlayerProperties(bankIterator);// Supprime l'élément à cette position
+                std::cout << "Element supprime !" << std::endl;
+            } else {
+                std::cout << "Element non trouve dans le vecteur." << std::endl;
+            }
+        }
+    }
+
+}
 
 
 

@@ -35,3 +35,17 @@ GameStatus Player::getGameStatus() {
 void Player::setGameStatus(GameStatus gameStatus) {
     this->gameStatus = gameStatus;
 }
+
+void Player::eraseFromPlayerProperties(std::vector<Property>::iterator indice) {
+    this->playerProperties.erase(indice);
+}
+
+std::string Player::getName() {
+    return this->name;
+}
+
+bool Player::operator==(const Player &other) const {
+    return (this->name == other.name);
+}
+
+
