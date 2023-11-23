@@ -27,12 +27,12 @@ Un état du jeu est toujours constitué d’un visuel du plateau. Ce visuel ne c
 ## State
 
 Il y a un nombre de joueurs compris entre 2 et 6 et ne variant pas au cours d’une même partie.
-Chaque joueur possède donc un statut : il a gagné, il a perdu, il est en train de jouer et n’est pas en prison, il est en train de jouer mais est en prison.
+Chaque joueur possède donc un statut : il a gagné, il a perdu, il est en train de jouer et n’est pas en prison, il est en train de jouer, mais est en prison.
 À tout moment du jeu correspond le tour d’un des joueurs ou un état d'absence de joueur (avant le démarrage d’une partie) ou de jeu terminé.
 
 Enfin, à chaque tour de chaque joueur est associé une valeur obtenue aux dés valant entre 2 et 12 ainsi qu’un booléen indiquant s’il s’agit d’un double ou non.
 
-L’état du jeu conserve également le nombre de double fait lors d’un tour d’un joueur (le troisième double d’affilé conduit le joueur directement en prison).
+L’état du jeu conserve également le nombre de doubles fait lors d’un tour d’un joueur (le troisième double d’affilé conduit le joueur directement en prison).
 
 ## Banque
 
@@ -100,4 +100,5 @@ Cette classe permet d'afficher les valeurs des joueurs et de la banque (nombre d
 
 Cette classe permet d'afficher les jetons sur le plateau avec leurs textures et leurs sprites.
 
-![render.dia](https://github.com/MathieuROCANCOURT/plt/blob/SFML/res/render.png "render")
+![render.dia](https://github.com/MathieuROCANCOURT/plt/blob/master/res/render.png "render")
+

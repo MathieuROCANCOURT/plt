@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(argv[1], "render") == 0) {
             cout << "--- Render ---" << endl;
 
-            State state;
+            state::State currentState;
 
             sf::RenderWindow window;
             sf::Texture plateauTexture;
@@ -69,10 +69,6 @@ int main(int argc, char *argv[]) {
 
             // Charge fichier police
             sf::Font font;
-            if (!font.loadFromFile("./../res/Police/ARIAL.TTF")) {
-                cout << "Error load file ARIAL.TTF." << endl;
-                return EXIT_FAILURE;
-            }
 
             // Obtain size of picture
             sf::Vector2u size = plateauTexture.getSize();
@@ -98,6 +94,9 @@ int main(int argc, char *argv[]) {
             window.create(sf::VideoMode(size.x * 2, size.y), "Monopoly");
             window.setVerticalSyncEnabled(true);
 
+            StateLayer state = StateLayer(currentState, window, font);
+
+
             // Add liste de texte
             vector<sf::Text> texts;
             vector<sf::RectangleShape> rectangles;
@@ -110,7 +109,7 @@ int main(int argc, char *argv[]) {
                 rectangle.setOutlineThickness(5);
 
                 sf::Text text;
-                text.setFont(font);
+                text.setFont(state.getFont());
                 text.setString(liste[i]);
                 text.setCharacterSize(20);
                 text.setFillColor(sf::Color::Black);
@@ -121,18 +120,26 @@ int main(int argc, char *argv[]) {
 
             sf::RectangleShape *selectedText = nullptr; // Pointeur vers le texte sélectionné
 
+            sf::Texture cardTexture;
+            if (!cardTexture.loadFromFile("./../res/ChanceCards/win_rugby.png")) {
+                cout << "Error load file." << endl;
+                return EXIT_FAILURE;
+            }
+            sf::Sprite card(cardTexture);
+            card.move(float (size.x) / 5, float (size.y) / 4);
+
             // on fait tourner la boucle principale
-            while (window.isOpen()) {
+            while (state.getWindow().isOpen()) {
                 // on gère les évènements
                 sf::Event event{};
-                while (window.pollEvent(event)) {
+                while (state.getWindow().pollEvent(event)) {
                     if (event.type == sf::Event::Closed) {
-                        window.close();
+                        state.getWindow().close();
                     }
                 }
 
                 // effacement de la fenêtre en noir
-                window.clear(sf::Color::White);
+                state.getWindow().clear(sf::Color::White);
 
                 // Voir clique souris gauche
                 if (event.type == sf::Event::MouseButtonPressed and event.mouseButton.button == sf::Mouse::Left) {
@@ -155,10 +162,10 @@ int main(int argc, char *argv[]) {
 
 
                 for (auto &rectangle: rectangles) {
-                    window.draw(rectangle);
+                    state.getWindow().draw(rectangle);
                 }
                 for (auto &texte: texts) {
-                    window.draw(texte);
+                    state.getWindow().draw(texte);
                 }
 
                 sf::CircleShape square(20.f, 4);
@@ -168,16 +175,18 @@ int main(int argc, char *argv[]) {
                 square.move(float(size.x) * 1.5, float(size.y) / 2);
                 square.rotate(45);
 
-                window.draw(square);
+                state.getWindow().draw(square);
 
-                window.draw(plateau);
-                window.draw(shoe);
-                window.draw(hat);
-                window.draw(dog);
-                window.draw(car);
-                window.draw(boat);
-                window.draw(iron);
-                window.display();
+                state.getWindow().draw(plateau);
+                state.getWindow().draw(shoe);
+                state.getWindow().draw(hat);
+                state.getWindow().draw(dog);
+                state.getWindow().draw(car);
+                state.getWindow().draw(boat);
+                state.getWindow().draw(iron);
+
+                state.getWindow().draw(card);
+                state.getWindow().display();
             }
         }
 
