@@ -1,12 +1,11 @@
-#include <iostream>
-
 // Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
-
+#include <SFML/Graphics/RenderStates.hpp>
 
 #include <state.h>
 #include "render.h"
 #include <cstring>
+#include <iostream>
 
 using namespace std;
 using namespace state;
@@ -23,6 +22,15 @@ int main(int argc, char *argv[]) {
             cout << "--- Render ---" << endl;
 
             state::State currentState;
+            sf::Color color[8] = {sf::Color(0xFF5D8FFF),
+                               sf::Color::Cyan,
+                               sf::Color::Magenta,
+                               sf::Color(0xE79C62FF),
+                               sf::Color::Red,
+                               sf::Color::Yellow,
+                               sf::Color::Green,
+                               sf::Color::Blue
+                               };
 
             sf::RenderWindow window;
             sf::Texture plateauTexture;
@@ -168,14 +176,97 @@ int main(int argc, char *argv[]) {
                     state.getWindow().draw(texte);
                 }
 
-                sf::CircleShape square(20.f, 4);
-                square.setFillColor(sf::Color::White);
-                square.setOutlineColor(sf::Color{0xFF5D8FFF});
-                square.setOutlineThickness(2);
-                square.move(float(size.x) * 1.5, float(size.y) / 2);
-                square.rotate(45);
+                for (auto c : color){
+                    if (c == sf::Color(0xFF5D8FFF) | c == sf::Color::Blue){
+                        sf::CircleShape squarePink(28.f, 4);
+                        squarePink.setFillColor(sf::Color::White);
+                        squarePink.setOutlineColor(c);
+                        squarePink.setOutlineThickness(2);
+                        squarePink.move(float(size.x) * 1.05, float(size.y) / 10);
+                        squarePink.rotate(45);
+                    }
+                }
+                sf::CircleShape squarePink(28.f, 4);
+                squarePink.setFillColor(sf::Color::White);
+                squarePink.setOutlineColor(color[0]);
+                squarePink.setOutlineThickness(2);
+                squarePink.move(float(size.x) * 1.05, float(size.y) / 10);
+                squarePink.rotate(45);
+                sf::CircleShape squarePink1(28.f, 4);
+                squarePink1.setFillColor(sf::Color::White);
+                squarePink1.setOutlineColor(color[0]);
+                squarePink1.setOutlineThickness(2);
+                squarePink1.move(float(size.x) * 1.13, float(size.y) / 10);
+                squarePink1.rotate(45);
 
-                state.getWindow().draw(square);
+                sf::CircleShape squareBlueLight(28.f, 4);
+                squareBlueLight.setFillColor(sf::Color::White);
+                squareBlueLight.setOutlineColor(color[1]);
+                squareBlueLight.setOutlineThickness(2);
+                squareBlueLight.move(float(size.x) * 1.23, float(size.y) / 10);
+                squareBlueLight.rotate(45);
+                sf::CircleShape squareBlueLight1(28.f, 4);
+                squareBlueLight1.setFillColor(sf::Color::White);
+                squareBlueLight1.setOutlineColor(color[1]);
+                squareBlueLight1.setOutlineThickness(2);
+                squareBlueLight1.move(float(size.x) * 1.31, float(size.y) / 10);
+                squareBlueLight1.rotate(45);
+                sf::CircleShape squareBlueLight2(28.f, 4);
+                squareBlueLight2.setFillColor(sf::Color::White);
+                squareBlueLight2.setOutlineColor(color[1]);
+                squareBlueLight2.setOutlineThickness(2);
+                squareBlueLight2.move(float(size.x) * 1.39, float(size.y) / 10);
+                squareBlueLight2.rotate(45);
+
+                sf::CircleShape squarePurple(28.f, 4);
+                squarePurple.setFillColor(sf::Color::White);
+                squarePurple.setOutlineColor(color[2]);
+                squarePurple.setOutlineThickness(2);
+                squarePurple.move(float(size.x) * 1.49, float(size.y) / 10);
+                squarePurple.rotate(45);
+                sf::CircleShape squarePurple1(28.f, 4);
+                squarePurple1.setFillColor(sf::Color::White);
+                squarePurple1.setOutlineColor(color[2]);
+                squarePurple1.setOutlineThickness(2);
+                squarePurple1.move(float(size.x) * 1.57, float(size.y) / 10);
+                squarePurple1.rotate(45);
+                sf::CircleShape squarePurple2(28.f, 4);
+                squarePurple2.setFillColor(sf::Color::White);
+                squarePurple2.setOutlineColor(color[2]);
+                squarePurple2.setOutlineThickness(2);
+                squarePurple2.move(float(size.x) * 1.65, float(size.y) / 10);
+                squarePurple2.rotate(45);
+
+                sf::CircleShape squareOrange(28.f, 4);
+                squareOrange.setFillColor(sf::Color::White);
+                squareOrange.setOutlineColor(color[3]);
+                squareOrange.setOutlineThickness(2);
+                squareOrange.move(float(size.x) * 1.75, float(size.y) / 10);
+                squareOrange.rotate(45);
+                sf::CircleShape squareOrange1(28.f, 4);
+                squareOrange1.setFillColor(sf::Color::White);
+                squareOrange1.setOutlineColor(color[3]);
+                squareOrange1.setOutlineThickness(2);
+                squareOrange1.move(float(size.x) * 1.83, float(size.y) / 10);
+                squareOrange1.rotate(45);
+                sf::CircleShape squareOrange2(28.f, 4);
+                squareOrange2.setFillColor(sf::Color::White);
+                squareOrange2.setOutlineColor(color[3]);
+                squareOrange2.setOutlineThickness(2);
+                squareOrange2.move(float(size.x) * 1.91, float(size.y) / 10);
+                squareOrange2.rotate(45);
+
+                state.getWindow().draw(squarePink);
+                state.getWindow().draw(squarePink1);
+                state.getWindow().draw(squareBlueLight);
+                state.getWindow().draw(squareBlueLight1);
+                state.getWindow().draw(squareBlueLight2);
+                state.getWindow().draw(squarePurple);
+                state.getWindow().draw(squarePurple1);
+                state.getWindow().draw(squarePurple2);
+                state.getWindow().draw(squareOrange);
+                state.getWindow().draw(squareOrange1);
+                state.getWindow().draw(squareOrange2);
 
                 state.getWindow().draw(plateau);
                 state.getWindow().draw(shoe);

@@ -9,7 +9,8 @@ file(GLOB_RECURSE client_sources *.cpp)
 list(REMOVE_ITEM client_sources "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp")
 
 # Build the "client" library, add required include and link against dependencies
-add_library(${lib_client_target} STATIC ${client_sources})
+add_library(${lib_client_target} STATIC ${client_sources}
+        render/Cases.cpp)
 add_dependencies(${lib_client_target} generate-headers)
 target_include_directories(${lib_client_target} INTERFACE
         ${CMAKE_CURRENT_SOUCE_DIR}
