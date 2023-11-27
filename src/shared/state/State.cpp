@@ -81,7 +81,7 @@ void State::modifyMoney(Player player, int value) {
 
 }
 
-void State::addPropertyBank(Property property) {
+void State::addPropertyBank(Property* property) {
 
     this->bank.addToBankProperties(property);
 
@@ -92,9 +92,9 @@ void State::addPropertyBank(Property property) {
     //}
 }
 
-void State::removePropertyBank(Property property) {
+void State::removePropertyBank(Property* property) {
 
-    const vector<Property> &myListOfBankProperties = this->bank.getBankProperties();
+    const vector<Property*> &myListOfBankProperties = this->bank.getBankProperties();
     auto it = std::find(myListOfBankProperties.begin(), myListOfBankProperties.end(),
                                                    property);
 
