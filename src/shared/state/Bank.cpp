@@ -10,7 +10,7 @@ namespace state{
 
     Bank::Bank() : nbApart(32), nbHostel(12){
 
-        City* lens = new City(2, true, false, false, false, false, "LENS", 600000, new int[6]{20000, 100000, 300000, 900000, 1600000, 250000}, PINK);
+        City* lens = new City(2, true, false, false, false, false, "LENS", 600000, new int[6]{20000, 100000, 300000, 900000, 1600000, 2500000}, PINK);
         City* bordeaux = new City(4, true, false, false, false, false, "BORDEAUX", 600000, new int[6]{40000, 200000, 600000, 1800000, 3200000, 4500000}, PINK);
         City* strasbourg = new City(7, true, false, false, false, false, "STRASBOURG", 1000000, new int[6]{60000, 300000, 900000, 2700000, 4000000, 5500000}, LIGHT_BLUE);
         City* saint_etienne = new City(9, true, false, false, false, false, "SAINT-ETIENNE", 1000000, new int[6]{60000, 300000, 900000, 2700000, 4000000, 5500000}, LIGHT_BLUE);
