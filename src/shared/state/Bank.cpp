@@ -1,4 +1,7 @@
 #include "Bank.h"
+#include "City.h"
+#include "Station.h"
+#include "Service.h"
 
 using namespace std;
 #include <vector>
