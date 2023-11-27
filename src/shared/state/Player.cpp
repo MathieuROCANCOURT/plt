@@ -3,6 +3,10 @@
 using namespace std;
 using namespace state;
 
+Player::Player(std::string name, Token token) : name(name), money(15000000), debt(NOT_DEBT), position(1), freeJailCard(0), nbTotalAppart(0), nbTotalHostel(0), gameStatus(PLAYINGFREE), nbTurnInJail(0), token(token){
+
+}
+
 
 void Player::setPosition(int) {
     this->position = position;
@@ -47,5 +51,7 @@ std::string Player::getName() {
 bool Player::operator==(const Player &other) const {
     return (this->name == other.name);
 }
+
+
 
 

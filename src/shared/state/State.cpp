@@ -6,6 +6,54 @@ using namespace std;
 using namespace state;
 
 
+State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), stackLuck(), turn(NO_PLAYER) {
+
+
+    //instanciation des cases propriétés
+    board.emplace(2, Box(2, true, false, false, false, false));
+    board.emplace(4, Box(4, true, false, false, false, false));
+    board.emplace(7, Box(7, true, false, false, false, false));
+    board.emplace(9, Box(9, true, false, false, false, false));
+    board.emplace(10, Box(10, true, false, false, false, false));
+    board.emplace(12, Box(12, true, false, false, false, false));
+    board.emplace(14, Box(14, true, false, false, false, false));
+    board.emplace(15, Box(15, true, false, false, false, false));
+    board.emplace(17, Box(17, true, false, false, false, false));
+    board.emplace(19, Box(19, true, false, false, false, false));
+    board.emplace(20, Box(20, true, false, false, false, false));
+    board.emplace(22, Box(22, true, false, false, false, false));
+    board.emplace(24, Box(24, true, false, false, false, false));
+    board.emplace(25, Box(25, true, false, false, false, false));
+    board.emplace(27, Box(27, true, false, false, false, false));
+    board.emplace(28, Box(28, true, false, false, false, false));
+    board.emplace(30, Box(30, true, false, false, false, false));
+    board.emplace(32, Box(32, true, false, false, false, false));
+    board.emplace(33, Box(33, true, false, false, false, false));
+    board.emplace(35, Box(35, true, false, false, false, false));
+    board.emplace(38, Box(38, true, false, false, false, false));
+    board.emplace(40, Box(40, true, false, false, false, false));
+
+    //instanciation des cases communauté
+    board.emplace(3, Box(3, false, true, false, false, false));
+    board.emplace(18, Box(18, false, true, false, false, false));
+    board.emplace(34, Box(34, false, true, false, false, false));
+    //instanciation des cases chance
+    board.emplace(8, Box(8, false, true, false, true, false));
+    board.emplace(23, Box(23, false, true, false, true, false));
+    board.emplace(37, Box(37, false, true, false, true, false));
+
+    //instanciation des autres cases
+    board.emplace(1, Box(1, false, false, true, false, false));
+    board.emplace(5, Box(5, false, false, true, false, false));
+    board.emplace(11, Box(11, false, false, false, false, false));
+    board.emplace(21, Box(21, false, false, false, false, false));
+    board.emplace(31, Box(31, false, false, true, false, true));
+    board.emplace(39, Box(39, false, false, true, false, false));
+
+
+
+}
+
 
 void State::modifyNbPlayer(int nbPlayer) {
     if (nbPlayer > 1 and nbPlayer < 7) {
@@ -170,6 +218,13 @@ void State::removePropertyPlayer(Player player, Property property) {
     }
 
 }
+
+int State::getNbDouble() {
+    return this->nbDouble;
+}
+
+
+
 
 
 
