@@ -3,16 +3,29 @@
 //
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include "Cases.h"
 
 render::Cases::Cases(float posX, float posY, sf::Color caseColor, float radius, int pointCount, sf::Color fillColor,
-                     float thickness, float rotate) {
-    sf::CircleShape square(radius, pointCount);
-    square.setFillColor(fillColor);
-    square.setOutlineColor(caseColor);
-    square.setOutlineThickness(thickness);
-    square.move(posX, posY);
-    square.rotate(rotate);
-
+                     float thickness, float rotate) : posX(posX),
+                                                      posY(posY),
+                                                      caseColor(caseColor),
+                                                      radius(radius),
+                                                      pointCount(pointCount),
+                                                      fillColor(fillColor),
+                                                      thickness(thickness),
+                                                      rotate(rotate) {
 }
 
+void render::Cases::draw(sf::RenderWindow& window) {
+    sf::CircleShape square(this->radius, this->pointCount);
+    square.setFillColor(this->fillColor);
+    square.setOutlineColor(this->caseColor);
+    square.setOutlineThickness(this->thickness);
+    square.move(this->posX, this->posY);
+    square.rotate(this->rotate);
+    window.draw(square);
+}
+render::Cases::~Cases() {
+    delete this;
+}
