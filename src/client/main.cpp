@@ -24,17 +24,6 @@ int main(int argc, char *argv[]) {
             state::State currentState;
             sf::RenderWindow window;
 
-            sf::Color color[8] = {
-                    sf::Color(0xFE90C9FF),
-                    sf::Color::Cyan,
-                    sf::Color::Magenta,
-                    sf::Color(0xE79C62FF),
-                    sf::Color::Red,
-                    sf::Color::Yellow,
-                    sf::Color::Green,
-                    sf::Color::Blue
-            };
-
             sf::Texture plateauTexture;
             sf::Texture backgroundTexture;
             sf::Texture hatTexture;
@@ -47,7 +36,7 @@ int main(int argc, char *argv[]) {
 
             vector<std::string> liste = {"Player 1", "Player 2", "Player 3", "Player 4", "Player 5", "Player 6"};
             vector<Cases *> list_cases;
-            vector<ButtonPlayer *> list_buttonPlayer;
+            vector<ButtonPlayer> list_buttonPlayer;
 
             // Charger le fichier du plateau de l'image
             if (!plateauTexture.loadFromFile("./../res/Plateau_monopoly_resize.jpg")) {
@@ -117,13 +106,10 @@ int main(int argc, char *argv[]) {
 
             // Add liste de texte
             for (int i = 0; i < (int) liste.size(); i++) {
-                ButtonPlayer *buttonPlayer;
-                buttonPlayer = new ButtonPlayer(95, 40, float(size.x) + float(i) * 110 + 10, 5, state.getFont(),
+                ButtonPlayer buttonPlayer(95, 40, float(size.x) + float(i) * 110 + 10, 5, state.getFont(),
                                                 liste[i], float(size.x) + float(i) * 110 + 20, 10);
                 list_buttonPlayer.push_back(buttonPlayer);
             }
-
-            sf::RectangleShape *selectedText = nullptr; // Pointeur vers le texte sélectionné
 
             sf::Texture cardTexture;
             if (!cardTexture.loadFromFile("./../res/ChanceCards/win_rugby.png")) {
@@ -132,6 +118,9 @@ int main(int argc, char *argv[]) {
             }
             sf::Sprite card(cardTexture);
             card.move(float(size.x) / 5, float(size.y) / 4);
+
+            sf::Text textBank("BANQUE", font, 50);
+            textBank.move(float(size.x) * 1.35, float(size.y) / 3);
 
             // on fait tourner la boucle principale
             while (state.getWindow().isOpen()) {
@@ -152,50 +141,7 @@ int main(int argc, char *argv[]) {
                     int y = event.mouseButton.y;
 
                     for (auto &rectangle: list_buttonPlayer) {
-                        sf::FloatRect textRect = rectangle->getRectangle().getGlobalBounds();
-                        if (textRect.contains(float(x), float(y))) {
-                            if (selectedText != nullptr) {
-                                selectedText->setFillColor(sf::Color::Yellow); // On remet sa couleur en jaune
-                            }
-                            selectedText = rectangle->changePointer();
-                            selectedText->setFillColor(sf::Color::Green); // On change sa couleur en vert
-
-                            /* Create all cases of properties */
-                            list_cases.clear(); // Delete all object
-                            int rep, count = 0;
-                            float posX_case = float(size.x) * 1.085, posY_case = float(size.y) / 15;
-                            for (auto c: color) {
-                                if (count == 4) {
-                                    posY_case += float(size.y) / 12;
-                                    posX_case = float(size.x) * 1.085;
-                                }
-                                if (count == 0 || c == sf::Color::Blue) {
-                                    rep = 2;
-                                } else {
-                                    rep = 3;
-                                }
-                                for (int i = 0; i < rep; i++) {
-                                    auto cases = new Cases(posX_case, posY_case, c);
-                                    list_cases.push_back(cases);
-                                    posX_case += float(size.x) * 0.072;
-                                }
-                                posX_case += float(size.x) * 0.03;
-                                count++;
-                            }
-                            posX_case = float(size.x) * 1.3, posY_case += float(size.y) / 12;
-                            for (int i = 0; i < 2; ++i) {
-                                auto cases = new Cases(posX_case, posY_case, sf::Color(0xB8B8B8FF));
-                                list_cases.push_back(cases);
-                                posX_case += float(size.x) * 0.072;
-                            }
-                            posX_case += float(size.x) * 0.1;
-                            for (int i = 0; i < 4; ++i) {
-                                auto cases = new Cases(posX_case, posY_case, sf::Color(0x66666FF));
-                                list_cases.push_back(cases);
-                                posX_case += float(size.x) * 0.072;
-                            }
-                            break;
-                        }
+                        list_cases = rectangle.click(x, y, list_cases, size);
                     }
                 }
 
@@ -204,8 +150,8 @@ int main(int argc, char *argv[]) {
                     c->draw(state.getWindow());
                 }
                 for (auto &buttonPlayer: list_buttonPlayer) {
-                    state.getWindow().draw(buttonPlayer->getRectangle());
-                    state.getWindow().draw(buttonPlayer->getText());
+                    state.getWindow().draw(buttonPlayer.getRectangle());
+                    state.getWindow().draw(buttonPlayer.getText());
                 }
 
                 state.getWindow().draw(plateau);
@@ -217,6 +163,7 @@ int main(int argc, char *argv[]) {
                 state.getWindow().draw(iron);
 
                 state.getWindow().draw(card);
+                state.getWindow().draw(textBank);
                 state.getWindow().display();
             }
         }
