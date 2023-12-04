@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "DeckLuck.h"
 
 using namespace std;
@@ -40,6 +41,40 @@ DeckLuck::DeckLuck() {
     stack.push_back(win_profit_shares);
     stack.push_back(win_rugby);
 
+}
 
+Card* DeckLuck::drawCard() {
+
+    state::Card* firstCard = stack[0];
+
+    if (!this->stack.empty()) { // Vérifie si le vecteur n'est pas vide
+        std::rotate(this->stack.begin(), this->stack.begin() + 1, this->stack.end());
+        // Déplace le premier élément à la dernière position du vecteur
+    }
+
+    if(firstCard->getText() == "free_prison"){
+        this->stack.pop_back();
+    }
+
+    // TEST : Affichage pour vérifier le déplacement
+   // for (const auto& this->stack : this->stack) {
+        // Affichage des cartes pour vérifier le déplacement
+        // test non effectué
+   // }
+
+    return firstCard;
+}
+
+void DeckLuck::returnJailCard() {
+
+    Card* free_prison = new Card("free_prison", true, false, false, false, false, false, new int[1]{0});
+    stack.push_back(free_prison);
 
 }
+
+int DeckLuck::sizeDeck() {
+    return this->stack.size();
+}
+
+
+

@@ -115,7 +115,7 @@ void State::modifyTurn(Playing tour) {
     this->turn = tour;
 
     //test non effectue
-    cout << "l'instancec turn de l'enumerate Playing vaut " << this->turn << endl;
+    cout << "l'instance turn de l'enumerate Playing vaut " << this->turn << endl;
 }
 
 void State::modifyMoney(Player player, int value) {
@@ -171,20 +171,10 @@ void State::addPropertyPlayer(Player player, Property property) {
     //}
 }
 
-void State::moveCardInDeckLuck() {
+Card* State::drawCardLuck() {
 
-    /*Pour que cela fonctionne, il va falloir récuper le vecteur de carte de stackLuck et non pas stackLuck directement*/
-
-//    if (!this->stackLuck.empty()) { // Vérifie si le vecteur n'est pas vide
-//        std::rotate(this->stackLuck.begin(), this->stackLuck.begin() + 1, this->stackLuck.end());
-//        // Déplace le premier élément à la dernière position du vecteur
-//    }
-//
-//    // Affichage pour vérifier le déplacement
-//    for (const auto& this->stackLuck : this->stackLuck) {
-//        // Affichage des cartes pour vérifier le déplacement
-//        // test non effectué
-//    }
+    Card* firstCard = this->stackLuck.drawCard();
+    return firstCard;
 }
 
 void State::gameStatus(Player player, GameStatus status) {
@@ -222,6 +212,66 @@ void State::removePropertyPlayer(Player player, Property property) {
 int State::getNbDouble() {
     return this->nbDouble;
 }
+
+Card *State::drawCardCommunity() {
+    Card* firstCard = this->stackLuck.drawCard();
+    return firstCard;
+}
+
+void State::modifyNbFreeJailCard(Player player, bool increase) {
+
+    int nbFreeJailCard = player.getFreeJailCard();
+
+    if(increase) {
+        if (nbFreeJailCard < 2) {
+            nbFreeJailCard++;
+            player.setFreeJailCard(nbFreeJailCard);
+        } else {
+            cout << "erreur : ce joueur possède trop de carte libéré de prison" << endl;
+        }
+    }
+    else{
+        if(nbFreeJailCard > 0){
+            nbFreeJailCard--;
+            player.setFreeJailCard(nbFreeJailCard);
+        }
+        else{
+            cout << "erreur : ce joueur ne possède pas assez de carte libéré de prison" << endl;
+        }
+    }
+
+}
+
+void State::returnJailCard() {
+
+    int nbCardCommunity = stackCommunity.sizeDeck();
+    int nbCardLuck = stackLuck.sizeDeck();
+
+    if(nbCardCommunity == 15){
+        stackCommunity.returnJailCard();
+    }
+    if(nbCardLuck == 15){
+        stackLuck.returnJailCard();
+    }
+
+}
+
+void State::debtPlayer(Player playerInDebt, Player playerCreditor) {
+
+    string name = playerCreditor.getName();
+
+
+    if( name == "A" ){ playerInDebt.setDebt(DEBT_PLAYERA);}
+    else if(name == "B"){ playerInDebt.setDebt(DEBT_PLAYERB);}
+    else if(name == "C"){ playerInDebt.setDebt(DEBT_PLAYERC);}
+    else if(name == "D"){ playerInDebt.setDebt(DEBT_PLAYERD);}
+    else if(name == "E"){ playerInDebt.setDebt(DEBT_PLAYERE);}
+    else if(name == "F"){ playerInDebt.setDebt(DEBT_PLAYERF);}
+    else{ cout << "erreur : le player envers qui il y a dette n'a pas été trouvé" << endl;}
+
+}
+
+
 
 
 

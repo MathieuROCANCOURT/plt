@@ -52,6 +52,20 @@ bool Player::operator==(const Player &other) const {
     return (this->name == other.name);
 }
 
+int Player::getFreeJailCard() {
+    return this->freeJailCard;
+}
+
+void Player::setFreeJailCard(int NbFreeJailCard) {
+
+    this->freeJailCard = NbFreeJailCard;
+
+}
+
+void Player::setDebt(Debt debt) {
+    this->debt = debt;
+}
+
 
 
 

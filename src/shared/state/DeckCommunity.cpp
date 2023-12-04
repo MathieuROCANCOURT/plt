@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "DeckCommunity.h"
 
 using namespace std;
@@ -41,3 +42,31 @@ DeckCommunity::DeckCommunity(){
     stack.push_back(win_taxes);
 
 }
+
+Card *DeckCommunity::drawCard() {
+
+    state::Card* firstCard = stack[0];
+
+    if (!this->stack.empty()) { // Vérifie si le vecteur n'est pas vide
+        std::rotate(this->stack.begin(), this->stack.begin() + 1, this->stack.end());
+        // Déplace le premier élément à la dernière position du vecteur
+    }
+
+    if(firstCard->getText() == "free_prison"){
+        this->stack.pop_back();
+    }
+
+    return firstCard;
+}
+
+void DeckCommunity::returnJailCard() {
+
+    Card* free_prison = new Card("free_prison", true, false, false, false, false, false, new int[1]{0});
+    stack.push_back(free_prison);
+
+}
+
+int DeckCommunity::sizeDeck() {
+    return this->stack.size();
+}
+

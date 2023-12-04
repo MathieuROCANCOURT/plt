@@ -33,10 +33,10 @@ namespace state{
         City* reims = new City(38, "REIMS", 3500000, new int[6]{350000, 1750000, 5000000, 11000000, 13000000, 15000000}, DARK_BLUE);
         City* dunkerque = new City(40, "DUNKERQUE", 4000000, new int[6]{500000, 2000000, 6000000, 14000000, 17000000, 20000000}, DARK_BLUE);
 
-        Station* stationLille = new Station(6, "LILLE", 2000000, new int[4]{250000, 500000, 1000000, 2000000});
-        Station* stationMarseille = new Station(16, "MARSEILLE", 2000000, new int[4]{250000, 500000, 1000000, 2000000});
-        Station* stationParis = new Station(26, "PARIS", 2000000, new int[4]{250000, 500000, 1000000, 2000000});
-        Station* stationLyon = new Station(36, "LYON", 2000000, new int[4]{250000, 500000, 1000000, 2000000});
+        Station* stationLille = new Station(6, "STATION_LILLE", 2000000, new int[4]{250000, 500000, 1000000, 2000000});
+        Station* stationMarseille = new Station(16, "STATION_MARSEILLE", 2000000, new int[4]{250000, 500000, 1000000, 2000000});
+        Station* stationParis = new Station(26, "STATION_PARIS", 2000000, new int[4]{250000, 500000, 1000000, 2000000});
+        Station* stationLyon = new Station(36, "STATION_LYON", 2000000, new int[4]{250000, 500000, 1000000, 2000000});
 
         Service* telecoms = new Service(13, "TELECOMS", 1500000);
         Service* satellite = new Service(29, "SATELLITE", 1500000);

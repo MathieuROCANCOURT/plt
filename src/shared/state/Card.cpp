@@ -14,3 +14,7 @@ Card::Card(std::string text, bool freeJail, bool money, bool fctHostel, bool mov
     }
 
 }
+
+std::string Card::getText() {
+    return this->text;
+}
