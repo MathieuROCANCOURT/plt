@@ -271,6 +271,33 @@ void State::debtPlayer(Player playerInDebt, Player playerCreditor) {
 
 }
 
+Player *State::getCurrentPlayer() {
+
+    Player* currentPlayer;
+
+    Playing turn = this->turn;
+    if(turn == PLAYERA){
+        currentPlayer = &listPlayer[0];
+    }
+    if(turn == PLAYERB){
+        currentPlayer = &listPlayer[1];
+    }
+    if(turn == PLAYERC){
+        currentPlayer = &listPlayer[2];
+    }
+    if(turn == PLAYERD){
+        currentPlayer = &listPlayer[3];
+    }
+    if(turn == PLAYERE){
+        currentPlayer = &listPlayer[4];
+    }
+    if(turn == PLAYERF){
+        currentPlayer = &listPlayer[5];
+    }
+
+    return currentPlayer;
+}
+
 
 
 
