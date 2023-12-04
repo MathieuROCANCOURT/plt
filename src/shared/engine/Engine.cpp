@@ -18,13 +18,22 @@ void engine::Engine::rollDices() {
         this->state.modifyNbDouble(1);
     }
 //    if (this->state.getNBdouble>=3){//getNBdouble
-        this->state
+//        this->state;
 //waiting for getCurrentPlayer        moveInJail(state::)
-    }
+
 
 }
 
 void engine::Engine::moveInJail(Player player){
     //this->state.moveToken(player,11);//est déplacé à la case 11 prison
     //this->state.gameStatus(player,PLAYINGJAIL);//est considérer comme en prison
+}
+
+int payTheBank (state::Player player, long long valueMoney){
+    long long tmp;
+    tmp=player.getMoney()-valueMoney;
+    if (tmp<0){
+        return -1;
+    }
+    return 0;
 }
