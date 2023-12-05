@@ -80,6 +80,7 @@ void State::modifyDices(int value1, int value2) {
         this->dices.setIsDouble(true);
         modifyNbDouble(1);
     }
+    else{this->dices.setIsDouble(false);}
     this->dices.setScore(value1+value2);
 
     //test non effectue
