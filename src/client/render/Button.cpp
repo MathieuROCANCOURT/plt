@@ -1,10 +1,8 @@
 //
 // Created by mathieu on 04/12/23.
 //
+#include <SFML/Graphics.hpp>
 #include "Button.h"
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/Text.hpp>
 
 using namespace std;
 using namespace render;
