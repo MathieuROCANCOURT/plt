@@ -17,18 +17,18 @@ Button render::ButtonPlayer::getButton() {
 }
 
 vector<Cases *> render::ButtonPlayer::click(int x, int y, vector<Cases *> list_cases, sf::Vector2u size) {
-    sf::FloatRect textRect = this->rectangle.getGlobalBounds();
+    sf::FloatRect textRect = this->getButton().getRectangle().getGlobalBounds();
     static ButtonPlayer *selectedText = nullptr;
     /*sf::RectangleShape rectangleShape{sf::Vector2f(10000, 10000)};
     rectangleShape.setFillColor(sf::Color::Red);
     rectangleShape.setPosition(size.x * 1.5, size.y * 0.5);*/
     if (textRect.contains(float(x), float(y))) {
         if (selectedText != nullptr) {
-            this->rectangle.setFillColor(sf::Color::Black); // On remet sa couleur en jaune
+            this->getButton().getRectangle().setFillColor(sf::Color::Black); // On remet sa couleur en jaune
             //selectedText->button.setRectangle(rectangleShape);
         }
         selectedText = this;
-        this->rectangle.setFillColor(sf::Color::Green); // On change sa couleur en vert
+        this->getButton().getRectangle().setFillColor(sf::Color::Green); // On change sa couleur en vert
         //selectedText->button.setRectangle(rectangleShape);
         list_cases = createAllCases(list_cases, sf::Vector2u(float(size.x), float(size.y) / 15));
     }

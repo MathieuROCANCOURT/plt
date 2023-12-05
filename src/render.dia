@@ -850,7 +850,7 @@
             <dia:string>#button#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#Button *#</dia:string>
+            <dia:string>#Button#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
