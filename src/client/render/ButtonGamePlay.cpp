@@ -1,5 +1,4 @@
 #include "ButtonGamePlay.h"
-#include <SFML/Graphics/Font.hpp>
 
 using namespace std;
 using namespace render;
