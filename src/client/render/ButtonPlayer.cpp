@@ -21,12 +21,12 @@ render::ButtonPlayer::ButtonPlayer(float sizeXButton, float sizeYButton, float p
                                                               buttonOutline(buttonOutline) {
     this->rectangle = sf::RectangleShape(sf::Vector2f(this->sizeXButton, this->sizeYButton));
     this->rectangle.setPosition(this->posXButton, this->posYButton);
-    this->rectangle.setFillColor(sf::Color::Yellow);
-    this->rectangle.setOutlineColor(sf::Color::Black);
+    this->rectangle.setFillColor(this->buttonColor);
+    this->rectangle.setOutlineColor(this->buttonOutline);
     this->rectangle.setOutlineThickness(this->thicknessButton);
 
     this->textPlayer = sf::Text(this->text, this->font, this->characterSize);
-    this->textPlayer.setFillColor(sf::Color::Black);
+    this->textPlayer.setFillColor(this->colorText);
     this->textPlayer.setPosition(this->posXText, this->posYText);
 }
 
@@ -54,10 +54,10 @@ vector<Cases *> render::ButtonPlayer::click(int x, int y, vector<Cases *> list_c
     static ButtonPlayer *selectedText = nullptr;
     if (textRect.contains(float(x), float(y))) {
         if (selectedText != nullptr) {
-            selectedText->rectangle.setFillColor(sf::Color::Yellow); // On remet sa couleur en jaune
+            selectedText->getRectangle().setFillColor(sf::Color::Yellow); // On remet sa couleur en jaune
         }
         selectedText = this;
-        selectedText->rectangle.setFillColor(sf::Color::Green); // On change sa couleur en vert
+        selectedText->getRectangle().setFillColor(sf::Color::Green); // On change sa couleur en vert
 
         /* Create all cases of properties */
         list_cases.clear(); // Delete all object
@@ -97,4 +97,7 @@ vector<Cases *> render::ButtonPlayer::click(int x, int y, vector<Cases *> list_c
     }
 
     return list_cases;
+}
+sf::Color ButtonPlayer::setButtonColor(sf::Color color) {
+    return sf::Color();
 }

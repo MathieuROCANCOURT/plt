@@ -1,6 +1,5 @@
 // Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics/RenderStates.hpp>
 
 #include <state.h>
 #include "render.h"
@@ -140,7 +139,7 @@ int main(int argc, char *argv[]) {
                     int x = event.mouseButton.x;
                     int y = event.mouseButton.y;
 
-                    for (auto &rectangle: list_buttonPlayer) {
+                    for (auto rectangle: list_buttonPlayer) {
                         list_cases = rectangle.click(x, y, list_cases, size);
                     }
                 }
