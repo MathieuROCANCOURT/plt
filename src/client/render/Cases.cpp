@@ -15,17 +15,15 @@ render::Cases::Cases(float posX, float posY, sf::Color caseColor, float radius, 
                                                       fillColor(fillColor),
                                                       thickness(thickness),
                                                       rotate(rotate) {
-}
-
-void render::Cases::draw(sf::RenderWindow& window) {
     sf::CircleShape square(this->radius, this->pointCount);
     square.setFillColor(this->fillColor);
     square.setOutlineColor(this->caseColor);
     square.setOutlineThickness(this->thickness);
     square.move(this->posX, this->posY);
     square.rotate(this->rotate);
-    window.draw(square);
+
 }
+
 render::Cases::~Cases() {
     delete this;
 }

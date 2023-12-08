@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 
             vector<std::string> liste = {"Player 1", "Player 2", "Player 3", "Player 4", "Player 5", "Player 6"};
             vector<Cases *> list_cases;
-            vector<ButtonPlayer> list_buttonPlayer;
+            vector<Button *> list_buttonPlayer;
 
             // Charger le fichier du plateau de l'image
             if (!plateauTexture.loadFromFile("./../res/Plateau_monopoly_resize.jpg")) {
@@ -48,27 +48,27 @@ int main(int argc, char *argv[]) {
                 return EXIT_FAILURE;
             }
             // Chargement des jetons
-            if (!hatTexture.loadFromFile("./../res/Tokens/hat.png")) {
+            if (!hatTexture.loadFromFile("./../res/Token/hat.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!shoeTexture.loadFromFile("./../res/Tokens/shoe.png")) {
+            if (!shoeTexture.loadFromFile("./../res/Token/shoe.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!dogTexture.loadFromFile("./../res/Tokens/dog.png")) {
+            if (!dogTexture.loadFromFile("./../res/Token/dog.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!carTexture.loadFromFile("./../res/Tokens/car.png")) {
+            if (!carTexture.loadFromFile("./../res/Token/car.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!boatTexture.loadFromFile("./../res/Tokens/boat.png")) {
+            if (!boatTexture.loadFromFile("./../res/Token/boat.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!ironTexture.loadFromFile("./../res/Tokens/iron.png")) {
+            if (!ironTexture.loadFromFile("./../res/Token/iron.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
@@ -98,8 +98,6 @@ int main(int argc, char *argv[]) {
             iron.move(float(size.x) - 35, float(size.y) - 80);
 
             // création de la fenêtre
-            window.create(sf::VideoMode(size.x * 2, size.y), "Monopoly");
-            window.setVerticalSyncEnabled(true);
 
             StateLayer state = StateLayer(currentState, window, font);
 
