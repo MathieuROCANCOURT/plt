@@ -75,7 +75,10 @@ Pour le rendu de cet état, nous avons fait le choix d'utiliser la librairie gra
 Le plateau est fait à partir d'un fichier image "Plateau_monopoly_resize.jpg" avec toutes les informations affichées. Si on souhaite changer de plateau, il faut changer l'image avec environ la même taille ou légèrement plus grande pour éviter que la fenêtre sort de l'écran.
 Les pions sont aussi des images, mais qui fallait mettre en transparence pour éviter l'affichage du fond blanc. Si on souhaite changer de pion, il faut changer l'image avec approximativement la même taille ou légèrement plus petite pour éviter que l'image du pion déborde de la case.
 
-Lorsqu'un évènement se produit, un changement d'état est effectué et alors, l'affichage doit être modifié en conséquence et mis à jour.
+Voici ci-dessous les différents états possible avec les transitions lors du tour du joueur, cela ne fait pas office des affichage différents.
+<p align="center">
+ <img src=https://github.com/MathieuROCANCOURT/plt/assets/114499096/302c631f-8a77-40dd-89e5-0b630423c6c2 alt=Diagramme d'état pour le rendu>
+</p>
 
 ## Conception logicielle
 ### StateLayer
