@@ -119,7 +119,7 @@ void State::modifyTurn(Playing tour) {
     cout << "l'instance turn de l'enumerate Playing vaut " << this->turn << endl;
 }
 
-void State::modifyMoney(Player player, int value) {
+void State::modifyMoney(Player player, long long value) {
 
     long long moneyOfPlayer = player.getMoney();
     moneyOfPlayer += value;
@@ -298,6 +298,21 @@ Player *State::getCurrentPlayer() {
 
     return currentPlayer;
 }
+
+void State::debtBank(Player player) {
+    player.setDebt(DEBT_BANK);
+}
+
+long long State::getRentToPay(Property property) {
+    return property.getRent();
+}
+
+void State::modifyNbPropertyType(Player player, Property property) {
+    property.modifyNbPossessed(player);
+
+}
+
+
 
 
 

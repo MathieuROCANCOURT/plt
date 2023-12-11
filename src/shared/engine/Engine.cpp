@@ -48,6 +48,6 @@ int engine::Engine::payOtherPlayer (state::Player player1, state::Player player2
         this->state.debtPlayer(player1,player2);
         return -1;
     }
-    this->state.modifyMoney(player2.getMoney())
+    //this->state.modifyMoney(player2.getMoney())
 }
 
