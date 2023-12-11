@@ -1,11 +1,14 @@
 #include "GameInformation.h"
+#include "state/Player.h"
 
 using namespace std;
 using namespace render;
 
-GameInformation::GameInformation(std::vector<Button *> listButton, std::vector<Text *> listText) {
-
-}
+/*GameInformation::GameInformation(vector<state::Player> & listPlayer) : listPlayer(listPlayer) {
+    for(auto i: listPlayer){
+        listButton.push_back(Button(95, 40,))
+    }
+}*/
 
 
 vector<Cases *> GameInformation::CreateCases(int clickwhere, vector<Cases *> listCases, sf::Vector2u size) {
@@ -55,4 +58,7 @@ vector<Cases *> GameInformation::CreateCases(int clickwhere, vector<Cases *> lis
     }
 
     return listCases;
+}
+GameInformation::GameInformation() {
+
 }

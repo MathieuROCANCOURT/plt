@@ -20,7 +20,6 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(argv[1], "render") == 0) {
             cout << "--- Render ---" << endl;
 
-            state::State currentState;
             sf::RenderWindow window;
 
             sf::Texture plateauTexture;
@@ -48,27 +47,27 @@ int main(int argc, char *argv[]) {
                 return EXIT_FAILURE;
             }
             // Chargement des jetons
-            if (!hatTexture.loadFromFile("./../res/Token/hat.png")) {
+            if (!hatTexture.loadFromFile("./../res/Tokens/hat.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!shoeTexture.loadFromFile("./../res/Token/shoe.png")) {
+            if (!shoeTexture.loadFromFile("./../res/Tokens/shoe.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!dogTexture.loadFromFile("./../res/Token/dog.png")) {
+            if (!dogTexture.loadFromFile("./../res/Tokens/dog.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!carTexture.loadFromFile("./../res/Token/car.png")) {
+            if (!carTexture.loadFromFile("./../res/Tokens/car.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!boatTexture.loadFromFile("./../res/Token/boat.png")) {
+            if (!boatTexture.loadFromFile("./../res/Tokens/boat.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
-            if (!ironTexture.loadFromFile("./../res/Token/iron.png")) {
+            if (!ironTexture.loadFromFile("./../res/Tokens/iron.png")) {
                 cout << "Error load file." << endl;
                 return EXIT_FAILURE;
             }
@@ -98,11 +97,21 @@ int main(int argc, char *argv[]) {
             iron.move(float(size.x) - 35, float(size.y) - 80);
 
             // création de la fenêtre
+            state::State currentState = *new State();
+            Render *r;
+            r = new Render(currentState);
+            while (r->getWindow().isOpen()) {
+                sf::Event event{};
+                while (r->getWindow().pollEvent(event)) {
+                    if (event.type == sf::Event::Closed) {
+                        r->getWindow().close();
+                    }
+                }
 
-            StateLayer state = StateLayer(currentState, window, font);
-
+                r->draw();
+            }
             // Add liste de texte
-            for (int i = 0; i < (int) liste.size(); i++) {
+            /*for (int i = 0; i < (int) liste.size(); i++) {
                 ButtonPlayer buttonPlayer(95, 40, float(size.x) + float(i) * 110 + 10, 5, state.getFont(),
                                                 liste[i], float(size.x) + float(i) * 110 + 20, 10);
                 list_buttonPlayer.push_back(buttonPlayer);
@@ -162,7 +171,7 @@ int main(int argc, char *argv[]) {
                 state.getWindow().draw(card);
                 state.getWindow().draw(textBank);
                 state.getWindow().display();
-            }
+            }*/
         }
 
     } else {
