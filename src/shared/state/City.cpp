@@ -38,25 +38,26 @@ long long City::getRent() {
 
 void City::modifyNbPossessed(Player player) {
 
-    /*if(this->color == PINK or this->color == DARK_BLUE){
-        int nbCityOfTheColor = 2;
+    int nbCityOfTheColor;
+    // Trouve le nombre de propriétés de la même couleur dans le jeu
+    if(this->color == PINK or this->color == DARK_BLUE){
+        nbCityOfTheColor = 2;
     }
     else{
-        int nbCityOfTheColor = 3;
+        nbCityOfTheColor = 3;
     }
-
+    // Trouve le nombre de propriétés de la même couleur que la propriété courante possédée par le joueur
     int nbCityOfTheColorPossessed = 0;
 
-    for(const auto &property : player.getPlayerProperties()){
-        if (City* city = dynamic_cast<City*>(property)){
+    for( auto &property : player.getPlayerProperties()){
+        if ( City* city = dynamic_cast< City*>(&property)){
             if(this->color == city->getColor()){
-
+                nbCityOfTheColorPossessed++;
             }
         }
     }
-
-
-
-
-    Property::modifyNbPossessed(player);*/
+    //Si le nombre de carte de la même couleur possédées par le joueur est maximal, monopoly passe à true
+    if(nbCityOfTheColorPossessed == nbCityOfTheColor){
+        this->monopoly = true;
+    }
 }
