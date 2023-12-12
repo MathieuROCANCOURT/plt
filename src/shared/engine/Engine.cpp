@@ -12,13 +12,13 @@ void engine::Engine::rollDices() {
     int dice1,dice2;
     default_random_engine generator;
     uniform_int_distribution<int> distribution(1,6);
-    dice1=distribution(generator);
-    dice2=distribution(generator);
-    if (dice1==dice2){
+    dice1 = distribution(generator);
+    dice2 = distribution(generator);
+    if (dice1 == dice2){
         this->state.modifyNbDouble(1);
     }
-//    if (this->state.getNBdouble>=3){//getNBdouble
-//        this->state;
+    if (this->state.getNbDouble() >= 3) {//getNBdouble
+        this->state;
 //waiting for getCurrentPlayer        moveInJail(state::)
 
 
