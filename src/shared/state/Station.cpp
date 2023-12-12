@@ -27,3 +27,14 @@ long long Station::getRent() {
         return rent[3];
     }
 }
+
+void Station::modifyNbPossessed(Player player){
+
+    int nbStation=0;
+    for( auto &property : player.getPlayerProperties()){
+        if(typeid(property)==typeid(Station)){
+            nbStation++;
+        }
+    }
+    this->nbStationPossessed = nbStation;
+}

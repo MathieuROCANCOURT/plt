@@ -17,3 +17,13 @@ long long Service::getRent() {
         return 10*score;
     }
 }
+
+void Service::modifyNbPossessed(Player player){
+    int nbService=0;
+    for( auto &property : player.getPlayerProperties()){
+        if(typeid(property)==typeid(Service)){
+            nbService++;
+        }
+    }
+    this->nbServicePossessed = nbService;
+}
