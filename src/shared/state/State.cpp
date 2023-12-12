@@ -312,6 +312,10 @@ void State::modifyNbPropertyType(Player player, Property property) {
 
 }
 
+std::vector<Player> State::getListPlayer() {
+    return this->listPlayer;
+}
+
 
 
 

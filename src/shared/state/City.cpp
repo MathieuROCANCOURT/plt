@@ -14,8 +14,6 @@ City::City(int position, std::string name, long long valuePurchase, long long *r
 
 long long City::getRent() {
 
-
-
     if(hostel){
         return rent[5];
     }
@@ -34,6 +32,10 @@ long long City::getRent() {
         default:
             return rent[0];
     }
+}
+
+Color City::getColor(){
+    return this->color;
 }
 
 void City::modifyNbPossessed(Player player) {
