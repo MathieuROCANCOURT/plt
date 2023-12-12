@@ -7,8 +7,8 @@ using namespace state;
 
 
 Render::Render(State &currentState) : currentState(currentState) {
-    this->gameInfo = *new GameInformation();
     this->gameBoard = *new GameBoard(this->currentState.getNbplayer());
+    this->gameInfo = *new GameInformation(this->gameBoard.getSizeBoard(), 6);
 
 
     this->window.create(sf::VideoMode(this->gameBoard.getSizeBoard().x * 2, this->gameBoard.getSizeBoard().y),
@@ -22,9 +22,16 @@ sf::RenderWindow &Render::getWindow() {
 
 void Render::draw() {
     this->window.clear(sf::Color::White);
-    this->getWindow().draw(this->gameBoard.getSpriteBoard());
+    this->window.draw(this->gameBoard.getSpriteBoard());
+    for (auto button: this->gameInfo.getListButton()) {
+        this->window.draw(button.getRectangle());
+        //this->window.draw(button.getText().getText());
+    }
+    /*for (auto texts: this->gameInfo.getListText()) {
+        this->window.draw(texts.getText());
+    }*/
 
-    this->getWindow().display();
+    this->window.display();
 }
 
 void Render::debt(int player) {

@@ -3,8 +3,9 @@
 #include "Text.h"
 
 using namespace std;
+using namespace render;
 
-render::Text::Text(string text, float posXtext, float posYtext, int characterSize, sf::Color colorText) :
+Text::Text(string text, float posXtext, float posYtext, int characterSize, sf::Color colorText) :
         text(std::move(text)),
         posXtext(posXtext),
         posYtext(posYtext),
@@ -14,10 +15,11 @@ render::Text::Text(string text, float posXtext, float posYtext, int characterSiz
     if (!font.loadFromFile("./../res/Police/ARIAL.TTF")) {
         cout << "Error load file ARIAL.TTF." << endl;
     }
-    this->blocText = sf::Text(this->text, font, this->characterSize);
+    this->blocText = *new sf::Text(this->text, font, this->characterSize);
     this->blocText.setFillColor(this->colorText);
     this->blocText.setPosition(this->posXtext, this->posYtext);
 }
-sf::Text render::Text::getText() {
+
+sf::Text Text::getText() {
     return this->blocText;
 }

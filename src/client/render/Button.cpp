@@ -23,10 +23,13 @@ Button::Button(float sizeXButton, float sizeYButton, float posXButton, float pos
     this->rectangle.setOutlineColor(this->buttonOutline);
     this->rectangle.setOutlineThickness(this->thicknessButton);
 
-    this->textPlayer = Text(this->text, this->posXText, this->posYText, this->characterSize,
+    this->textPlayer = *new Text(this->text, this->posXText, this->posYText, this->characterSize,
                             sf::Color::Black);
 }
 
+Text Button::getText() {
+    return this->textPlayer;
+}
 
 sf::RectangleShape Button::getRectangle() {
     return this->rectangle;
