@@ -10,3 +10,7 @@ bool Property::operator==(const Property &other) const{
 
 
 Property::Property(int position, std::string name, long long valuePurchase) : position(position), name(name), valuePurchase(valuePurchase){}
+
+int Property::getPosition() {
+    return (this->position);
+}

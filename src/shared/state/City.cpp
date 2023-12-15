@@ -63,3 +63,13 @@ void City::modifyNbPossessed(Player player) {
         this->monopoly = true;
     }
 }
+
+int City::getNbApart() {
+    return this->nbApart;
+}
+
+void City::setNbApart(int nbApart) {
+    this->nbApart=nbApart;
+}
+
+

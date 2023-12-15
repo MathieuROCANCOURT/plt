@@ -11,9 +11,18 @@ file(GLOB_RECURSE shared_sources *.cpp)
 
 # Build the "shared" library and add required includes
 add_library(${lib_shared_target} STATIC ${shared_sources}
-        state/Box.cpp
-        engine/Engine.cpp
-        engine/Engine.h)
+        engine/buyApartCommand.cpp
+        engine/buyHostelCommand.cpp
+        engine/Command.cpp
+        engine/CommandTypeId.cpp
+        engine/EndTurnCommand.cpp
+        engine/freeUsingCardCommand.cpp
+        engine/freeUsingMoneyCommand.cpp
+        engine/InitGameCommand.cpp
+        engine/RollDicesCommand.cpp
+        engine/sellApartCommand.cpp
+        engine/sellHostelCommand.cpp
+)
 add_dependencies(${lib_shared_target} generate-headers)
 target_include_directories(${lib_shared_target} PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}
