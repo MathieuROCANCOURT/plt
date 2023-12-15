@@ -1,4 +1,5 @@
 #include "Station.h"
+#include <typeinfo>
 
 using namespace std;
 using namespace state;
