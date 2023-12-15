@@ -1,4 +1,5 @@
 #include "Station.h"
+#include <typeinfo>
 
 
 using namespace std;
@@ -14,19 +15,17 @@ Station::Station(int position, std::string name, long long valuePurchase, long l
 }
 
 long long Station::getRent() {
-
-    if(nbStationPossessed==1){
-        return rent[0];
+    switch (nbStationPossessed) {
+        case 1:
+            return rent[0];
+        case 2:
+            return rent[1];
+        case 3:
+            return rent[2];
+        case 4:
+            return rent[3];
     }
-    if(nbStationPossessed==2){
-        return rent[1];
-    }
-    if(nbStationPossessed==3){
-        return rent[2];
-    }
-    if(nbStationPossessed==4){
-        return rent[3];
-    }
+    return 0;
 }
 
 void Station::modifyNbPossessed(Player player){
