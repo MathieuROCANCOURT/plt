@@ -1,4 +1,5 @@
 #include "Service.h"
+#include <typeinfo>
 
 using namespace std;
 using namespace state;
