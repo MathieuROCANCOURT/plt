@@ -7,7 +7,7 @@
 
 using namespace std;
 using namespace state;
-
+/*
 void engine::Engine::rollDices() {
     int dice1,dice2;
     default_random_engine generator;
@@ -23,12 +23,14 @@ void engine::Engine::rollDices() {
 
 
 }
-
+*/
+/*
 void engine::Engine::moveInJail(Player player){
     //this->state.moveToken(player,11);//est déplacé à la case 11 prison
     //this->state.gameStatus(player,PLAYINGJAIL);//est considérer comme en prison
 }
-
+*/
+/*
 int engine::Engine::payTheBank (Player player, long long valueMoney){
     long long tmp;
     tmp=player.getMoney()-valueMoney;
@@ -38,7 +40,8 @@ int engine::Engine::payTheBank (Player player, long long valueMoney){
     }
     return 0;
 }
-
+*/
+/*
 int engine::Engine::payOtherPlayer (state::Player player1, state::Player player2, long long valueMoney){
     long long tmp;
     tmp=player1.getMoney()-valueMoney;
@@ -50,4 +53,4 @@ int engine::Engine::payOtherPlayer (state::Player player1, state::Player player2
     }
     //this->state.modifyMoney(player2.getMoney())
 }
-
+*/
