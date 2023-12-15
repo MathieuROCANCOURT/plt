@@ -25,6 +25,7 @@ bool engine::buyApartCommand::buyApart(state::State &state) {
         state::City* city =dynamic_cast<state::City*>(&propertySameColor[i]);
         city->getNbApart();
 
+
     }
 
     return false;
