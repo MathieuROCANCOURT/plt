@@ -84,8 +84,8 @@ void State::modifyDices(int value1, int value2) {
     this->dices.setScore(value1+value2);
 
     //test non effectue
-    cout << "il y a un double ? " << this->dices.getIsDouble() << endl;
-    cout << "le score au dés est : " << this->dices.getScore() << endl;
+    //cout << "il y a un double ? " << this->dices.getIsDouble() << endl;
+    //cout << "le score au dés est : " << this->dices.getScore() << endl;
 
 }
 
@@ -314,6 +314,25 @@ void State::modifyNbPropertyType(Player player, Property property) {
 
 std::vector<Player> State::getListPlayer() {
     return this->listPlayer;
+}
+
+int State::getNbPlayer() {
+    return this->nbPlayer;
+}
+
+void State::modifyNbTurnInJail(bool isInJail) {
+
+    Player* playerCurrent = getCurrentPlayer();
+
+    if(isInJail){
+        if (int nbTurn = playerCurrent->getNbTurnInJail()<3){
+            playerCurrent->setNbTurnInJail(nbTurn+1);
+        }
+        else{ std::cout << "le nombre de tours en prison est supérieur à 3"<<std::endl;}
+    }
+    if(!isInJail){
+        playerCurrent->setNbTurnInJail(0);
+    }
 }
 
 
