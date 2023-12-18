@@ -5,7 +5,7 @@
 #include "freeUsingMoneyCommand.h"
 
 
-bool engine::freeUsingMoneyCommand::FreeByMoney(state::State &state) {
+bool engine::freeUsingMoneyCommand::freeByMoney(state::State &state) {
     state::Player* playerCurrent = state.getCurrentPlayer();
     if((playerCurrent->getMoney() - 500000) >= 0){
         payTheBank(state, 500000);
@@ -21,4 +21,8 @@ void engine::freeUsingMoneyCommand::payTheBank(state::State &state, long long in
         playerCurrent->setDebt(state::DEBT_BANK);
     }
     state.modifyMoney(*playerCurrent, -valueMoney);
+}
+
+void engine::freeUsingMoneyCommand::execute(state::State &state) {
+    freeByMoney(state);
 }

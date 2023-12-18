@@ -5,7 +5,7 @@
 #include "freeUsingCardCommand.h"
 
 
-void engine::freeUsingCardCommand::freebyCard(state::State &state) {
+void engine::freeUsingCardCommand::freeByCard(state::State &state) {
 
     state::Player* playerCurrent = state.getCurrentPlayer();
 
@@ -16,4 +16,8 @@ void engine::freeUsingCardCommand::freebyCard(state::State &state) {
     playerCurrent->setGameStatus(state::PLAYINGFREE);
     state.modifyNbTurnInJail(0);
 
+}
+
+void engine::freeUsingCardCommand::execute(state::State &state) {
+    freeByCard(state);
 }
