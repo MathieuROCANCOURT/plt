@@ -112,8 +112,8 @@ int main(int argc, char *argv[]) {
                     int x = event.mouseButton.x;
                     int y = event.mouseButton.y;
 
-                    for (auto rectangle: r->getGameInfo().getListButton()) {
-                        rectangle.click(x, y);
+                    for (auto &rectangle: r->getGameInfo().getListButton()) {
+                        rectangle->click(x, y);
                     }
                 }
 

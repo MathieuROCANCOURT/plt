@@ -32,11 +32,11 @@ Text Button::getText() {
     return this->textPlayer;
 }
 
-sf::RectangleShape Button::getRectangle() {
+sf::RectangleShape& Button::getRectangle() {
     return this->rectangle;
 }
 
-Button Button::click(int x, int y) {
+Button * Button::click(int x, int y) {
     sf::FloatRect textRect = this->getRectangle().getGlobalBounds();
     static Button *selectedText = nullptr;
     if (textRect.contains(float(x), float(y))) {
@@ -46,6 +46,5 @@ Button Button::click(int x, int y) {
         selectedText = this;
         selectedText->getRectangle().setFillColor(sf::Color::Green); // On change sa couleur en vert
     }
-    return *this;
-
+    return this;
 }
