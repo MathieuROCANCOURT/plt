@@ -15,9 +15,11 @@ Text::Text(string text, float posXtext, float posYtext, int characterSize, sf::C
     if (!font.loadFromFile("./../res/Police/ARIAL.TTF")) {
         cout << "Error load file ARIAL.TTF." << endl;
     }
-    this->blocText = *new sf::Text(this->text, font, this->characterSize);
+    this->blocText.setString(this->text);
+    this->blocText.setCharacterSize(this->characterSize);
+    this->blocText.setFont(font);
     this->blocText.setFillColor(this->colorText);
-    this->blocText.setPosition(this->posXtext, this->posYtext);
+    this->blocText.move(this->posXtext, this->posYtext);
 }
 
 sf::Text Text::getText() {

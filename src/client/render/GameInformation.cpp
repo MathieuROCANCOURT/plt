@@ -1,3 +1,4 @@
+#include <iostream>
 #include "GameInformation.h"
 #include "state/Player.h"
 
@@ -15,7 +16,7 @@ GameInformation::GameInformation(sf::Vector2u size, int nbPlayer) : nbPlayer(nbP
         this->listButton.emplace_back(95, 40, float(size.x) + float(i) * 110 + 10, float(size.y) * 0.9, listNameAction[i],
                                       float(size.x) + float(i) * 110 + 20, 10);
     }
-    listText.emplace_back("BANQUE", float(size.x) * 1.35, float(size.y) / 3);
+    this->listText.emplace_back(*new Text("BANQUE", float(size.x) * 1.35, float(size.y) / 3));
 }
 
 vector<Button> GameInformation::getListButton() {
@@ -23,6 +24,7 @@ vector<Button> GameInformation::getListButton() {
 }
 
 vector<Text> GameInformation::getListText() {
+    cout << this->listText.size() << endl;
     return this->listText;
 }
 
