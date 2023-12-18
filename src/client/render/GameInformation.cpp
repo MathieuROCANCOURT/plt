@@ -59,7 +59,7 @@ vector<Cases *> GameInformation::CreateCases(int clickwhere, vector<Cases *> lis
     float posX_case = float(size.x) * 1.085, posY_case = float(size.y) / 15;
     for (auto c: color) {
         if (count == 4) {
-            posY_case += float(size.y) / 12;
+            posY_case += 50;
             posX_case = float(size.x) * 1.085;
         }
         if (count == 0 || c == sf::Color::Blue) {
@@ -75,7 +75,7 @@ vector<Cases *> GameInformation::CreateCases(int clickwhere, vector<Cases *> lis
         posX_case += float(size.x) * 0.03;
         count++;
     }
-    posX_case = float(size.x) * 1.3, posY_case += float(size.y) / 12;
+    posX_case = float(size.x) * 1.3, posY_case += 50;
     for (int i = 0; i < 2; ++i) {
         auto cases = new Cases(posX_case, posY_case, sf::Color(0xB8B8B8FF));
         listCases.push_back(cases);
