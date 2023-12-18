@@ -16,6 +16,10 @@ Render::Render(State &currentState) : currentState(currentState) {
     this->window.setVerticalSyncEnabled(true);
 }
 
+GameInformation Render::getGameInfo() {
+    return this->gameInfo;
+}
+
 sf::RenderWindow &Render::getWindow() {
     return this->window;
 }
@@ -32,7 +36,7 @@ void Render::draw() {
     this->window.draw(this->gameBoard.getSpriteBoard());
     for (auto button: this->gameInfo.getListButton()) {
         this->window.draw(button.getRectangle());
-        //this->window.draw(button.getText().getText());
+        this->window.draw(button.getText().getText());
     }
     for (auto texts: this->gameInfo.getListText()) {
         this->window.draw(texts.getText());

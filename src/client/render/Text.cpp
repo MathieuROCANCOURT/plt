@@ -11,7 +11,6 @@ Text::Text(string text, float posXtext, float posYtext, int characterSize, sf::C
         posYtext(posYtext),
         characterSize(characterSize),
         colorText(colorText){
-    sf::Font font;
     if (!font.loadFromFile("./../res/Police/ARIAL.TTF")) {
         cout << "Error load file ARIAL.TTF." << endl;
     }

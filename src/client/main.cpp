@@ -108,6 +108,15 @@ int main(int argc, char *argv[]) {
                     }
                 }
 
+                if (event.type == sf::Event::MouseButtonPressed and event.mouseButton.button == sf::Mouse::Left) {
+                    int x = event.mouseButton.x;
+                    int y = event.mouseButton.y;
+
+                    for (auto rectangle: r->getGameInfo().getListButton()) {
+                        rectangle.click(x, y);
+                    }
+                }
+
                 r->draw();
             }
             // Add liste de texte

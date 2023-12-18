@@ -11,12 +11,23 @@ GameInformation::GameInformation(sf::Vector2u size, int nbPlayer) : nbPlayer(nbP
         this->listButton.emplace_back(95, 40, float(size.x) + float(i) * 110 + 10, 5, listeNamePlayer[i],
                                       float(size.x) + float(i) * 110 + 20, 10);
     }
-    vector<std::string> listNameAction = {"Lancer dés", "Acheter", "Vendre", "Abandonner"};
-    for (int i = 0; i < 4; i++) {
-        this->listButton.emplace_back(95, 40, float(size.x) + float(i) * 110 + 10, float(size.y) * 0.9, listNameAction[i],
-                                      float(size.x) + float(i) * 110 + 20, 10);
-    }
-    this->listText.emplace_back(*new Text("BANQUE", float(size.x) * 1.35, float(size.y) / 3));
+
+    vector<std::string> listNameAction = {"Launch Dices", "Buy", "Sell", "Abandon"};
+    this->listButton.emplace_back(140, 40, float(size.x) + 10, float(size.y) * 0.9,
+                                  listNameAction[0],
+                                  float(size.x) + 20, float(size.y) * 0.91);
+    this->listButton.emplace_back(50, 40, float(size.x) + 160, float(size.y) * 0.9,
+                                  listNameAction[1],
+                                  float(size.x) + 170, float(size.y) * 0.91);
+    this->listButton.emplace_back(50, 40, float(size.x) + 220, float(size.y) * 0.9,
+                                  listNameAction[2],
+                                  float(size.x) + 230, float(size.y) * 0.91);
+
+    this->listButton.emplace_back(90, 40, float(size.x) + 280, float(size.y) * 0.9,
+                                  listNameAction[3],
+                                  float(size.x) + 285, float(size.y) * 0.91);
+
+    this->listText.emplace_back("BANQUE", float(size.x) * 1.4, float(size.y) / 3);
 }
 
 vector<Button> GameInformation::getListButton() {
@@ -24,7 +35,6 @@ vector<Button> GameInformation::getListButton() {
 }
 
 vector<Text> GameInformation::getListText() {
-    cout << this->listText.size() << endl;
     return this->listText;
 }
 
