@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Player.h"
 
 using namespace std;
@@ -65,6 +66,20 @@ void Player::setFreeJailCard(int NbFreeJailCard) {
 void Player::setDebt(Debt debt) {
     this->debt = debt;
 }
+
+void Player::setNbTurnInJail(int nbTurnInJail) {
+    this->nbTurnInJail = nbTurnInJail;
+}
+
+int Player::getNbTurnInJail() {
+    return this->nbTurnInJail;
+}
+
+Debt Player::getDebt() {
+    return this->debt;
+}
+
+
 
 
 
