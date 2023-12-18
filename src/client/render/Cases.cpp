@@ -1,12 +1,8 @@
-//
-// Created by mathieu on 27/11/23.
-//
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
 #include "Cases.h"
 
-render::Cases::Cases(float posX, float posY, sf::Color caseColor, float radius, int pointCount, sf::Color fillColor,
+using namespace render;
+
+Cases::Cases(float posX, float posY, sf::Color caseColor, float radius, int pointCount, sf::Color fillColor,
                      float thickness, float rotate) : posX(posX),
                                                       posY(posY),
                                                       caseColor(caseColor),
@@ -14,16 +10,19 @@ render::Cases::Cases(float posX, float posY, sf::Color caseColor, float radius, 
                                                       pointCount(pointCount),
                                                       fillColor(fillColor),
                                                       thickness(thickness),
-                                                      rotate(rotate) {
-    sf::CircleShape square(this->radius, this->pointCount);
-    square.setFillColor(this->fillColor);
-    square.setOutlineColor(this->caseColor);
-    square.setOutlineThickness(this->thickness);
-    square.move(this->posX, this->posY);
-    square.rotate(this->rotate);
-
+                                                      rotate(rotate){
+    this->square = sf::CircleShape(this->radius, this->pointCount);
+    this->square.setFillColor(this->fillColor);
+    this->square.setOutlineColor(this->caseColor);
+    this->square.setOutlineThickness(this->thickness);
+    this->square.move(this->posX, this->posY);
+    this->square.rotate(this->rotate);
 }
 
-render::Cases::~Cases() {
+sf::CircleShape Cases::getSquare() {
+    return this->square;
+}
+
+Cases::~Cases() {
     delete this;
 }

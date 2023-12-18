@@ -8,32 +8,34 @@ using namespace render;
 GameInformation::GameInformation(sf::Vector2u size, int nbPlayer) : nbPlayer(nbPlayer), size(size) {
     vector<std::string> listeNamePlayer = {"Player 1", "Player 2", "Player 3", "Player 4", "Player 5", "Player 6"};
     for (int i = 0; i < nbPlayer; i++) {
-        this->listButton.emplace_back(new Button(95, 40, float(size.x) + float(i) * 110 + 10, 5, listeNamePlayer[i],
+        this->listButtonPlayer.emplace_back(new Button(95, 40, float(size.x) + float(i) * 110 + 10, 5, listeNamePlayer[i],
                                                   float(size.x) + float(i) * 110 + 20, 10));
     }
 
     vector<std::string> listNameAction = {"Launch Dices", "Buy", "Sell", "Abandon"};
-    this->listButton.emplace_back(new Button(140, 40, float(size.x) + 10, float(size.y) * 0.9,
+    this->listButtonAction.emplace_back(new Button(140, 40, float(size.x) + 10, float(size.y) * 0.9,
                                               listNameAction[0],
                                               float(size.x) + 20, float(size.y) * 0.91));
-    this->listButton.emplace_back(new Button(50, 40, float(size.x) + 160, float(size.y) * 0.9,
+    this->listButtonAction.emplace_back(new Button(50, 40, float(size.x) + 160, float(size.y) * 0.9,
                                               listNameAction[1],
                                               float(size.x) + 170, float(size.y) * 0.91));
-    this->listButton.emplace_back(new Button(50, 40, float(size.x) + 220, float(size.y) * 0.9,
+    this->listButtonAction.emplace_back(new Button(50, 40, float(size.x) + 220, float(size.y) * 0.9,
                                               listNameAction[2],
                                               float(size.x) + 230, float(size.y) * 0.91));
 
-    this->listButton.emplace_back(new Button(90, 40, float(size.x) + 280, float(size.y) * 0.9,
+    this->listButtonAction.emplace_back(new Button(90, 40, float(size.x) + 280, float(size.y) * 0.9,
                                               listNameAction[3],
                                               float(size.x) + 285, float(size.y) * 0.91));
 
     this->listText.emplace_back("BANQUE", float(size.x) * 1.4, float(size.y) / 3);
 }
 
+vector<Button *> GameInformation::getListButtonPlayer() {
+    return this->listButtonPlayer;
+}
 
-
-vector<Button *> GameInformation::getListButton() {
-    return this->listButton;
+vector<Button *> GameInformation::getListButtonAction() {
+    return this->listButtonAction;
 }
 
 vector<Text> GameInformation::getListText() {
