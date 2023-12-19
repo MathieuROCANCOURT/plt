@@ -61,8 +61,9 @@ bool engine::buyApartCommand::buyApart(state::State &state) {
 
     }
     state::Player*playerAchetant;
-    payTheBank(state,cityApartAchetable.);
+    payTheBank(state,cityApartAchetable.getPriceApartHostel());
     playerAchetant=state.getCurrentPlayer();
+
     //getter et setter NbAppart à ajouter + augmenter le nombre appart dans la ville acheté
 
 
