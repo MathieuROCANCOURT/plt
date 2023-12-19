@@ -335,6 +335,10 @@ void State::modifyNbTurnInJail(bool isInJail) {
     }
 }
 
+Bank State::getBank() {
+    return this->bank;
+}
+
 
 
 
