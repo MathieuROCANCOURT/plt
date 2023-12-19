@@ -61,10 +61,18 @@ bool engine::buyApartCommand::buyApart(state::State &state) {
 
     }
     state::Player*playerAchetant;
-    //payTheBank(state,cityApartAchetable,cityApartAchetable);
+    payTheBank(state,cityApartAchetable.);
     playerAchetant=state.getCurrentPlayer();
     //getter et setter NbAppart à ajouter + augmenter le nombre appart dans la ville acheté
 
 
     return false;
+}
+void engine::buyApartCommand::payTheBank(state::State &state, long long int valueMoney) {
+    state::Player* playerCurrent = state.getCurrentPlayer();
+
+    if((playerCurrent->getMoney() - valueMoney)<0){
+        playerCurrent->setDebt(state::DEBT_BANK);
+    }
+    state.modifyMoney(*playerCurrent, -valueMoney);
 }
