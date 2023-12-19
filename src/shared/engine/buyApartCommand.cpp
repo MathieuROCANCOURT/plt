@@ -12,8 +12,8 @@ void engine::buyApartCommand::execute (state::State& state){
 
 
 bool engine::buyApartCommand::buyApart(state::State &state) {
-    state::Player* player=state.getCurrentPlayer();
-    std::vector<state::Property> myproperties=player->getPlayerProperties();
+    state::Player* playerAchetant=state.getCurrentPlayer();
+    std::vector<state::Property> myproperties=playerAchetant->getPlayerProperties();
     int minpos=9999999;
     std::vector<state::Property> propertySameColor;
     std::vector<state::City> listville;
@@ -60,10 +60,16 @@ bool engine::buyApartCommand::buyApart(state::State &state) {
         }
 
     }
-    state::Player*playerAchetant;
+
+    if(cityApartAchetable.getNbApart()>=4){
+        return false;
+    }
+
     payTheBank(state,cityApartAchetable.getPriceApartHostel());
     playerAchetant=state.getCurrentPlayer();
+    playerAchetant->setNbTotalApart(playerAchetant->getNbTotalApart()+1);
 
+    cityApartAchetable.setNbApart(cityApartAchetable.getNbApart()+1);
     //getter et setter NbAppart à ajouter + augmenter le nombre appart dans la ville acheté
 
 
