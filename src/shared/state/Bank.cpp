@@ -90,7 +90,7 @@ namespace state{
         this->bankProperties.erase(it);
     }
 
-    int Bank::getNbAppartBank() {
+    int Bank::getNbApartBank() {
         return this->nbApart;
     }
 
