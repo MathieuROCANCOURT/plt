@@ -339,6 +339,18 @@ Bank State::getBank() {
     return this->bank;
 }
 
+int State::getScoreDices() {
+    return dices.getScore();
+}
+
+bool State::getIsDouble() {
+    return dices.getIsDouble();
+}
+
+std::map<int, Box> State::getBoard() {
+    return this->board;
+}
+
 
 
 
