@@ -64,16 +64,16 @@ bool engine::buyApartCommand::buyApart(state::State &state) {
     if(cityApartAchetable.getNbApart()>=4){
         return false;
     }
-
-    payTheBank(state,cityApartAchetable.getPriceApartHostel());
+    state::Bank bank=state.getBank();
+    if(bank.getNbAppartBank()==0){
+        return false;
+    }
+    payTheBank(state,cityApartAchetable.getPriceApartHostel());//paiement de l'argent
     playerAchetant=state.getCurrentPlayer();
-    playerAchetant->setNbTotalApart(playerAchetant->getNbTotalApart()+1);
-
-    cityApartAchetable.setNbApart(cityApartAchetable.getNbApart()+1);
-    //getter et setter NbAppart à ajouter + augmenter le nombre appart dans la ville acheté
-
-
-    return false;
+    playerAchetant->setNbTotalApart(playerAchetant->getNbTotalApart()+1);//nbApartTotal du joueur augmenté de 1
+    cityApartAchetable.setNbApart(cityApartAchetable.getNbApart()+1);//nbApart de la propriété augmenter de 1
+    bank.setNbApartBank(bank.getNbAppartBank()-1);
+    return true;
 }
 void engine::buyApartCommand::payTheBank(state::State &state, long long int valueMoney) {
     state::Player* playerCurrent = state.getCurrentPlayer();

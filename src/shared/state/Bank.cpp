@@ -90,6 +90,22 @@ namespace state{
         this->bankProperties.erase(it);
     }
 
+    int Bank::getNbAppartBank() {
+        return this->nbApart;
+    }
+
+    int Bank::getNbHostelBank() {
+        return this->nbHostel;
+    }
+
+    void Bank::setNbApartBank(int NbApartBank) {
+        this->nbApart=NbApartBank;
+    }
+
+    void Bank::setNbHostelBank(int NbHostelBank) {
+        this->nbHostel=NbHostelBank;
+    }
+
 
 }
 
