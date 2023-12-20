@@ -94,7 +94,7 @@ namespace state{
         return this->nbApart;
     }
 
-    bool Bank::getNbHostelBank() {
+    int Bank::getNbHostelBank() {
         return this->nbHostel;
     }
 
