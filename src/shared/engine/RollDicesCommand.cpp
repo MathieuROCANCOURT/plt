@@ -114,6 +114,26 @@ void engine::RollDicesCommand::boxEffect(state::State &state, state::Box box) {
 
 }
 
+void engine::RollDicesCommand::luckBox(state::State &state) {
+    state::Card* luckCard = state.drawCardLuck();
+    cardEffect(state, *luckCard);
+}
+
+void engine::RollDicesCommand::communityBox(state::State &state) {
+    state::Card* communityCard = state.drawCardCommunity();
+    cardEffect(state, *communityCard);
+}
+
+void engine::RollDicesCommand::cardEffect(state::State &state, state::Card card) {
+
+
+
+}
+
+
+
+
+
 
 
 
