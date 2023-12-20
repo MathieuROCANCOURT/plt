@@ -23,6 +23,10 @@ sf::CircleShape Cases::getSquare() {
     return this->square;
 }
 
+void Cases::setFillColor(sf::Color changeColor) {
+    this->square.setFillColor(changeColor);
+}
+
 Cases::~Cases() {
     delete this;
 }

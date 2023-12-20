@@ -6,7 +6,7 @@ using namespace std;
 using namespace state;
 
 
-State::State() : nbPlayer(4), bank(), dices(), nbDouble(0), stackCommunity(), stackLuck(), turn(NO_PLAYER) {
+State::State() : nbPlayer(6), bank(), dices(), nbDouble(0), stackCommunity(), stackLuck(), turn(NO_PLAYER) {
 
 
     //instanciation des cases propriétés
@@ -298,7 +298,7 @@ Player *State::getCurrentPlayer() {
 
     return currentPlayer;
 }
-int State::getNbplayer() {
+int State::getNbPlayer() {
     return this->nbPlayer;
 }
 

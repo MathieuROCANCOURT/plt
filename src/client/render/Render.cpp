@@ -7,7 +7,7 @@ using namespace state;
 
 
 Render::Render(State &currentState) : currentState(currentState) {
-    this->gameBoard = *new GameBoard(this->currentState.getNbplayer());
+    this->gameBoard = *new GameBoard(this->currentState.getNbPlayer());
     this->gameInfo = *new GameInformation(this->gameBoard.getSizeBoard(), 6);
 
 
@@ -28,6 +28,10 @@ void Render::draw() {
     static vector<Cases *> listCasesPlayer, listCasesBank = this->gameInfo.CreateCases(0, listCasesBank, this->gameBoard.getSizeBoard() + sf::Vector2u (0, this->gameBoard.getSizeBoard().y * 4.8));
     this->window.clear(sf::Color::White);
     this->window.draw(this->gameBoard.getSpriteBoard());
+
+    for (auto token: this->gameBoard.getListToken()) {
+        this->window.draw(token->getSprite());
+    }
 
     /* Cases Bank */
     for (auto cases: listCasesBank) {

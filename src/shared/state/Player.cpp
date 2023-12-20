@@ -1,9 +1,11 @@
 #include "Player.h"
 
+#include <utility>
+
 using namespace std;
 using namespace state;
 
-Player::Player(std::string name, Token token) : name(name), money(15000000), debt(NOT_DEBT), position(1), freeJailCard(0), nbTotalAppart(0), nbTotalHostel(0), gameStatus(PLAYINGFREE), nbTurnInJail(0), token(token){
+Player::Player(string name, Token token) : name(std::move(name)), money(15000000), debt(NOT_DEBT), position(1), freeJailCard(0), nbTotalAppart(0), nbTotalHostel(0), gameStatus(PLAYINGFREE), nbTurnInJail(0), token(token){
 
 }
 
@@ -16,11 +18,11 @@ int Player::getPosition() {
     return this->position;
 }
 
-void Player::setMoney(long long int) {
+void Player::setMoney(long long int money) {
     this->money = money;
 }
 
-long long Player::getMoney() {
+long long int Player::getMoney() {
     return this->money;
 }
 
