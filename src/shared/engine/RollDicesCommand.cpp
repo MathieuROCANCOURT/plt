@@ -159,7 +159,42 @@ void engine::RollDicesCommand::cardEffect(state::State &state, state::Card card)
 
 void engine::RollDicesCommand::moveInJail(state::State &state) {
 
+    state::Player* playerCurrent = state.getCurrentPlayer();
+    moveToken(state, playerCurrent->getPosition(), 11, false);
+    state.gameStatus(*playerCurrent, state::PLAYINGJAIL);
+
 }
+
+void engine::RollDicesCommand::freeMandatory(state::State &state) {
+
+    state::Player* playerCurrent = state.getCurrentPlayer();
+    payTheBank(state, 500000);
+    state.gameStatus(*playerCurrent, state::PLAYINGFREE);
+    state.modifyNbTurnInJail(false);
+
+    int score = state.getScoreDices();
+    int futurPosition = (11+score)%40 +1;
+
+    moveToken(state, 11, futurPosition , true);
+
+}
+
+void engine::RollDicesCommand::freeByDices(state::State &state) {
+
+    state::Player* playerCurrent = state.getCurrentPlayer();
+
+    state.gameStatus(*playerCurrent, state::PLAYINGFREE);
+    state.modifyNbTurnInJail(false);
+
+    int score = state.getScoreDices();
+    int futurPosition = (11+score)%40 +1;
+
+    moveToken(state, 11, futurPosition , true);
+
+
+}
+
+
 
 
 
