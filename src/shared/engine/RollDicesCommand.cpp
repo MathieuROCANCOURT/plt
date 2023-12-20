@@ -259,11 +259,35 @@ void engine::RollDicesCommand::cardFctHostels(state::State &state, state::Card c
 
 void engine::RollDicesCommand::propertyBox(state::State &state, int position) {
 
+    state::Player* playerCurrent = state.getCurrentPlayer();
+    std::vector<state::Property> propertiesCurrentPlayer = playerCurrent->getPlayerProperties();
 
+    /* Vérifie si le joueur qui tombe sur la case propriété, la possède déjà*/
+    for(auto property : propertiesCurrentPlayer){
+        if(property.getPosition() == position){
+            return;
+        }
+    }
 
+    /* S'il ne la possède pas, vérifie si l'un des autres joueurs la possède*/
 
-    //std::vector<state::Property> myproperties=playerAchetant->getPlayerProperties();
+    std::vector<state::Player> listPlayers = state.getListPlayer();
+    int nbPlayers = state.getNbPlayer();
 
+    for(int i = 0; i < nbPlayers; i++) {
+        if (listPlayers[i] != *playerCurrent) {
+            if (listPlayers[i].getGameStatus() != state::LOST) {
+                std::vector<state::Property> propertiesOtherPlayer = playerCurrent->getPlayerProperties();
+                for (auto property: propertiesOtherPlayer) {
+                    if (property.getPosition() == position) {
+                        long long rent = state.getRentToPay(property);
+                        payOtherPlayer(state, listPlayers[i], *playerCurrent, rent);
+                        return;
+                    }
+                }
+            }
+        }
+    }
 }
 
 
