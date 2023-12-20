@@ -43,5 +43,11 @@ bool Card::getJail() {
     return this->jail;
 }
 
+std::vector<int> Card::getArgs() {
+    return this->args;
+}
+
+
+
 
 

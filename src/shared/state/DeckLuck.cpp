@@ -8,12 +8,12 @@ using namespace state;
 DeckLuck::DeckLuck() {
 
     Card* free_prison = new Card("free_prison", true, false, false, false, false, false, new int[1]{0});
-    Card* go_dunkerque = new Card("go_dunkerque", false, false, false, true, false, false, new int[1]{0});
-    Card* go_lens = new Card("go_lens", false, false, false, true, false, false, new int[1]{0});
-    Card* go_marseille_station = new Card("go_marseille_station", false, false, false, true, false, false, new int[1]{0});
-    Card* go_metz = new Card("go_metz", false, false, false, true, false, false, new int[1]{0});
-    Card* go_prison = new Card("go_prison", false, false, false, false, false, true, new int[1]{0});
-    Card* go_start = new Card("go_start", false, false, false, true, false, false, new int[1]{0});
+    Card* go_dunkerque = new Card("go_dunkerque", false, false, false, true, false, false, new int[1]{40});
+    Card* go_lens = new Card("go_lens", false, false, false, true, false, false, new int[1]{2});
+    Card* go_marseille_station = new Card("go_marseille_station", false, false, false, true, false, false, new int[1]{16});
+    Card* go_metz = new Card("go_metz", false, false, false, true, false, false, new int[1]{25});
+    Card* go_prison = new Card("go_prison", false, false, false, false, false, true, new int[1]{11});
+    Card* go_start = new Card("go_start", false, false, false, true, false, false, new int[1]{1});
     Card* lose_construct_pool = new Card("lose_construct_pool", false, true, false, false, false, false, new int[1]{-200000});
     Card* move_back_bottleneck = new Card("move_back_bottleneck", false, false, false, false, false, false, new int[1]{0});
     Card* pay1_apart_and_hostel = new Card("pay(1)_apart_and_hostel", false, true, true, false, false, false, new int[2]{-250000, -1000000});

@@ -8,9 +8,9 @@ using namespace state;
 DeckCommunity::DeckCommunity(){
 
     Card* free_prison = new Card("free_prison", true, false, false, false, false, false, new int[1]{0});
-    Card* go_back_lens = new Card("go_back_lens", false, false, false, false, false, false, new int[1]{0});
-    Card* go_prison = new Card("go_prison", false, false, false, false, false, true, new int[1]{0});
-    Card* go_start = new Card("go_start", false, false, false, true, false, false, new int[1]{0});
+    Card* go_back_lens = new Card("go_back_lens", false, false, false, false, false, false, new int[1]{2});
+    Card* go_prison = new Card("go_prison", false, false, false, false, false, true, new int[1]{11});
+    Card* go_start = new Card("go_start", false, false, false, true, false, false, new int[1]{1});
     Card* pay_big_sell = new Card("pay_big_sell", false, true, false, false, false, false, new int[1]{-1000000});
     Card* pay_hostel_stars = new Card("pay_hostel_stars", false, true, false, false, false, false, new int[1]{-500000});
     Card* pay_picture_damage = new Card("pay_picture_damage", false, true, false, false, false, false, new int[1]{-500000});

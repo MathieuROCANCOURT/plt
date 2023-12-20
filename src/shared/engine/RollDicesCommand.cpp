@@ -143,9 +143,21 @@ void engine::RollDicesCommand::cardEffect(state::State &state, state::Card card)
             return;
         }
     }else if(card.getMoveForward()){
-
-        //moveToken(state, playerCurrent->getPosition(), )
+        std::vector<int> arguments = card.getArgs();
+        moveToken(state, playerCurrent->getPosition(), arguments[0], true);
+        return;
+    }else if(card.getJail()){
+        moveInJail(state);
+        return;
+    }else{
+        std::vector<int> arguments = card.getArgs();
+        moveToken(state, playerCurrent->getPosition(), arguments[0], false);
+        return;
     }
+
+}
+
+void engine::RollDicesCommand::moveInJail(state::State &state) {
 
 }
 
