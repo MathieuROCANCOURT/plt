@@ -49,7 +49,7 @@ void engine::RollDicesCommand::rollDices(state::State &state) {
             freeByDices(state);
         }
         else if(playerCurrent->getNbTurnInJail() == 3){
-            freeByMoney(state);
+            freeMandatory(state);
         }
     }
 }
@@ -126,7 +126,26 @@ void engine::RollDicesCommand::communityBox(state::State &state) {
 
 void engine::RollDicesCommand::cardEffect(state::State &state, state::Card card) {
 
+    state::Player* playerCurrent = state.getCurrentPlayer();
 
+    if(card.getFreeJail()){
+        state.modifyNbFreeJailCard(*playerCurrent, true);
+        return;
+    }else if(card.getMoney()){
+        if(card.getFctHostel()){
+            cardFctHostels(state, card);
+            return;
+        }else if(card.getFromOthers()){
+            cardBirthday(state, card);
+            return;
+        }else{
+            cardWinLostMoney(state, card);
+            return;
+        }
+    }else if(card.getMoveForward()){
+
+        //moveToken(state, playerCurrent->getPosition(), )
+    }
 
 }
 

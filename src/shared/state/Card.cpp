@@ -18,3 +18,30 @@ Card::Card(std::string text, bool freeJail, bool money, bool fctHostel, bool mov
 std::string Card::getText() {
     return this->text;
 }
+
+bool Card::getFreeJail() {
+    return this->freeJail;
+}
+
+bool Card::getMoney() {
+    return this->money;
+}
+
+bool Card::getFctHostel() {
+    return this->fctHostel;
+}
+
+bool Card::getMoveForward() {
+    return this->moveForwardTo;
+}
+
+bool Card::getFromOthers() {
+    return this->fromOthers;
+}
+
+bool Card::getJail() {
+    return this->jail;
+}
+
+
+
