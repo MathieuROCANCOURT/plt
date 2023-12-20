@@ -22,6 +22,7 @@ add_library(${lib_shared_target} STATIC ${shared_sources}
         engine/RollDicesCommand.cpp
         engine/sellApartCommand.cpp
         engine/sellHostelCommand.cpp
+        engine/BuyPropertyCommand.cpp
 )
 add_dependencies(${lib_shared_target} generate-headers)
 target_include_directories(${lib_shared_target} PUBLIC
