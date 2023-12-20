@@ -232,6 +232,21 @@ void engine::RollDicesCommand::cardBirthday(state::State &state, state::Card car
 
 }
 
+void engine::RollDicesCommand::payOtherPlayer(state::State &state, state::Player playerToPay, state::Player playerPaying,
+                                             long long int valueMoney) {
+
+
+    if((playerPaying.getMoney() - valueMoney)<0){
+        state.debtPlayer(playerPaying, playerToPay);
+    }
+    state.modifyMoney(playerPaying, -valueMoney);
+    state.modifyMoney(playerToPay, valueMoney);
+
+
+}
+
+
+
 
 
 
