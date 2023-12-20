@@ -235,15 +235,29 @@ void engine::RollDicesCommand::cardBirthday(state::State &state, state::Card car
 void engine::RollDicesCommand::payOtherPlayer(state::State &state, state::Player playerToPay, state::Player playerPaying,
                                              long long int valueMoney) {
 
-
     if((playerPaying.getMoney() - valueMoney)<0){
         state.debtPlayer(playerPaying, playerToPay);
     }
     state.modifyMoney(playerPaying, -valueMoney);
     state.modifyMoney(playerToPay, valueMoney);
 
+}
+
+void engine::RollDicesCommand::cardFctHostels(state::State &state, state::Card card) {
+
+    state::Player* playerCurrent = state.getCurrentPlayer();
+    int nbApartPossessed = playerCurrent->getNbTotalApart();
+    int nbHostelPossessed = playerCurrent->getNbTotalHostel();
+
+    std::vector<int> arguments = card.getArgs();
+
+    long long valueToPay = nbApartPossessed*arguments[0] + nbHostelPossessed*arguments[1];
+
+    payTheBank(state, valueToPay);
 
 }
+
+
 
 
 
