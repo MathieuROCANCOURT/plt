@@ -15,7 +15,7 @@ DeckLuck::DeckLuck() {
     Card* go_prison = new Card("go_prison", false, false, false, false, false, true, new int[1]{11});
     Card* go_start = new Card("go_start", false, false, false, true, false, false, new int[1]{1});
     Card* lose_construct_pool = new Card("lose_construct_pool", false, true, false, false, false, false, new int[1]{-200000});
-    Card* move_back_bottleneck = new Card("move_back_bottleneck", false, false, false, false, false, false, new int[1]{0});
+    Card* move_back_bottleneck = new Card("move_back_bottleneck", false, false, false, false, false, false, new int[1]{3});
     Card* pay1_apart_and_hostel = new Card("pay(1)_apart_and_hostel", false, true, true, false, false, false, new int[2]{-250000, -1000000});
     Card* pay_apart_and_hostel = new Card("pay_apart_and_hostel", false, true, true, false, false, false, new int[2]{-400000, -1150000});
     Card* pay_phone = new Card("pay_phone", false, true, false, false, false, false, new int[1]{-150000});

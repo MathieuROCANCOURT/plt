@@ -6,7 +6,7 @@
 #include <random>
 
 
-int engine::RollDicesCommand::payTheBank(state::State &state, long long int valueMoney) {
+void engine::RollDicesCommand::payTheBank(state::State &state, long long int valueMoney) {
     state::Player* playerCurrent = state.getCurrentPlayer();
 
     if((playerCurrent->getMoney() - valueMoney)<0){
@@ -151,8 +151,14 @@ void engine::RollDicesCommand::cardEffect(state::State &state, state::Card card)
         return;
     }else{
         std::vector<int> arguments = card.getArgs();
-        moveToken(state, playerCurrent->getPosition(), arguments[0], false);
-        return;
+        if(arguments[0] < 0){
+            moveToken(state, playerCurrent->getPosition(), playerCurrent->getPosition() - arguments[0], false);
+            return;
+        }else{
+            moveToken(state, playerCurrent->getPosition(), arguments[0], false);
+            return;
+        }
+
     }
 
 }
@@ -190,6 +196,38 @@ void engine::RollDicesCommand::freeByDices(state::State &state) {
     int futurPosition = (11+score)%40 +1;
 
     moveToken(state, 11, futurPosition , true);
+
+
+}
+
+void engine::RollDicesCommand::cardWinLostMoney(state::State &state, state::Card card) {
+
+    state::Player* playerCurrent = state.getCurrentPlayer();
+    std::vector<int> arguments = card.getArgs();
+
+    if(arguments[0] < 0){ //Lost Money
+        payTheBank(state, arguments[0]);
+    }
+    else{ //Win Money
+        state.modifyMoney(*playerCurrent, arguments[0]);
+    }
+
+}
+
+void engine::RollDicesCommand::cardBirthday(state::State &state, state::Card card) {
+
+    state::Player* playerCurrent = state.getCurrentPlayer();
+    std::vector<state::Player> listPlayers = state.getListPlayer();
+    int nbPlayers = state.getNbPlayer();
+    std::vector<int> arguments = card.getArgs();
+
+    for(int i = 0; i < nbPlayers; i++){
+        if(listPlayers[i] != *playerCurrent){
+            if(listPlayers[i].getGameStatus() != state::LOST){
+                payOtherPlayer(state, listPlayers[i], *playerCurrent, arguments[0]);
+            }
+        }
+    }
 
 
 }
