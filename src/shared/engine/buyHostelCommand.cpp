@@ -37,44 +37,44 @@ bool engine::buyHostelCommand::buyHostel(state::State &state) {
         }
     }
 
-    state::City cityApartAchetable=listville[listville.size()-1];
+    state::City cityHostelAchetable=listville[listville.size() - 1];
     if (nbMemenbApart==listville.size()){//si toutes les ville ont le même nombre d'appartement choisi la ville ayant la position la plus faible
         for (int i = 0; i < listville.size(); i++) {
-            if (listville[i].getPosition() < cityApartAchetable.getPosition()){
-                cityApartAchetable=listville[i];
+            if (listville[i].getPosition() < cityHostelAchetable.getPosition()){
+                cityHostelAchetable=listville[i];
             }
         }
     }
     std::vector<state::City> cityLessApart;
     if (nbMemenbApart<listville.size()){
         for (int i = 0; i < listville.size(); i++) {//si pas toutes les villes ont le même nombre d'appartement choisi les ville ayant le moins d'appartement
-            if (listville[i].getNbApart()<=cityApartAchetable.getNbApart()){
+            if (listville[i].getNbHostel() == cityHostelAchetable.getNbHostel()){
                 cityLessApart.push_back(listville[i]);
             }
         }
         for (int i = 0; i < cityLessApart.size(); i++) {//choisi la ville parmi celle qui ont le moins d'apârtement la ville avec la position la moins élevé
-            if (cityApartAchetable.getPosition() > cityLessApart[i].getPosition()){
-                cityApartAchetable=cityLessApart[i];
+            if (cityHostelAchetable.getPosition() > cityLessApart[i].getPosition()){
+                cityHostelAchetable=cityLessApart[i];
             }
         }
 
     }
 
-    if(cityApartAchetable.getNbApart()>=4){
+    if(cityHostelAchetable.getNbHostel() == true){
         return false;
     }
     state::Bank bank=state.getBank();
-    if(bank.getNbApartBank()==0){
+    if(bank.getNbHostelBank()==0){
         return false;
     }
-    payTheBank(state,cityApartAchetable.getPriceApartHostel());//paiement de l'argent
+    payTheBank(state, cityHostelAchetable.getPriceApartHostel());//paiement de l'argent
     playerAchetant=state.getCurrentPlayer();
-    playerAchetant->setNbTotalApart(playerAchetant->getNbTotalApart()+1);//nbApartTotal du joueur augmenté de 1
-    cityApartAchetable.setNbApart(cityApartAchetable.getNbApart()+1);//nbApart de la propriété augmenter de 1
-    bank.setNbApartBank(bank.getNbApartBank()-1);
+    playerAchetant->setNbTotalApart(playerAchetant->getNbTotalHostel()+1);//nbApartTotal du joueur augmenté de 1
+    cityHostelAchetable.setNbHostel(cityHostelAchetable.getNbHostel() + 1);//nbApart de la propriété augmenter de 1
+    bank.setNbHostelBank(bank.getNbHostelBank()-1);
     return true;
 }
-void engine::buyApartCommand::payTheBank(state::State &state, long long int valueMoney) {
+void engine::buyHostelCommand::payTheBank(state::State &state, long long int valueMoney) {
     state::Player* playerCurrent = state.getCurrentPlayer();
 
     if((playerCurrent->getMoney() - valueMoney)<0){
