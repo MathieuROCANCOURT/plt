@@ -38,21 +38,21 @@ bool engine::buyApartCommand::buyApart(state::State &state) {
     }
 
     state::City cityApartAchetable=listville[listville.size()-1];
-    if (nbMemenbApart==(int)listville.size()){//si toutes les ville ont le même nombre d'appartement choisi la ville ayant la position la plus faible
-        for (int i = 0; i < listville.size(); i++) {
+    if (nbMemenbApart==int(listville.size())){//si toutes les ville ont le même nombre d'appartement choisi la ville ayant la position la plus faible
+        for (int i = 0; i < int(listville.size()); i++) {
             if (listville[i].getPosition() < cityApartAchetable.getPosition()){
                 cityApartAchetable=listville[i];
             }
         }
     }
     std::vector<state::City> cityLessApart;
-    if (nbMemenbApart<(int)listville.size()){
-        for (int i = 0; i < listville.size(); i++) {//si pas toutes les villes ont le même nombre d'appartement choisi les ville ayant le moins d'appartement
+    if (nbMemenbApart<int(listville.size())){
+        for (int i = 0; i < int(listville.size()); i++) {//si pas toutes les villes ont le même nombre d'appartement choisi les ville ayant le moins d'appartement
             if (listville[i].getNbApart()<=cityApartAchetable.getNbApart()){
                 cityLessApart.push_back(listville[i]);
             }
         }
-        for (int i = 0; i < (int)cityLessApart.size(); i++) {//choisi la ville parmi celle qui ont le moins d'apârtement la ville avec la position la moins élevé
+        for (int i = 0; i < int(cityLessApart.size()); i++) {//choisi la ville parmi celle qui ont le moins d'apârtement la ville avec la position la moins élevé
             if (cityApartAchetable.getPosition() > cityLessApart[i].getPosition()){
                 cityApartAchetable=cityLessApart[i];
             }

@@ -16,43 +16,43 @@ bool engine::buyHostelCommand::buyHostel(state::State &state) {
     std::vector<state::Property> myproperties=playerAchetant->getPlayerProperties();
     std::vector<state::Property> propertySameColor;
     std::vector<state::City> listville;
-    for (int i=0;i<myproperties.size();i++) {//met toute les propriété ayant la même couleur dans un vecteur à part
+    for (int i=0;i<int(myproperties.size());i++) {//met toute les propriété ayant la même couleur dans un vecteur à part
         if (myproperties[i].getColor()== this->getColor()) {
             propertySameColor.push_back(myproperties[i]);
         }
     }
-    for (int i = 0; i < propertySameColor.size(); i++) {//transforme les propriétés en ville
+    for (int i = 0; i < int(propertySameColor.size()); i++) {//transforme les propriétés en ville
         state::City* city =dynamic_cast<state::City*>(&propertySameColor[i]);
         listville.push_back(*city);
     }
     int a[listville.size()];
-    for (int i = 0; i < listville.size(); i++) {
+    for (int i = 0; i < int(listville.size()); i++) {
         a[i]=listville[i].getNbHostel();
     }
     int b=a[listville.size()-1];
     int nbMemenbApart=0;
-    for (int i = 0; i <listville.size(); i++) {//compte le nombre de ville ayant le même nombre d'appartement
+    for (int i = 0; i <int(listville.size()); i++) {//compte le nombre de ville ayant le même nombre d'appartement
         if(b==a[i]){
             nbMemenbApart++;
         }
     }
 
     state::City cityHostelAchetable=listville[listville.size() - 1];
-    if (nbMemenbApart==listville.size()){//si toutes les ville ont le même nombre d'appartement choisi la ville ayant la position la plus faible
-        for (int i = 0; i < listville.size(); i++) {
+    if (nbMemenbApart==int(listville.size())){//si toutes les ville ont le même nombre d'appartement choisi la ville ayant la position la plus faible
+        for (int i = 0; i < int(listville.size()); i++) {
             if (listville[i].getPosition() < cityHostelAchetable.getPosition()){
                 cityHostelAchetable=listville[i];
             }
         }
     }
     std::vector<state::City> cityLessApart;
-    if (nbMemenbApart<listville.size()){
-        for (int i = 0; i < listville.size(); i++) {//si pas toutes les villes ont le même nombre d'appartement choisi les ville ayant le moins d'appartement
+    if (nbMemenbApart<int(listville.size())){
+        for (int i = 0; i < int(listville.size()); i++) {//si pas toutes les villes ont le même nombre d'appartement choisi les ville ayant le moins d'appartement
             if (listville[i].getNbHostel() == cityHostelAchetable.getNbHostel()){
                 cityLessApart.push_back(listville[i]);
             }
         }
-        for (int i = 0; i < cityLessApart.size(); i++) {//choisi la ville parmi celle qui ont le moins d'apârtement la ville avec la position la moins élevé
+        for (int i = 0; i < int(cityLessApart.size()); i++) {//choisi la ville parmi celle qui ont le moins d'apârtement la ville avec la position la moins élevé
             if (cityHostelAchetable.getPosition() > cityLessApart[i].getPosition()){
                 cityHostelAchetable=cityLessApart[i];
             }
