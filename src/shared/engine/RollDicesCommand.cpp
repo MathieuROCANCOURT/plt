@@ -257,6 +257,15 @@ void engine::RollDicesCommand::cardFctHostels(state::State &state, state::Card c
 
 }
 
+void engine::RollDicesCommand::propertyBox(state::State &state, int position) {
+
+
+
+
+    //std::vector<state::Property> myproperties=playerAchetant->getPlayerProperties();
+
+}
+
 
 
 
