@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
                  << endl;
 
 
-            //State* myState =  new State();
+            State* myState =  new State();
             //int nbP = 3;
             //myState->State::modifyNbPlayer(nbP);
 

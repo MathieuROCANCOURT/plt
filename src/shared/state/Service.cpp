@@ -17,6 +17,7 @@ long long Service::getRent() {
     if(nbServicePossessed==2){
         return 10*score;
     }
+    return -1;
 }
 
 void Service::modifyNbPossessed(Player player){

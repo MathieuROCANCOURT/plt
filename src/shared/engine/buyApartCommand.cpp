@@ -11,7 +11,7 @@ void engine::buyApartCommand::execute (state::State& state){
 
 
 
-bool engine::buyApartCommand::buyApart(state::State &state) {
+bool engine::buyApartCommand::buyApart(state::State &state) { /*
     state::Player* playerAchetant=state.getCurrentPlayer();
     std::vector<state::Property> myproperties=playerAchetant->getPlayerProperties();
     std::vector<state::Property> propertySameColor;
@@ -80,5 +80,5 @@ void engine::buyApartCommand::payTheBank(state::State &state, long long int valu
     if((playerCurrent->getMoney() - valueMoney)<0){
         playerCurrent->setDebt(state::DEBT_BANK);
     }
-    state.modifyMoney(*playerCurrent, -valueMoney);
+    state.modifyMoney(*playerCurrent, -valueMoney);*/ return true;
 }
