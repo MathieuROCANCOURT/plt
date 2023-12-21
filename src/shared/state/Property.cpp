@@ -14,3 +14,15 @@ Property::Property(int position, std::string name, long long valuePurchase) : po
 int Property::getPosition() {
     return (this->position);
 }
+
+long long Property::getRent() {
+    return 0;
+}
+
+void Property::modifyNbPossessed(Player player) {
+
+}
+
+Color Property::getColor() {
+    return RED;
+}
