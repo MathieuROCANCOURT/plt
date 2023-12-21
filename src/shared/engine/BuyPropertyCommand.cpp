@@ -6,7 +6,7 @@
 
 
 void engine::BuyPropertyCommand::buyTheProperty(state::State &state) {
-    state::Player* playerCurrent = state.getCurrentPlayer();
+    //state::Player* playerCurrent = state.getCurrentPlayer();
     //Achat de property (argument de la commande)
 }
 

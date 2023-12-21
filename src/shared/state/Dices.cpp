@@ -13,8 +13,8 @@ void Dices::setIsDouble(bool isDouble) {
     this->isDouble = isDouble;
 }
 
-void Dices::setScore(int) {
-    this->score = score;
+void Dices::setScore(int sc) {
+    this->score = sc;
 }
 
 int Dices::getScore() {

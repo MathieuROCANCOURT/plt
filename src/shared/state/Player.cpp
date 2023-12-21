@@ -79,6 +79,10 @@ Debt Player::getDebt() {
     return this->debt;
 }
 
+int Player::getNbdouble() {
+    return this->NbDouble;
+}
+
 
 
 
