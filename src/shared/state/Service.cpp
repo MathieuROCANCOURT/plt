@@ -29,3 +29,7 @@ void Service::modifyNbPossessed(Player player){
     }
     this->nbServicePossessed = nbService;
 }
+
+void Service::resetPossessions() {
+    this->nbServicePossessed = 0;
+}

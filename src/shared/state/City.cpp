@@ -72,4 +72,22 @@ void City::setNbApart(int nbApart) {
     this->nbApart=nbApart;
 }
 
+void City::resetPossessions() {
+    this->nbApart = 0;
+    this->hostel = false;
+    this->monopoly = false;
+}
+
+long long City::getPriceApartHostel() {
+    return this->priceApartHostel;
+}
+
+bool City::getNbHostel() {
+    return this->hostel;
+}
+
+void City::setNbHostel(bool nbHostel) {
+    this->hostel = nbHostel;
+}
+
 

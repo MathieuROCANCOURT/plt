@@ -30,3 +30,7 @@ Color Property::getColor() {
 long long Property::getValuePurchase() {
     return this->valuePurchase;
 }
+
+void Property::resetPossessions() {
+
+}

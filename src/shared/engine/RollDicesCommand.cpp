@@ -69,9 +69,9 @@ void engine::RollDicesCommand::moveToken(state::State &state, int currentPositio
         state.modifyPosition(*playerCurrent, futurPosition);
 
         std::map<int, state::Box> board = state.getBoard();
-        state::Box* currentBox = &(board[futurPosition]);
+        state::Box currentBox = board.at(futurPosition);
 
-        boxEffect(state, *currentBox);
+        boxEffect(state, currentBox);
     }
 
 }
@@ -237,9 +237,9 @@ void engine::RollDicesCommand::payOtherPlayer(state::State &state, state::Player
 
     if((playerPaying.getMoney() - valueMoney)<0){
         state.debtPlayer(playerPaying, playerToPay);
+        state.modifyMoney(playerPaying, -valueMoney);
+        state.modifyMoney(playerToPay, valueMoney);
     }
-    state.modifyMoney(playerPaying, -valueMoney);
-    state.modifyMoney(playerToPay, valueMoney);
 
 }
 
