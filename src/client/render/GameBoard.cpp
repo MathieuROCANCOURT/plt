@@ -9,7 +9,7 @@ GameBoard::GameBoard(int nbPlayer): nbPlayer(nbPlayer) {
         this->list_token.emplace_back(new Token(i));
     }
     float xmove, ymove = 35;
-    for (int i = 0; i < (int) this->nbPlayer / 2; i++){
+    for (int i = 0; i <= (int) this->nbPlayer / 2; i++){
         xmove = 80;
         for (int j = 0; j < 2; j++){
             if (i * 2 + j < this->nbPlayer) {

@@ -6,7 +6,7 @@ using namespace std;
 using namespace state;
 
 
-State::State() : nbPlayer(6), bank(), dices(), nbDouble(0), stackCommunity(), stackLuck(), turn(NO_PLAYER) {
+State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), stackLuck(), turn(NO_PLAYER) {
 
 
     //instanciation des cases propriétés
@@ -51,7 +51,6 @@ State::State() : nbPlayer(6), bank(), dices(), nbDouble(0), stackCommunity(), st
     board.emplace(39, Box(39, false, false, true, false, false));
 
 
-
 }
 
 
@@ -67,7 +66,7 @@ void State::modifyNbPlayer(int nbPlayer) {
 void State::addPlayer(Player player) {
 
     this->listPlayer.push_back(player);
-
+    this->nbPlayer= this->nbPlayer+1;
     //test non effectue
     //for (Player i : this->listPlayer){
     //  cout << i << endl;
@@ -76,27 +75,25 @@ void State::addPlayer(Player player) {
 }
 
 void State::modifyDices(int value1, int value2) {
-    if (value1 == value2){
+    if (value1 == value2) {
         this->dices.setIsDouble(true);
         modifyNbDouble(1);
-    }
-    else{this->dices.setIsDouble(false);}
-    this->dices.setScore(value1+value2);
+    } else { this->dices.setIsDouble(false); }
+    this->dices.setScore(value1 + value2);
 
     //test non effectue
-    cout << "il y a un double ? " << this->dices.getIsDouble() << endl;
-    cout << "le score au dés est : " << this->dices.getScore() << endl;
+    //cout << "il y a un double ? " << this->dices.getIsDouble() << endl;
+    //cout << "le score au dés est : " << this->dices.getScore() << endl;
 
 }
 
 void State::modifyNbDouble(bool isDouble) {
-    if(isDouble){
-        if (this->nbDouble<3){
+    if (isDouble) {
+        if (this->nbDouble < 3) {
             this->nbDouble += 1;
-        }
-        else{ cout << "le nombre de doubles est supérieur à 3 pour le tour d'un même joueur"<<endl;}
+        } else { cout << "le nombre de doubles est supérieur à 3 pour le tour d'un même joueur" << endl; }
     }
-    if(!isDouble){
+    if (!isDouble) {
         this->nbDouble = 0;
     }
     // test non effectué
@@ -104,12 +101,12 @@ void State::modifyNbDouble(bool isDouble) {
 
 void State::modifyPosition(Player player, int position) {
 
-    if(position < 41 and position > 0){
+    if (position < 41 and position > 0) {
         player.setPosition(position);
     }
 
     // test non effectue
-    cout << "le joueur est sur la case "<< player.getPosition() << endl;
+    cout << "le joueur est sur la case " << player.getPosition() << endl;
 }
 
 void State::modifyTurn(Playing tour) {
@@ -119,18 +116,18 @@ void State::modifyTurn(Playing tour) {
     cout << "l'instance turn de l'enumerate Playing vaut " << this->turn << endl;
 }
 
-void State::modifyMoney(Player player, int value) {
+void State::modifyMoney(Player player, long long value) {
 
     long long moneyOfPlayer = player.getMoney();
     moneyOfPlayer += value;
     player.setMoney(moneyOfPlayer);
 
     //test non effectué
-    cout << "le joueur possède "<< player.getMoney() << "euros" << endl;
+    cout << "le joueur possède " << player.getMoney() << "euros" << endl;
 
 }
 
-void State::addPropertyBank(Property* property) {
+void State::addPropertyBank(Property *property) {
 
     this->bank.addToBankProperties(property);
 
@@ -141,9 +138,9 @@ void State::addPropertyBank(Property* property) {
     //}
 }
 
-void State::removePropertyBank(Property* property) {
+void State::removePropertyBank(Property *property) {
 
-    const vector<Property*> &myListOfBankProperties = this->bank.getBankProperties();
+    const vector<Property *> &myListOfBankProperties = this->bank.getBankProperties();
     auto it = std::find(myListOfBankProperties.begin(), myListOfBankProperties.end(),
                         property);
 
@@ -172,9 +169,9 @@ void State::addPropertyPlayer(Player player, Property property) {
     //}
 }
 
-Card* State::drawCardLuck() {
+Card *State::drawCardLuck() {
 
-    Card* firstCard = this->stackLuck.drawCard();
+    Card *firstCard = this->stackLuck.drawCard();
     return firstCard;
 }
 
@@ -186,8 +183,8 @@ void State::gameStatus(Player player, GameStatus status) {
 
 void State::removePropertyPlayer(Player player, Property property) {
 
-    for(auto& currentPlayer : listPlayer) {
-        if (currentPlayer.getName() == player.getName()){
+    for (auto &currentPlayer: listPlayer) {
+        if (currentPlayer.getName() == player.getName()) {
             const vector<Property> &myListOfPlayerProperties = currentPlayer.getPlayerProperties();
             auto it = std::find(myListOfPlayerProperties.begin(), myListOfPlayerProperties.end(),
                                 property);
@@ -211,11 +208,11 @@ void State::removePropertyPlayer(Player player, Property property) {
 }
 
 int State::getNbDouble() {
-    return this->nbDouble;
+    return this->getCurrentPlayer()->getNbdouble();
 }
 
 Card *State::drawCardCommunity() {
-    Card* firstCard = this->stackLuck.drawCard();
+    Card *firstCard = this->stackLuck.drawCard();
     return firstCard;
 }
 
@@ -223,20 +220,18 @@ void State::modifyNbFreeJailCard(Player player, bool increase) {
 
     int nbFreeJailCard = player.getFreeJailCard();
 
-    if(increase) {
+    if (increase) {
         if (nbFreeJailCard < 2) {
             nbFreeJailCard++;
             player.setFreeJailCard(nbFreeJailCard);
         } else {
             cout << "erreur : ce joueur possède trop de carte libéré de prison" << endl;
         }
-    }
-    else{
-        if(nbFreeJailCard > 0){
+    } else {
+        if (nbFreeJailCard > 0) {
             nbFreeJailCard--;
             player.setFreeJailCard(nbFreeJailCard);
-        }
-        else{
+        } else {
             cout << "erreur : ce joueur ne possède pas assez de carte libéré de prison" << endl;
         }
     }
@@ -248,10 +243,10 @@ void State::returnJailCard() {
     int nbCardCommunity = stackCommunity.sizeDeck();
     int nbCardLuck = stackLuck.sizeDeck();
 
-    if(nbCardCommunity == 15){
+    if (nbCardCommunity == 15) {
         stackCommunity.returnJailCard();
     }
-    if(nbCardLuck == 15){
+    if (nbCardLuck == 15) {
         stackLuck.returnJailCard();
     }
 
@@ -262,43 +257,105 @@ void State::debtPlayer(Player playerInDebt, Player playerCreditor) {
     string name = playerCreditor.getName();
 
 
-    if( name == "A" ){ playerInDebt.setDebt(DEBT_PLAYERA);}
-    else if(name == "B"){ playerInDebt.setDebt(DEBT_PLAYERB);}
-    else if(name == "C"){ playerInDebt.setDebt(DEBT_PLAYERC);}
-    else if(name == "D"){ playerInDebt.setDebt(DEBT_PLAYERD);}
-    else if(name == "E"){ playerInDebt.setDebt(DEBT_PLAYERE);}
-    else if(name == "F"){ playerInDebt.setDebt(DEBT_PLAYERF);}
-    else{ cout << "erreur : le player envers qui il y a dette n'a pas été trouvé" << endl;}
+    if (name == "A") { playerInDebt.setDebt(DEBT_PLAYERA); }
+    else if (name == "B") { playerInDebt.setDebt(DEBT_PLAYERB); }
+    else if (name == "C") { playerInDebt.setDebt(DEBT_PLAYERC); }
+    else if (name == "D") { playerInDebt.setDebt(DEBT_PLAYERD); }
+    else if (name == "E") { playerInDebt.setDebt(DEBT_PLAYERE); }
+    else if (name == "F") { playerInDebt.setDebt(DEBT_PLAYERF); }
+    else { cout << "erreur : le player envers qui il y a dette n'a pas été trouvé" << endl; }
 
 }
 
 Player *State::getCurrentPlayer() {
 
-    Player* currentPlayer;
+    Player *currentPlayer;
 
     Playing turn = this->turn;
-    if(turn == PLAYERA){
+    if (turn == PLAYERA) {
         currentPlayer = &listPlayer[0];
     }
-    if(turn == PLAYERB){
+    if (turn == PLAYERB) {
         currentPlayer = &listPlayer[1];
     }
-    if(turn == PLAYERC){
+    if (turn == PLAYERC) {
         currentPlayer = &listPlayer[2];
     }
-    if(turn == PLAYERD){
+    if (turn == PLAYERD) {
         currentPlayer = &listPlayer[3];
     }
-    if(turn == PLAYERE){
+    if (turn == PLAYERE) {
         currentPlayer = &listPlayer[4];
     }
-    if(turn == PLAYERF){
+    if (turn == PLAYERF) {
         currentPlayer = &listPlayer[5];
     }
 
     return currentPlayer;
 }
+
+void State::debtBank(Player player) {
+    player.setDebt(DEBT_BANK);
+}
+
+long long State::getRentToPay(Property property) {
+    return property.getRent();
+}
+
+void State::modifyNbPropertyType(Player player, Property property) {
+    property.modifyNbPossessed(player);
+
+}
+
+std::vector<Player> State::getListPlayer() {
+    return this->listPlayer;
+}
+
 int State::getNbPlayer() {
     return this->nbPlayer;
 }
+
+void State::modifyNbTurnInJail(bool isInJail) {
+
+    Player *playerCurrent = getCurrentPlayer();
+
+    if (isInJail) {
+        if (int nbTurn = playerCurrent->getNbTurnInJail() < 3) {
+            playerCurrent->setNbTurnInJail(nbTurn + 1);
+        } else { std::cout << "le nombre de tours en prison est supérieur à 3" << std::endl; }
+    }
+    if (!isInJail) {
+        playerCurrent->setNbTurnInJail(0);
+    }
+}
+
+Bank State::getBank() {
+    return this->bank;
+}
+
+int State::getScoreDices() {
+    return dices.getScore();
+}
+
+bool State::getIsDouble() {
+    return dices.getIsDouble();
+}
+
+std::map<int, Box> State::getBoard() {
+    return this->board;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
