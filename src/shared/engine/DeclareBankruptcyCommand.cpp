@@ -40,4 +40,6 @@ void engine::DeclareBankruptcyCommand::changeTurn(state::State &state) {
 void engine::DeclareBankruptcyCommand::declareBankruptcy(state::State &state, state::Player player) {
 
 
+
+
 }
