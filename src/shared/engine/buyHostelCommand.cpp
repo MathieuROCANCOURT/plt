@@ -11,7 +11,7 @@ void engine::buyHostelCommand::execute (state::State& state){
 
 
 
-bool engine::buyHostelCommand::buyHostel(state::State &state) {/*
+bool engine::buyHostelCommand::buyHostel(state::State &state) {
     state::Player* playerAchetant=state.getCurrentPlayer();
     std::vector<state::Property> myproperties=playerAchetant->getPlayerProperties();
     std::vector<state::Property> propertySameColor;
@@ -80,5 +80,6 @@ void engine::buyHostelCommand::payTheBank(state::State &state, long long int val
     if((playerCurrent->getMoney() - valueMoney)<0){
         playerCurrent->setDebt(state::DEBT_BANK);
     }
-    state.modifyMoney(*playerCurrent, -valueMoney);*/ return true;
+    state.modifyMoney(*playerCurrent, -valueMoney);
+    return;
 }
