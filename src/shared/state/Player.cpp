@@ -17,7 +17,7 @@ int Player::getPosition() {
     return this->position;
 }
 
-void Player::setMoney(long long int) {
+void Player::setMoney(long long ) {
     this->money = money;
 }
 

@@ -3,10 +3,17 @@
 //
 #include <random>
 #include "Engine.h"
-#include "state/State.h"
+
 
 using namespace std;
 using namespace state;
+
+
+
+
+
+
+
 /*
 void engine::Engine::rollDices() {
     int dice1,dice2;
@@ -54,3 +61,11 @@ int engine::Engine::payOtherPlayer (state::Player player1, state::Player player2
     //this->state.modifyMoney(player2.getMoney())
 }
 */
+const state::State &engine::Engine::getState() const {
+
+    return <#initializer#>;
+}
+
+engine::Engine::Engine() {
+
+}

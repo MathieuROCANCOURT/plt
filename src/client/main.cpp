@@ -22,6 +22,7 @@ int main(int argc, char *argv[]) {
 
 
             State* myState =  new State();
+            myState->getIsDouble();
             //int nbP = 3;
             //myState->State::modifyNbPlayer(nbP);
 
