@@ -60,7 +60,7 @@ void State::modifyNbPlayer(int nbPlayer) {
     }
 
     //test non effectue
-    cout << this->nbPlayer << endl;
+    //cout << this->nbPlayer << endl;
 }
 
 void State::addPlayer(Player player) {

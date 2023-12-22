@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Render.h"
 
 using namespace std;
@@ -26,7 +25,13 @@ sf::RenderWindow &Render::getWindow() {
 }
 
 void Render::draw() {
-    static vector<Cases *> listCasesPlayer, listCasesBank = this->gameInfo.CreateCases(0, listCasesBank, this->gameBoard.getSizeBoard() + sf::Vector2u (0, this->gameBoard.getSizeBoard().y * 4.8));
+    static vector<Cases *> listCasesPlayer;
+    static vector<Cases *> listCasesBank = this->gameInfo.CreateCases(0,
+                                                                      listCasesBank,
+                                                                      this->gameBoard.getSizeBoard() +
+                                                                      sf::Vector2u(0,
+                                                                                   this->gameBoard.getSizeBoard().y *
+                                                                                   4.8));
     this->window.clear(sf::Color::White);
     this->window.draw(this->gameBoard.getSpriteBoard());
 

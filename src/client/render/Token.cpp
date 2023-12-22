@@ -1,19 +1,13 @@
 #include "Token.h"
-#include <iostream>
-#include <dirent.h>
+#include "config.h"
 
 using namespace std;
 using namespace render;
 
 Token::Token(int obj) {
-    struct dirent **namelist;
-    int n;
+    string path = RES_DIR;
 
-    n = scandir("./../res/Tokens/", &namelist, 0, versionsort);
-    if (n < 0) {
-        perror("scandir\n");
-    }
-    string fileName = "./../res/Tokens/" + to_string(obj) + ".png";
+    string fileName = path + "Tokens/" + to_string(obj) + ".png";
     if (!this->texture.loadFromFile(fileName)) {
         perror("Error load file boat.\n");
     }
@@ -45,7 +39,7 @@ void Token::posModify(state::Player player) {
                     this->posMove(sf::Vector2f(positionCase[player.getPosition() - 1], positionCase[9]));
                     break;
                 default:
-                    cout << "BAD VALUE position" << endl;
+                    perror("BAD VALUE position");
                     break;
             }
             break;

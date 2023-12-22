@@ -25,7 +25,7 @@ long long Player::getMoney() {
     return this->money;
 }
 
-void Player::addToPlayerProperties(const Property& property) {
+void Player::addToPlayerProperties(Property property) {
     this->playerProperties.push_back(property);
 }
 

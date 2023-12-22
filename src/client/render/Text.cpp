@@ -1,6 +1,6 @@
-#include <iostream>
-#include <utility>
 #include "Text.h"
+#include "config.h"
+#include <utility>
 
 using namespace std;
 using namespace render;
@@ -11,8 +11,9 @@ Text::Text(string text, float posXtext, float posYtext, int characterSize, sf::C
         posYtext(posYtext),
         characterSize(characterSize),
         colorText(colorText){
-    if (!font.loadFromFile("./../res/Police/ARIAL.TTF")) {
-        cout << "Error load file ARIAL.TTF." << endl;
+    string path = RES_DIR;
+    if (!font.loadFromFile(path + "Police/ARIAL.TTF")) {
+        perror("Error load file ARIAL.TTF.");
     }
     this->blocText.setString(this->text);
     this->blocText.setCharacterSize(this->characterSize);

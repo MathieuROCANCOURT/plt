@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
             cout << "--- Render ---" << endl;
 
             state::State currentState = *new State();
-            currentState.modifyNbPlayer(5);
+            currentState.modifyNbPlayer(6);
             Render *r;
             r = new Render(currentState);
             while (r->getWindow().isOpen()) {

@@ -1,13 +1,14 @@
-#include <iostream>
 #include "Board.h"
+#include "config.h"
 
 using namespace render;
 using namespace std;
 
 Board::Board() {
+    string path = RES_DIR;
     // Charger le fichier du plateau de l'image
-    if (!this->textureBoard.loadFromFile("./../res/Plateau_monopoly_resize.jpg")) {
-        cout << "Error load file board." << endl;
+    if (!this->textureBoard.loadFromFile(path + "Plateau_monopoly_resize.jpg")) {
+        perror("Error load file board.");
     }
     this->spriteBoard.setTexture(this->textureBoard);
 }

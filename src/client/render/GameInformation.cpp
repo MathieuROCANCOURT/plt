@@ -1,4 +1,3 @@
-#include <iostream>
 #include "GameInformation.h"
 #include "state/Player.h"
 
