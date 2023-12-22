@@ -66,9 +66,9 @@ const state::State &engine::Engine::getState() const {
 }
 
 engine::Engine::Engine() {
-    this->CurrentState;
+    this->CurrentState=State();
 }
 
-void engine::Engine::update() {
-    this->CurrentState=state::
+void engine::Engine::update(state::State&  state) {
+    this->CurrentState=state;
 }
