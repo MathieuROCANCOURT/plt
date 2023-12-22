@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
             currentState.modifyNbPlayer(6);
             Render *r;
             r = new Render(currentState);
+            sf::Vector2i cursorPos;
             while (r->getWindow().isOpen()) {
                 sf::Event event{};
                 while (r->getWindow().pollEvent(event)) {
@@ -39,6 +40,10 @@ int main(int argc, char *argv[]) {
                     for (auto &rectangle: r->getGameInfo().getListButtonPlayer()) {
                         rectangle->click(x, y);
                     }
+                }
+                if (event.type == sf::Event::MouseMoved)                {
+                    cursorPos = sf::Mouse::getPosition(r->getWindow());
+
                 }
 
                 r->draw();
