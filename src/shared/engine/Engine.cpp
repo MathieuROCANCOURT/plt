@@ -61,11 +61,14 @@ int engine::Engine::payOtherPlayer (state::Player player1, state::Player player2
     //this->state.modifyMoney(player2.getMoney())
 }
 */
-/*const state::State &engine::Engine::getState() const {
-
-    return <#initializer#>;
-}*/
+const state::State &engine::Engine::getState() const {
+    return this->CurrentState;
+}
 
 engine::Engine::Engine() {
+    this->CurrentState;
+}
 
+void engine::Engine::update() {
+    this->CurrentState=state::
 }
