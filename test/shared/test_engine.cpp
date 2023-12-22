@@ -8,6 +8,8 @@ using namespace ::engine;
 
 BOOST_AUTO_TEST_CASE(Test_command){
 
+    Engine* theEngine = new Engine();
+    //RollDicesCommand->rollDices(theEngine->state);
         BOOST_CHECK(1);
 
 }
