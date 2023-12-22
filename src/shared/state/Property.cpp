@@ -26,3 +26,7 @@ void Property::modifyNbPossessed(Player player) {
 Color Property::getColor() {
     return RED;
 }
+
+long long Property::getValuePurchase() {
+    return this->valuePurchase;
+}
