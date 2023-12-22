@@ -9,23 +9,23 @@ Player::Player(std::string name, Token token) : name(name), money(15000000), deb
 }
 
 
-void Player::setPosition(int) {
-    this->position = position;
+void Player::setPosition(int pos) {
+    this->position = pos;
 }
 
 int Player::getPosition() {
     return this->position;
 }
 
-void Player::setMoney(long long int) {
-    this->money = money;
+void Player::setMoney(long long mon) {
+    this->money = mon;
 }
 
 long long Player::getMoney() {
     return this->money;
 }
 
-void Player::addToPlayerProperties(Property property) {
+void Player::addToPlayerProperties(const Property& property) {
     this->playerProperties.push_back(property);
 }
 
@@ -37,8 +37,8 @@ GameStatus Player::getGameStatus() {
     return this->gameStatus;
 }
 
-void Player::setGameStatus(GameStatus gameStatus) {
-    this->gameStatus = gameStatus;
+void Player::setGameStatus(GameStatus changeGameStatus) {
+    this->gameStatus = changeGameStatus;
 }
 
 void Player::eraseFromPlayerProperties(std::vector<Property>::iterator indice) {
@@ -63,12 +63,12 @@ void Player::setFreeJailCard(int NbFreeJailCard) {
 
 }
 
-void Player::setDebt(Debt debt) {
-    this->debt = debt;
+void Player::setDebt(Debt deb) {
+    this->debt = deb;
 }
 
-void Player::setNbTurnInJail(int nbTurnInJail) {
-    this->nbTurnInJail = nbTurnInJail;
+void Player::setNbTurnInJail(int turnInJail) {
+    this->nbTurnInJail = turnInJail;
 }
 
 int Player::getNbTurnInJail() {

@@ -13,7 +13,7 @@ GameBoard::GameBoard(int nbPlayer): nbPlayer(nbPlayer) {
         xmove = 80;
         for (int j = 0; j < 2; j++){
             if (i * 2 + j < this->nbPlayer) {
-                this->list_token[i * 2 + j]->posInit(sf::Vector2f(this->board.getSize()) - sf::Vector2f(xmove, ymove));
+                this->list_token[i * 2 + j]->posMove(sf::Vector2f(this->board.getSize()) - sf::Vector2f(xmove, ymove));
                 xmove = 35;
             }
         }
