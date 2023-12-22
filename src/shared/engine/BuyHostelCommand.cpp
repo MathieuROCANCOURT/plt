@@ -1,17 +1,14 @@
-//
-// Created by alexis on 15/12/23.
-//
-#include "buyHostelCommand.h"
+#include "BuyHostelCommand.h"
 #include "state/City.h"
 
 
-void engine::buyHostelCommand::execute (state::State& state){
+void engine::BuyHostelCommand::execute (state::State& state){
     buyHostel(state);
 }
 
 
 
-bool engine::buyHostelCommand::buyHostel(state::State &state) {
+bool engine::BuyHostelCommand::buyHostel(state::State &state) {
     state::Player* playerAchetant=state.getCurrentPlayer();
     std::vector<state::Property> myproperties=playerAchetant->getPlayerProperties();
     std::vector<state::Property> propertySameColor;
@@ -74,7 +71,7 @@ bool engine::buyHostelCommand::buyHostel(state::State &state) {
     bank.setNbHostelBank(bank.getNbHostelBank()-1);
     return true;
 }
-void engine::buyHostelCommand::payTheBank(state::State &state, long long int valueMoney) {
+void engine::BuyHostelCommand::payTheBank(state::State &state, long long int valueMoney) {
     state::Player* playerCurrent = state.getCurrentPlayer();
 
     if((playerCurrent->getMoney() - valueMoney)<0){

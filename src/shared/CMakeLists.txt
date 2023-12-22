@@ -11,8 +11,8 @@ file(GLOB_RECURSE shared_sources *.cpp)
 
 # Build the "shared" library and add required includes
 add_library(${lib_shared_target} STATIC ${shared_sources}
-        engine/buyApartCommand.cpp
-        engine/buyHostelCommand.cpp
+        engine/BuyApartCommand.cpp
+
         engine/Command.cpp
         engine/CommandTypeId.cpp
         engine/EndTurnCommand.cpp
@@ -20,10 +20,11 @@ add_library(${lib_shared_target} STATIC ${shared_sources}
         engine/FreeUsingMoneyCommand.cpp
         engine/InitGameCommand.cpp
         engine/RollDicesCommand.cpp
-        engine/sellApartCommand.cpp
-        engine/sellHostelCommand.cpp
+
+
         engine/BuyPropertyCommand.cpp
         engine/DeclareBankruptcyCommand.cpp
+        engine/BuyHostelCommand.cpp
 )
 add_dependencies(${lib_shared_target} generate-headers)
 target_include_directories(${lib_shared_target} PUBLIC
