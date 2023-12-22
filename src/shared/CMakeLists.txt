@@ -16,13 +16,14 @@ add_library(${lib_shared_target} STATIC ${shared_sources}
         engine/Command.cpp
         engine/CommandTypeId.cpp
         engine/EndTurnCommand.cpp
-        engine/freeUsingCardCommand.cpp
-        engine/freeUsingMoneyCommand.cpp
+        engine/FreeUsingCardCommand.cpp
+        engine/FreeUsingMoneyCommand.cpp
         engine/InitGameCommand.cpp
         engine/RollDicesCommand.cpp
         engine/sellApartCommand.cpp
         engine/sellHostelCommand.cpp
         engine/BuyPropertyCommand.cpp
+        engine/DeclareBankruptcyCommand.cpp
 )
 add_dependencies(${lib_shared_target} generate-headers)
 target_include_directories(${lib_shared_target} PUBLIC

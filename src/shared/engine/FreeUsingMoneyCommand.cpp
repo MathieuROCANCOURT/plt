@@ -2,10 +2,10 @@
 // Created by alexis on 15/12/23.
 //
 
-#include "freeUsingMoneyCommand.h"
+#include "FreeUsingMoneyCommand.h"
 
 
-void engine::freeUsingMoneyCommand::freeByMoney(state::State &state) {
+void engine::FreeUsingMoneyCommand::freeByMoney(state::State &state) {
     state::Player* playerCurrent = state.getCurrentPlayer();
     if((playerCurrent->getMoney() - 500000) >= 0){
         payTheBank(state, 500000);
@@ -14,7 +14,7 @@ void engine::freeUsingMoneyCommand::freeByMoney(state::State &state) {
     }
 }
 
-void engine::freeUsingMoneyCommand::payTheBank(state::State &state, long long int valueMoney) {
+void engine::FreeUsingMoneyCommand::payTheBank(state::State &state, long long int valueMoney) {
     state::Player* playerCurrent = state.getCurrentPlayer();
 
     if((playerCurrent->getMoney() - valueMoney)<0){
@@ -23,6 +23,6 @@ void engine::freeUsingMoneyCommand::payTheBank(state::State &state, long long in
     state.modifyMoney(*playerCurrent, -valueMoney);
 }
 
-void engine::freeUsingMoneyCommand::execute(state::State &state) {
+void engine::FreeUsingMoneyCommand::execute(state::State &state) {
     freeByMoney(state);
 }

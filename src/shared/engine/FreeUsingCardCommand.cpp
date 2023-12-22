@@ -2,10 +2,10 @@
 // Created by alexis on 15/12/23.
 //
 
-#include "freeUsingCardCommand.h"
+#include "FreeUsingCardCommand.h"
 
 
-void engine::freeUsingCardCommand::freeByCard(state::State &state) {
+void engine::FreeUsingCardCommand::freeByCard(state::State &state) {
 
     state::Player* playerCurrent = state.getCurrentPlayer();
 
@@ -18,6 +18,6 @@ void engine::freeUsingCardCommand::freeByCard(state::State &state) {
 
 }
 
-void engine::freeUsingCardCommand::execute(state::State &state) {
+void engine::FreeUsingCardCommand::execute(state::State &state) {
     freeByCard(state);
 }
