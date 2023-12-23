@@ -12,15 +12,16 @@ Cases::Cases(float posX, float posY, sf::Color caseColor, float radius, int poin
                                               fillColor(fillColor),
                                               thickness(thickness),
                                               rotate(rotate) {
-    this->square = sf::CircleShape(this->radius, this->pointCount);
+    this->square.setSize(sf::Vector2f(40, 40));
+    this->square.rotate(45);
     this->square.setFillColor(this->fillColor);
     this->square.setOutlineColor(this->caseColor);
     this->square.setOutlineThickness(this->thickness);
-    this->square.move(this->posX, this->posY);
+    this->square.setPosition(this->posX, this->posY);
     this->square.rotate(this->rotate);
 }
 
-sf::CircleShape Cases::getSquare() {
+sf::RectangleShape Cases::getSquare() {
     return this->square;
 }
 

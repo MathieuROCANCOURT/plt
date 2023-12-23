@@ -4692,7 +4692,7 @@
             <dia:string>#square#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#sf::CircleShape#</dia:string>
+            <dia:string>#sf::RectangleShape#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -4887,7 +4887,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#sf::CircleShape#</dia:string>
+            <dia:string>#sf::RectangleShape#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5699,7 +5699,7 @@
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const sf::Vector2i &amp;#</dia:string>
+                <dia:string>#sf::Vector2i#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5716,7 +5716,7 @@
                 <dia:string>##</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::vector &lt;Cases *&gt; &amp;#</dia:string>
+                <dia:string>#const std::vector &lt;Cases *&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

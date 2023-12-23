@@ -27,7 +27,7 @@ GameInformation::GameInformation(sf::Vector2u size, int nbPlayer) : nbPlayer(nbP
                                                    listNameAction[3],
                                                    float(size.x) + 285, float(size.y) * 0.91));
 
-    this->listText.emplace_back("BANQUE", float(size.x) * 1.4, float(size.y) / 3);
+    this->listText.emplace_back("BANQUE", float(size.x) * 1.4, float(size.y) * 0.38);
 }
 
 vector<Button *> GameInformation::getListButtonPlayer() {
@@ -91,10 +91,10 @@ vector<Cases *> GameInformation::CreateCases(int clickwhere, vector<Cases *> lis
     return listCases;
 }
 
-void GameInformation::hoverCase(const sf::Vector2i &cursorPos, const std::vector<Cases *>& listCases, sf::RenderWindow & window) {
+void GameInformation::hoverCase(sf::Vector2i cursorPos, std::vector<Cases *> listCases, sf::RenderWindow & window) {
     int whichCase = 0;
-    for (auto box: listCases) {
-        if (box->getSquare().getGlobalBounds().contains(static_cast<sf::Vector2f>(cursorPos))) {
+    for (auto * box: listCases) {
+        if (box->getSquare().getGlobalBounds().contains(cursorPos.x, cursorPos.y)) {
             sf::Texture textureCard;
             sf::Sprite spriteCard;
             string path = RES_DIR;
@@ -191,9 +191,8 @@ void GameInformation::hoverCase(const sf::Vector2i &cursorPos, const std::vector
                 perror("Error load file card property.\n");
             }
             spriteCard.setTexture(textureCard);
-            spriteCard.move(float(size.x) / 3, float(size.y) / 4);
+            spriteCard.move(float(this->size.x) / 3, float(this->size.y) / 4);
             window.draw(spriteCard);
-            printf("Past\n");
             break;
         }
         whichCase++;

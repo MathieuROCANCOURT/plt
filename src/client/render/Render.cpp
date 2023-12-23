@@ -29,9 +29,9 @@ void Render::draw(const sf::Vector2i cursorPos) {
     static vector<Cases *> listCasesBank = this->gameInfo.CreateCases(0,
                                                                       listCasesBank,
                                                                       this->gameBoard.getSizeBoard() +
-                                                                      sf::Vector2u(0,
+                                                                      sf::Vector2u(20,
                                                                                    this->gameBoard.getSizeBoard().y *
-                                                                                   4.8));
+                                                                                   6));
     this->window.clear(sf::Color::White);
     this->window.draw(this->gameBoard.getSpriteBoard());
 
@@ -44,12 +44,13 @@ void Render::draw(const sf::Vector2i cursorPos) {
         this->window.draw(cases->getSquare());
     }
 
+    this->gameInfo.hoverCase(cursorPos, listCasesPlayer, this->window);
     this->gameInfo.hoverCase(cursorPos, listCasesBank, this->window);
 
     /* Buttons Players */
     for (auto buttonP: this->gameInfo.getListButtonPlayer()) {
         if (buttonP->getRectangle().getFillColor() == sf::Color::Green) {
-            listCasesPlayer = this->gameInfo.CreateCases(1, listCasesPlayer, this->gameBoard.getSizeBoard());
+            listCasesPlayer = this->gameInfo.CreateCases(1, listCasesPlayer, this->gameBoard.getSizeBoard() + sf::Vector2u(20, 800));
         }
         for (auto cases: listCasesPlayer) {
             this->window.draw(cases->getSquare());
