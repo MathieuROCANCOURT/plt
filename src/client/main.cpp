@@ -43,10 +43,9 @@ int main(int argc, char *argv[]) {
                 }
                 if (event.type == sf::Event::MouseMoved)                {
                     cursorPos = sf::Mouse::getPosition(r->getWindow());
-
                 }
 
-                r->draw();
+                r->draw(cursorPos);
             }
             // Add liste de texte
             /*sf::Texture cardTexture;

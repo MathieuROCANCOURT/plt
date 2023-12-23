@@ -24,7 +24,7 @@ sf::RenderWindow &Render::getWindow() {
     return this->window;
 }
 
-void Render::draw() {
+void Render::draw(const sf::Vector2i cursorPos) {
     static vector<Cases *> listCasesPlayer;
     static vector<Cases *> listCasesBank = this->gameInfo.CreateCases(0,
                                                                       listCasesBank,
@@ -43,6 +43,8 @@ void Render::draw() {
     for (auto cases: listCasesBank) {
         this->window.draw(cases->getSquare());
     }
+
+    this->gameInfo.hoverCase(cursorPos, listCasesBank, this->window);
 
     /* Buttons Players */
     for (auto buttonP: this->gameInfo.getListButtonPlayer()) {
