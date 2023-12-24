@@ -26,7 +26,7 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, int nbPlayer) : nbPlaye
     this->listButtonAction.emplace_back(new Button(90, 40, float(sizeBoard.x) + 280, float(sizeBoard.y) * 0.9,
                                                    listNameAction[3],
                                                    float(sizeBoard.x) + 285, float(sizeBoard.y) * 0.91));
-
+    this->listText.emplace_back(*new Text("BANQUE", float(sizeBoard.x) * 1.42, float(sizeBoard.y) * 0.39));
 }
 
 const sf::Vector2u &GameInformation::getSizeBoard() const {
@@ -59,11 +59,11 @@ vector<Cases *> GameInformation::CreateCases(vector<Cases *> listCases, uint yMo
     listCases.clear();
     /* Create all cases of properties */
     int rep, count = 0;
-    float posX_case = float(this->sizeBoard.x) * 1.085, posY_case = float(yMove);
+    float posX_case = float(this->getSizeBoard().x) * 1.12, posY_case = float(yMove);
     for (auto c: color) {
         if (count == 4) {
             posY_case += 50;
-            posX_case = float(this->sizeBoard.x) * 1.085;
+            posX_case = float(this->getSizeBoard().x) * 1.12;
         }
         if (count == 0 || c == sf::Color::Blue) {
             rep = 2;
@@ -73,22 +73,22 @@ vector<Cases *> GameInformation::CreateCases(vector<Cases *> listCases, uint yMo
         for (int i = 0; i < rep; i++) {
             auto cases = new Cases(posX_case, posY_case, c);
             listCases.push_back(cases);
-            posX_case += float(this->sizeBoard.x) * 0.072;
+            posX_case += float(this->getSizeBoard().x) * 0.072;
         }
-        posX_case += float(this->sizeBoard.x) * 0.03;
+        posX_case += float(this->getSizeBoard().x) * 0.03;
         count++;
     }
-    posX_case = float(this->sizeBoard.x) * 1.3, posY_case += 50;
+    posX_case = float(this->getSizeBoard().x) * 1.3, posY_case += 50;
     for (int i = 0; i < 2; ++i) {
         auto cases = new Cases(posX_case, posY_case, sf::Color(0xB8B8B8FF));
         listCases.push_back(cases);
-        posX_case += float(this->sizeBoard.x) * 0.072;
+        posX_case += float(this->getSizeBoard().x) * 0.072;
     }
-    posX_case += float(this->sizeBoard.x) * 0.1;
+    posX_case += float(this->getSizeBoard().x) * 0.1;
     for (int i = 0; i < 4; ++i) {
         auto cases = new Cases(posX_case, posY_case, sf::Color(0x66666FF));
         listCases.push_back(cases);
-        posX_case += float(this->sizeBoard.x) * 0.072;
+        posX_case += float(this->getSizeBoard().x) * 0.072;
     }
 
     return listCases;
@@ -194,7 +194,7 @@ void GameInformation::hoverCase(sf::Vector2i cursorPos, const std::vector<Cases 
                 perror("Error load file card property.\n");
             }
             spriteCard.setTexture(textureCard);
-            spriteCard.move(float(this->sizeBoard.x) / 3, float(this->sizeBoard.y) / 4);
+            spriteCard.move(float(this->getSizeBoard().x) / 3, float(this->getSizeBoard().y) / 4);
             window.draw(spriteCard);
             break;
         }
