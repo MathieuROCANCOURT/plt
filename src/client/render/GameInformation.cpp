@@ -4,11 +4,7 @@
 using namespace std;
 using namespace render;
 
-GameInformation::GameInformation(sf::Vector2u sizeBoard, int nbApart, int nbHostel, int nbPlayer) : nbPlayer(nbPlayer),
-                                                                                                    sizeBoard(
-                                                                                                            sizeBoard),
-                                                                                                    nbApart(nbApart),
-                                                                                                    nbHostel(nbHostel) {
+GameInformation::GameInformation(sf::Vector2u sizeBoard, int nbPlayer, const state::Bank& bank) : sizeBoard(sizeBoard) {
     string pathname = RES_DIR;
 
     vector<std::string> listeNamePlayer = {"Player 1", "Player 2", "Player 3", "Player 4", "Player 5", "Player 6"};
@@ -32,20 +28,9 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, int nbApart, int nbHost
     this->listButtonAction.emplace_back(new Button(90, 40, float(sizeBoard.x) + 280, float(sizeBoard.y) * 0.9,
                                                    listNameAction[3],
                                                    float(sizeBoard.x) + 285, float(sizeBoard.y) * 0.91));
-    this->listText.emplace_back(*new Text("BANQUE", float(sizeBoard.x) * 1.42, float(sizeBoard.y) * 0.39));
-    this->listText.emplace_back(*new Text(to_string(this->nbApart), float(sizeBoard.x) * 1.72, float(sizeBoard.y) * 0.39));
-    this->listText.emplace_back(*new Text(to_string(this->nbHostel), float(sizeBoard.x) * 1.86, float(sizeBoard.y) * 0.39));
 
-    if (!this->apartTexture.loadFromFile(pathname + "iconApart.png")) {
-        perror("Error load file icon apart");
-    }
-    if (!this->hostelTexture.loadFromFile(pathname + "iconHostel.png")) {
-        perror("Error load file icon hostel");
-    }
-    this->spriteApart.setTexture(this->apartTexture);
-    this->spriteHostel.setTexture(this->hostelTexture);
-    this->spriteApart.move(this->sizeBoard.x * 1.65, this->sizeBoard.y * 0.39);
-    this->spriteHostel.move(this->sizeBoard.x * 1.8, this->sizeBoard.y * 0.39);
+    this->bankInfo = new BankInformation(bank, sizeBoard);
+
 
 }
 
@@ -55,18 +40,6 @@ vector<Button *> GameInformation::getListButtonPlayer() {
 
 vector<Button *> GameInformation::getListButtonAction() {
     return this->listButtonAction;
-}
-
-vector<Text> GameInformation::getListText() {
-    return this->listText;
-}
-
-sf::Sprite GameInformation::getSpriteApart() const {
-    return this->spriteApart;
-}
-
-sf::Sprite GameInformation::getSpriteHostel() const {
-    return this->spriteHostel;
 }
 
 vector<Cases *> GameInformation::CreateCases(vector<Cases *> listCases, uint yMove) {
@@ -225,5 +198,12 @@ void GameInformation::hoverCase(sf::Vector2i cursorPos, const std::vector<Cases 
         }
         whichCase++;
     }
+}
+const sf::Vector2u &GameInformation::getSizeBoard() const {
+    return this->sizeBoard;
+}
+
+BankInformation *GameInformation::getBankInformation() {
+    return this->bankInfo;
 }
 

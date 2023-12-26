@@ -5,6 +5,10 @@
 using namespace std;
 using namespace render;
 
+Text::Text() {
+
+}
+
 Text::Text(string text, float posXtext, float posYtext, int characterSize, sf::Color colorText) :
         text(std::move(text)),
         posXtext(posXtext),
@@ -24,4 +28,8 @@ Text::Text(string text, float posXtext, float posYtext, int characterSize, sf::C
 
 sf::Text Text::getText() {
     return this->blocText;
+}
+
+void Text::setTextModify(const string& switchText){
+    this->blocText.setString(switchText);
 }

@@ -8,13 +8,13 @@ BOOST_AUTO_TEST_CASE(TestStaticAssert) {
 
 BOOST_AUTO_TEST_CASE(TestButtonPlayer) {
     for (int nbPlayer = 2; nbPlayer <= 6; nbPlayer++) {
-        render::GameInformation gameInformation = *new render::GameInformation(sf::Vector2u(0, 0), 12, 32, nbPlayer);
+        render::GameInformation gameInformation = *new render::GameInformation(sf::Vector2u(0, 0), nbPlayer, state::Bank());
         BOOST_CHECK_EQUAL(nbPlayer, gameInformation.getListButtonPlayer().size());
     }
 }
 
 BOOST_AUTO_TEST_CASE(TestColorOutlineCases) {
-    render::GameInformation gameInformation = render::GameInformation(sf::Vector2u(0, 0), 12, 32, 6);
+    render::GameInformation gameInformation = render::GameInformation(sf::Vector2u(0, 0), 6, state::Bank());
     std::vector<render::Cases *> listCases;
     listCases = gameInformation.CreateCases(listCases, 2);
     BOOST_CHECK_EQUAL(28, listCases.size());
@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(TestColorOutlineCases) {
 }
 
 BOOST_AUTO_TEST_CASE(TestFillColorCase){
-    render::GameInformation gameInformation = render::GameInformation(sf::Vector2u(0, 0), 12, 32, 6);
+    render::GameInformation gameInformation = render::GameInformation(sf::Vector2u(0, 0), 6, state::Bank());
     std::vector<render::Cases *> listCases;
     listCases = gameInformation.CreateCases(listCases, 2);
     for (auto cases: listCases){
