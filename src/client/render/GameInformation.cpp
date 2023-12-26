@@ -4,7 +4,13 @@
 using namespace std;
 using namespace render;
 
-GameInformation::GameInformation(sf::Vector2u sizeBoard, int nbPlayer) : nbPlayer(nbPlayer), sizeBoard(sizeBoard) {
+GameInformation::GameInformation(sf::Vector2u sizeBoard, int nbApart, int nbHostel, int nbPlayer) : nbPlayer(nbPlayer),
+                                                                                                    nbApart(nbApart),
+                                                                                                    nbHostel(nbHostel),
+                                                                                                    sizeBoard(
+                                                                                                            sizeBoard) {
+    string pathname = RES_DIR;
+
     vector<std::string> listeNamePlayer = {"Player 1", "Player 2", "Player 3", "Player 4", "Player 5", "Player 6"};
     for (int i = 0; i < nbPlayer; i++) {
         this->listButtonPlayer.emplace_back(
@@ -27,6 +33,19 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, int nbPlayer) : nbPlaye
                                                    listNameAction[3],
                                                    float(sizeBoard.x) + 285, float(sizeBoard.y) * 0.91));
     this->listText.emplace_back(*new Text("BANQUE", float(sizeBoard.x) * 1.42, float(sizeBoard.y) * 0.39));
+    this->listText.emplace_back(*new Text(to_string(this->nbApart), float(sizeBoard.x) * 1.72, float(sizeBoard.y) * 0.39));
+    this->listText.emplace_back(*new Text(to_string(this->nbHostel), float(sizeBoard.x) * 1.86, float(sizeBoard.y) * 0.39));
+
+    if (!this->apartTexture.loadFromFile(pathname + "iconApart.png")) {
+        perror("Error load file icon apart");
+    }
+    if (!this->hostelTexture.loadFromFile(pathname + "iconHostel.png")) {
+        perror("Error load file icon hostel");
+    }
+    this->spriteApart.setTexture(this->apartTexture);
+    this->spriteHostel.setTexture(this->hostelTexture);
+    this->spriteApart.move(this->sizeBoard.x * 1.65, this->sizeBoard.y * 0.39);
+    this->spriteHostel.move(this->sizeBoard.x * 1.8, this->sizeBoard.y * 0.39);
 }
 
 const sf::Vector2u &GameInformation::getSizeBoard() const {
@@ -43,6 +62,14 @@ vector<Button *> GameInformation::getListButtonAction() {
 
 vector<Text> GameInformation::getListText() {
     return this->listText;
+}
+
+sf::Sprite GameInformation::getSpriteApart() const {
+    return this->spriteApart;
+}
+
+sf::Sprite GameInformation::getSpriteHostel() const {
+    return this->spriteHostel;
 }
 
 vector<Cases *> GameInformation::CreateCases(vector<Cases *> listCases, uint yMove) {
@@ -94,9 +121,10 @@ vector<Cases *> GameInformation::CreateCases(vector<Cases *> listCases, uint yMo
     return listCases;
 }
 
-void GameInformation::hoverCase(sf::Vector2i cursorPos, const std::vector<Cases *>& listCases, sf::RenderWindow & window) const {
+void GameInformation::hoverCase(sf::Vector2i cursorPos, const std::vector<Cases *> &listCases,
+                                sf::RenderWindow &window) const {
     int whichCase = 0;
-    for (auto * box: listCases) {
+    for (auto *box: listCases) {
         if (box->getSquare().getGlobalBounds().contains(float(cursorPos.x), float(cursorPos.y))) {
             sf::Texture textureCard;
             sf::Sprite spriteCard;
@@ -201,3 +229,4 @@ void GameInformation::hoverCase(sf::Vector2i cursorPos, const std::vector<Cases 
         whichCase++;
     }
 }
+

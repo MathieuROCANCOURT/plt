@@ -5,11 +5,12 @@ using namespace render;
 using namespace state;
 
 
-Render::Render(State &currentState) : currentState(currentState) {
+Render::Render(State &currentState) : currentState(currentState){
     this->currentState.getListPlayer();
     this->gameBoard = *new GameBoard(this->currentState.getNbPlayer());
-    this->gameInfo = *new GameInformation(this->gameBoard.getSizeBoard(), this->currentState.getNbPlayer());
-
+    this->gameInfo = *new GameInformation(this->gameBoard.getSizeBoard(), this->currentState.getBank().getNbApartBank(),
+                                          this->currentState.getBank().getNbHostelBank(),
+                                          this->currentState.getNbPlayer());
 
     this->window.create(sf::VideoMode(this->gameBoard.getSizeBoard().x * 2, this->gameBoard.getSizeBoard().y),
                         "Monopoly");
@@ -40,6 +41,9 @@ void Render::draw(const sf::Vector2i cursorPos) {
     for (auto cases: listCasesBank) {
         this->window.draw(cases->getSquare());
     }
+
+    this->window.draw(this->gameInfo.getSpriteApart());
+    this->window.draw(this->gameInfo.getSpriteHostel());
 
     this->gameInfo.hoverCase(cursorPos, listCasesPlayer, this->window);
     this->gameInfo.hoverCase(cursorPos, listCasesBank, this->window);
