@@ -4,7 +4,7 @@
 using namespace std;
 using namespace render;
 
-GameInformation::GameInformation(sf::Vector2u sizeBoard, int nbPlayer, const state::Bank& bank) : sizeBoard(sizeBoard) {
+GameInformation::GameInformation(sf::Vector2u sizeBoard, int nbPlayer, const state::Bank &bank) : sizeBoard(sizeBoard) {
     string pathname = RES_DIR;
 
     vector<std::string> listeNamePlayer = {"Player 1", "Player 2", "Player 3", "Player 4", "Player 5", "Player 6"};
@@ -205,5 +205,38 @@ const sf::Vector2u &GameInformation::getSizeBoard() const {
 
 BankInformation *GameInformation::getBankInformation() {
     return this->bankInfo;
+}
+
+void GameInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos) {
+    static vector<Cases *> listCasesPlayer;
+    static vector<Cases *> listCasesBank = this->CreateCases(vector<Cases *>(),
+                                                             uint(this->getSizeBoard().y * 0.47));
+
+    /* Cases Bank */
+    for (auto cases: listCasesBank) {
+        window.draw(cases->getSquare());
+    }
+    this->hoverCase(cursorPos, listCasesPlayer, window);
+    this->hoverCase(cursorPos, listCasesBank, window);
+
+    /* Buttons Players */
+    for (auto buttonP: this->listButtonPlayer) {
+        if (buttonP->getRectangle().getFillColor() == sf::Color::Green) {
+            listCasesPlayer = this->CreateCases(listCasesPlayer,
+                                                sizeBoard.y * 0.14);
+        }
+        for (auto cases: listCasesPlayer) {
+            window.draw(cases->getSquare());
+        }
+        window.draw(buttonP->getRectangle());
+        window.draw(buttonP->getText().getText());
+    }
+    /* Buttons Actions */
+    for (auto buttonA: this->listButtonAction) {
+        window.draw(buttonA->getRectangle());
+        window.draw(buttonA->getText().getText());
+    }
+
+    this->bankInfo->draw(window);
 }
 

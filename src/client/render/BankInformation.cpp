@@ -1,6 +1,5 @@
 #include "BankInformation.h"
 #include "config.h"
-#include <utility>
 
 using namespace state;
 using namespace render;
@@ -20,7 +19,7 @@ BankInformation::BankInformation(Bank bank, sf::Vector2u sizeBoard){
     this->spriteApart.move(sizeBoard.x * 1.65, sizeBoard.y * 0.39);
     this->spriteHostel.move(sizeBoard.x * 1.8, sizeBoard.y * 0.39);
 
-    this->textBank = *new Text("BANQUE", float(sizeBoard.x) * 1.42, float(sizeBoard.y) * 0.39);
+    this->textBank = *new Text("BANQUE", sizeBoard.x * 1.42, sizeBoard.y * 0.39);
     this->textApart = *new Text(to_string(bank.getNbApartBank()), sizeBoard.x * 1.72, sizeBoard.y * 0.39);
     this->textHostel = *new Text(to_string(bank.getNbHostelBank()), sizeBoard.x * 1.86, sizeBoard.y * 0.39);
 }
@@ -43,5 +42,15 @@ Text BankInformation::getTextApart() {
 
 Text BankInformation::getTextHostel() {
     return this->textHostel;
+}
+
+void BankInformation::draw(sf::RenderWindow &window) {
+    /* Draw texts and sprite house and apart */
+    window.draw(this->getSpriteApart());
+    window.draw(this->getSpriteHostel());
+    window.draw(this->textBank.getText());
+    window.draw(this->textApart.getText());
+    window.draw(this->textHostel.getText());
+
 }
 

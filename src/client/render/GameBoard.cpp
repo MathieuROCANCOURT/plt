@@ -36,3 +36,11 @@ std::vector<Token *> GameBoard::getListToken() {
 GameBoard::~GameBoard() {
     delete this;
 }
+
+void GameBoard::draw(sf::RenderWindow &window) {
+    /* Draw board and tokens */
+    window.draw(this->getSpriteBoard());
+    for (auto token: this->list_token) {
+        window.draw(token->getSprite());
+    }
+}
