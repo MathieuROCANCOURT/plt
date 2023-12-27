@@ -31,7 +31,6 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, int nbPlayer, const sta
 
     this->bankInfo = new BankInformation(bank, sizeBoard);
 
-
 }
 
 vector<Button *> GameInformation::getListButtonPlayer() {
