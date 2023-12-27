@@ -42,6 +42,14 @@ vector<Button *> GameInformation::getListButtonAction() {
     return this->listButtonAction;
 }
 
+const sf::Vector2u &GameInformation::getSizeBoard() const {
+    return this->sizeBoard;
+}
+
+BankInformation *GameInformation::getBankInformation() {
+    return this->bankInfo;
+}
+
 vector<Cases *> GameInformation::CreateCases(vector<Cases *> listCases, uint yMove) {
     const sf::Color color[8] = {
             sf::Color(0xFE90C9FF),
@@ -198,13 +206,6 @@ void GameInformation::hoverCase(sf::Vector2i cursorPos, const std::vector<Cases 
         }
         whichCase++;
     }
-}
-const sf::Vector2u &GameInformation::getSizeBoard() const {
-    return this->sizeBoard;
-}
-
-BankInformation *GameInformation::getBankInformation() {
-    return this->bankInfo;
 }
 
 void GameInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos) {
