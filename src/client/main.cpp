@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
             currentState.addPlayer(*new Player("hat", HAT));
             currentState.addPlayer(*new Player("iron", IRON));
             currentState.addPlayer(*new Player("shoe", SHOE));
-            cout << "Number of player:" << currentState.getNbPlayer() << endl;
+
             Render *r;
             r = new Render(currentState);
             sf::Vector2i cursorPos;
@@ -43,8 +43,8 @@ int main(int argc, char *argv[]) {
                     int x = event.mouseButton.x;
                     int y = event.mouseButton.y;
 
-                    for (auto &rectangle: r->getGameInfo()->getPlayerInformation()->getListButtonPlayer()) {
-                        rectangle->click(x, y);
+                    for (auto &rectangle: r->getGameInfo()->getPlayerInformation()->getDictPlayer()) {
+                        rectangle.first->click(x, y);
                     }
                 }
                 if (event.type == sf::Event::MouseMoved)                {
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 
                 r->draw(cursorPos);
             }
-            // Add liste de texte
+            // Add card
             /*sf::Texture cardTexture;
             if (!cardTexture.loadFromFile("./../res/ChanceCards/win_rugby.png")) {
                 cout << "Error load file." << endl;

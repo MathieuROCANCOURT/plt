@@ -47,3 +47,8 @@ Button * Button::click(int x, int y) {
     }
     return this;
 }
+
+void Button::draw(sf::RenderWindow & window) {
+    window.draw(this->getRectangle());
+    window.draw(this->getText().getText());
+}
