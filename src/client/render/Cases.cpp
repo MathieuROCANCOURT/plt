@@ -29,6 +29,8 @@ void Cases::setFillColor(sf::Color changeColor) {
     this->square.setFillColor(changeColor);
 }
 
-Cases::~Cases() {
-    delete this;
+void Cases::draw(sf::RenderWindow &window) {
+    window.draw(this->square);
 }
+
+Cases::~Cases() = default;

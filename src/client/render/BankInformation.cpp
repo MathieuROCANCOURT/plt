@@ -5,12 +5,12 @@ using namespace state;
 using namespace render;
 using namespace std;
 
-BankInformation::BankInformation(Bank bank, sf::Vector2u sizeBoard){
+BankInformation::BankInformation(Bank bank, sf::Vector2u sizeBoard) {
     string pathname = RES_DIR;
-    if (!this->textureApart.loadFromFile(pathname + "iconApart.png")){
+    if (!this->textureApart.loadFromFile(pathname + "iconApart.png")) {
         perror("Error load icon apart");
     }
-    if (!this->textureHostel.loadFromFile(pathname + "iconHostel.png")){
+    if (!this->textureHostel.loadFromFile(pathname + "iconHostel.png")) {
         perror("Error load icon hostel");
     }
     this->spriteApart.setTexture(this->textureApart);
@@ -19,9 +19,12 @@ BankInformation::BankInformation(Bank bank, sf::Vector2u sizeBoard){
     this->spriteApart.move(sizeBoard.x * 1.65, sizeBoard.y * 0.39);
     this->spriteHostel.move(sizeBoard.x * 1.8, sizeBoard.y * 0.39);
 
-    this->textBank = *new Text("BANQUE", sizeBoard.x * 1.42, sizeBoard.y * 0.39);
-    this->textApart = *new Text(to_string(bank.getNbApartBank()), sizeBoard.x * 1.72, sizeBoard.y * 0.39);
-    this->textHostel = *new Text(to_string(bank.getNbHostelBank()), sizeBoard.x * 1.86, sizeBoard.y * 0.39);
+    this->textBank = *new Text("BANQUE", float(sizeBoard.x * 1.42), float(sizeBoard.y * 0.39));
+    this->textApart = *new Text(to_string(bank.getNbApartBank()), float(sizeBoard.x * 1.72), float(sizeBoard.y * 0.39));
+    this->textHostel = *new Text(to_string(bank.getNbHostelBank()), float(sizeBoard.x * 1.86),
+                                 float(sizeBoard.y * 0.39));
+
+    this->listCases = new AllCases(sizeBoard, uint(sizeBoard.y * 0.47));
 }
 
 sf::Sprite BankInformation::getSpriteApart() {
@@ -44,13 +47,12 @@ Text BankInformation::getTextHostel() {
     return this->textHostel;
 }
 
-void BankInformation::draw(sf::RenderWindow &window) {
+void BankInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos) {
     /* Draw texts and sprite house and apart */
     window.draw(this->getSpriteApart());
     window.draw(this->getSpriteHostel());
     window.draw(this->textBank.getText());
     window.draw(this->textApart.getText());
     window.draw(this->textHostel.getText());
-
+    this->listCases->draw(window, cursorPos);
 }
-

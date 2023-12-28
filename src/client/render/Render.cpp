@@ -7,7 +7,7 @@ using namespace state;
 
 Render::Render(State &currentState) : currentState(currentState) {
     this->gameBoard = *new GameBoard(this->currentState.getNbPlayer());
-    this->gameInfo = new GameInformation(this->gameBoard.getSizeBoard(), (int) currentState.getNbPlayer(),
+    this->gameInfo = new GameInformation(this->gameBoard.getSizeBoard(), currentState.getListPlayer(),
                                          currentState.getBank());
 
     this->window.create(sf::VideoMode(this->gameBoard.getSizeBoard().x * 2, this->gameBoard.getSizeBoard().y),

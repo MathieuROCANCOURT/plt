@@ -21,7 +21,13 @@ int main(int argc, char *argv[]) {
             cout << "--- Render ---" << endl;
 
             state::State currentState = *new State();
-            currentState.modifyNbPlayer(6);
+            currentState.addPlayer(*new Player("boat", BOAT));
+            currentState.addPlayer(*new Player("car", CAR));
+            currentState.addPlayer(*new Player("dog", DOG));
+            currentState.addPlayer(*new Player("hat", HAT));
+            currentState.addPlayer(*new Player("iron", IRON));
+            currentState.addPlayer(*new Player("shoe", SHOE));
+            cout << "Number of player:" << currentState.getNbPlayer() << endl;
             Render *r;
             r = new Render(currentState);
             sf::Vector2i cursorPos;
@@ -37,7 +43,7 @@ int main(int argc, char *argv[]) {
                     int x = event.mouseButton.x;
                     int y = event.mouseButton.y;
 
-                    for (auto &rectangle: r->getGameInfo()->getListButtonPlayer()) {
+                    for (auto &rectangle: r->getGameInfo()->getPlayerInformation()->getListButtonPlayer()) {
                         rectangle->click(x, y);
                     }
                 }
