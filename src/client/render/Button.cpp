@@ -4,19 +4,19 @@ using namespace std;
 using namespace render;
 
 Button::Button(float sizeXButton, float sizeYButton, float posXButton, float posYButton, string text,
-               float posXText, float posYText, int characterSize, sf::Color colorText, float thicknessButton,
-               sf::Color buttonColor, sf::Color buttonOutline) : sizeXButton(sizeXButton),
-                                                                 sizeYButton(sizeYButton),
-                                                                 posXButton(posXButton),
-                                                                 posYButton(posYButton),
-                                                                 text(std::move(text)),
-                                                                 posXText(posXText),
-                                                                 posYText(posYText),
-                                                                 characterSize(characterSize),
-                                                                 colorText(colorText),
-                                                                 thicknessButton(thicknessButton),
-                                                                 buttonColor(buttonColor),
-                                                                 buttonOutline(buttonOutline) {
+               float posXText, float posYText, sf::Color buttonColor, sf::Color buttonOutline, float thicknessButton,
+               sf::Color colorText, int characterSize) : sizeXButton(sizeXButton),
+                                                         sizeYButton(sizeYButton),
+                                                         posXButton(posXButton),
+                                                         posYButton(posYButton),
+                                                         text(std::move(text)),
+                                                         posXText(posXText),
+                                                         posYText(posYText),
+                                                         buttonColor(buttonColor),
+                                                         buttonOutline(buttonOutline),
+                                                         thicknessButton(thicknessButton),
+                                                         colorText(colorText),
+                                                         characterSize(characterSize) {
     this->rectangle = sf::RectangleShape(sf::Vector2f(this->sizeXButton, this->sizeYButton));
     this->rectangle.setPosition(this->posXButton, this->posYButton);
     this->rectangle.setFillColor(this->buttonColor);
@@ -24,18 +24,18 @@ Button::Button(float sizeXButton, float sizeYButton, float posXButton, float pos
     this->rectangle.setOutlineThickness(this->thicknessButton);
 
     this->textPlayer = *new Text(this->text, this->posXText, this->posYText, this->characterSize,
-                            sf::Color::Black);
+                                 sf::Color::Black);
 }
 
 Text Button::getText() {
     return this->textPlayer;
 }
 
-sf::RectangleShape& Button::getRectangle() {
+sf::RectangleShape &Button::getRectangle() {
     return this->rectangle;
 }
 
-Button * Button::click(int x, int y) {
+Button *Button::click(int x, int y) {
     sf::FloatRect textRect = this->getRectangle().getGlobalBounds();
     static Button *selectedText = nullptr;
     if (textRect.contains(float(x), float(y))) {
@@ -48,7 +48,7 @@ Button * Button::click(int x, int y) {
     return this;
 }
 
-void Button::draw(sf::RenderWindow & window) {
+void Button::draw(sf::RenderWindow &window) {
     window.draw(this->getRectangle());
     window.draw(this->getText().getText());
 }

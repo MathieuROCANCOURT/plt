@@ -21,6 +21,7 @@ int main(int argc, char *argv[]) {
             cout << "--- Render ---" << endl;
 
             state::State currentState = *new State();
+            currentState.getBank().getBankProperties();
             currentState.addPlayer(*new Player("boat", BOAT));
             currentState.addPlayer(*new Player("car", CAR));
             currentState.addPlayer(*new Player("dog", DOG));
@@ -51,7 +52,7 @@ int main(int argc, char *argv[]) {
                     cursorPos = sf::Mouse::getPosition(r->getWindow());
                 }
 
-                r->draw(cursorPos);
+                r->drawGame(cursorPos);
             }
             // Add card
             /*sf::Texture cardTexture;

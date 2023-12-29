@@ -33,3 +33,8 @@ sf::Text Text::getText() {
 void Text::setTextModify(const string& switchText){
     this->blocText.setString(switchText);
 }
+
+void Text::draw(sf::RenderWindow & window) {
+    window.draw(this->blocText);
+}
+
