@@ -31,28 +31,8 @@ int main(int argc, char *argv[]) {
 
             Render *r;
             r = new Render(currentState);
-            sf::Vector2i cursorPos;
             while (r->getWindow().isOpen()) {
-                sf::Event event{};
-                while (r->getWindow().pollEvent(event)) {
-                    if (event.type == sf::Event::Closed) {
-                        r->getWindow().close();
-                    }
-                }
-
-                if (event.type == sf::Event::MouseButtonPressed and event.mouseButton.button == sf::Mouse::Left) {
-                    int x = event.mouseButton.x;
-                    int y = event.mouseButton.y;
-
-                    for (auto &rectangle: r->getGameInfo()->getPlayerInformation()->getDictPlayer()) {
-                        rectangle.first->click(x, y);
-                    }
-                }
-                if (event.type == sf::Event::MouseMoved)                {
-                    cursorPos = sf::Mouse::getPosition(r->getWindow());
-                }
-
-                r->drawGame(cursorPos);
+                r->drawGame();
             }
             // Add card
             /*sf::Texture cardTexture;

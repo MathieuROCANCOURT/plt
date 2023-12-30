@@ -4,10 +4,10 @@
 using namespace std;
 using namespace render;
 
-Token::Token(int obj) {
+Token::Token(state::Token obj): obj(obj) {
     string path = RES_DIR;
 
-    string fileName = path + "Tokens/" + to_string(obj) + ".png";
+    string fileName = path + "Tokens/" + to_string(this->obj) + ".png";
     if (!this->texture.loadFromFile(fileName)) {
         perror("Error load file boat.\n");
     }

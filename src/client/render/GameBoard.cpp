@@ -6,7 +6,7 @@ using namespace render;
 GameBoard::GameBoard(int nbPlayer): nbPlayer(nbPlayer) {
     this->board = *new Board();
     for (int i = 0; i < this->nbPlayer; i++){
-        this->list_token.emplace_back(new Token(i));
+        this->list_token.emplace_back(new Token(state::BOAT));
     }
     float xmove, ymove = 35;
     for (int i = 0; i <= (int) this->nbPlayer / 2; i++){
