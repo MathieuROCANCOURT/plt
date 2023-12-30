@@ -7,9 +7,14 @@ using namespace state;
 
 
 Render::Render(State &currentState) : currentState(currentState) {
-    int nbPlayer = this->drawInit();
-    if (nbPlayer != 0) {
-        this->drawChoosePlayer(nbPlayer);
+    int nbPlayer;
+    do {
+        nbPlayer = this->drawInit();
+        if (nbPlayer != 0) {
+            this->drawChoosePlayer(nbPlayer);
+        }
+    } while ((currentState.getListPlayer().size() != nbPlayer) && (nbPlayer != 0));
+    if (nbPlayer != 0){
         this->gameBoard = *new GameBoard(this->currentState.getNbPlayer());
         this->gameInfo = new GameInformation(this->gameBoard.getSizeBoard(), currentState.getListPlayer(),
                                              currentState.getBank());
@@ -50,23 +55,24 @@ int Render::drawInit() {
     sf::Vector2i cursorPos;
     int nbPlayer = 0;
 
-
     while (windowInit.isOpen()) {
         windowInit.clear(sf::Color::White);
         sf::Event event{};
         while (windowInit.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 windowInit.close();
-            }
-            if (event.type == sf::Event::MouseButtonPressed and event.mouseButton.button == sf::Mouse::Left) {
+            } else if (event.type == sf::Event::MouseButtonPressed and event.mouseButton.button == sf::Mouse::Left) {
                 cursorPos = sf::Mouse::getPosition(windowInit);
 
                 for (auto &rectangle: listButton) {
                     rectangle->setFocus(cursorPos);
                     if (rectangle->getRectangle().getFillColor() == sf::Color::Green) {
                         string nbPlayerString = rectangle->getText()->getText().getString();
-                        nbPlayer = stoi(nbPlayerString);
                         windowInit.close();
+                        if (nbPlayerString == "EXIT") {
+                            return 0;
+                        }
+                        nbPlayer = stoi(nbPlayerString);
                     }
                 }
             }
@@ -112,7 +118,7 @@ void Render::drawChoosePlayer(int nbPlayer) {
         while (windowChoice.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 windowChoice.close();
-                this->drawInit();
+                initPlayer.clear();
             }
             if (event.type == sf::Event::MouseButtonReleased and event.mouseButton.button == sf::Mouse::Left) {
                 cursorPos = sf::Mouse::getPosition(windowChoice);
