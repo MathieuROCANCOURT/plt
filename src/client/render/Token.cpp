@@ -30,13 +30,13 @@ void Token::posModify(state::Player player) {
                     this->posMove(sf::Vector2f(positionCase[player.getPosition() - 1], positionCase[9]));
                     break;
                 case 11 ... 20:
-                    this->posMove(sf::Vector2f(positionCase[player.getPosition() - 1], positionCase[9]));
+                    this->posMove(sf::Vector2f(positionCase[0], positionCase[20 - player.getPosition()]));
                     break;
                 case 21 ... 30:
-                    this->posMove(sf::Vector2f(positionCase[player.getPosition() - 1], positionCase[9]));
+                    this->posMove(sf::Vector2f(positionCase[21 - player.getPosition()], positionCase[0]));
                     break;
-                case 31 ... 39:
-                    this->posMove(sf::Vector2f(positionCase[player.getPosition() - 1], positionCase[9]));
+                case 31 ... 40:
+                    this->posMove(sf::Vector2f(positionCase[9], positionCase[player.getPosition() - 31]));
                     break;
                 default:
                     perror("BAD VALUE position");
@@ -51,4 +51,9 @@ void Token::posModify(state::Player player) {
             this->sprite.setColor(sf::Color::Transparent);
     }
 }
+
+void Token::draw(sf::RenderWindow & window) {
+    window.draw(this->sprite);
+}
+
 

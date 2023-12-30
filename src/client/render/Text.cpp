@@ -26,7 +26,7 @@ Text::Text(string text, float posXtext, float posYtext, int characterSize, sf::C
     this->blocText.move(this->posXtext, this->posYtext);
 }
 
-sf::Text Text::getText() {
+sf::Text & Text::getText() {
     return this->blocText;
 }
 

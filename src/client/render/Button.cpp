@@ -27,7 +27,7 @@ Button::Button(float sizeXButton, float sizeYButton, float posXButton, float pos
                                  sf::Color::Black);
 }
 
-Text Button::getText() {
+Text & Button::getText() {
     return this->textPlayer;
 }
 
