@@ -33,11 +33,12 @@ Button::Button(state::Token chooseToken, float sizeXButton, float sizeYButton, f
                                                                  sizeYButton(sizeYButton),
                                                                  posXButton(posXButton),
                                                                  posYButton(posYButton),
+                                                                 buttonColor(sf::Color::White),
                                                                  buttonOutline(buttonOutline),
                                                                  thicknessButton(thicknessButton){
     this->rectangle = sf::RectangleShape(sf::Vector2f(this->sizeXButton, this->sizeYButton));
     this->rectangle.setPosition(this->posXButton, this->posYButton);
-    this->rectangle.setFillColor(sf::Color::White);
+    this->rectangle.setFillColor(this->buttonColor);
     this->rectangle.setOutlineColor(this->buttonOutline);
     this->rectangle.setOutlineThickness(this->thicknessButton);
 
@@ -45,7 +46,11 @@ Button::Button(state::Token chooseToken, float sizeXButton, float sizeYButton, f
     this->token->posMove(sf::Vector2f(this->posXButton, this->posYButton));
 }
 
-Text * Button::getText() {
+sf::Color Button::getButtonColor() {
+    return this->buttonColor;
+}
+
+Text *Button::getText() {
     return this->textPlayer;
 }
 
@@ -53,24 +58,38 @@ sf::RectangleShape &Button::getRectangle() {
     return this->rectangle;
 }
 
+Token *Button::getToken() {
+    return this->token;
+}
+
+void Button::select() {
+    this->getRectangle().setFillColor(sf::Color::Green); // On met sa couleur en vert
+}
+
+void Button::deselect() {
+    this->getRectangle().setFillColor(this->buttonColor); // On remet sa couleur d'origine
+}
+
 void Button::setFocus(sf::Vector2i cursorPos) {
     sf::FloatRect textRect = this->getRectangle().getGlobalBounds();
-    static Button *selectedText = nullptr;
     if (textRect.contains(sf::Vector2f(cursorPos))) {
-        if (selectedText != nullptr) {
-            selectedText->getRectangle().setFillColor(sf::Color::Yellow); // On remet sa couleur en jaune
-        }
-        selectedText = this;
-        selectedText->getRectangle().setFillColor(sf::Color::Green); // On change sa couleur en vert
+        this->select();
+    } else {
+        this->deselect();
     }
 }
 
 void Button::draw(sf::RenderWindow &window) {
     window.draw(this->getRectangle());
-    if (this->getText() != nullptr){
+    if (this->getText() != nullptr) {
         window.draw(this->getText()->getText());
     }
-    if (this->token != nullptr){
+    if (this->token != nullptr) {
         this->token->draw(window);
     }
+}
+
+Button::~Button() {
+    delete textPlayer;
+    delete token;
 }

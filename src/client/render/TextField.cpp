@@ -36,10 +36,10 @@ void TextField::handleInput(sf::Event event) {
     if (this->hasFocus && event.type == sf::Event::TextEntered){
         if (event.text.unicode == 8) {   // Delete key
             this->text = this->text.substr(0, this->text.size() - 1);
-            this->getText()->setTextModify(this->text);
+            this->getText()->setStringText(this->text);
         } else if (this->text.size() < 8) {
             this->text += static_cast<char>(event.text.unicode);
-            this->getText()->setTextModify(this->text);
+            this->getText()->setStringText(this->text);
         }
     }
 }

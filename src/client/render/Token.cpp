@@ -14,6 +14,10 @@ Token::Token(state::Token obj): obj(obj) {
     this->sprite.setTexture(this->texture);
 }
 
+state::Token Token::getObj() {
+    return this->obj;
+}
+
 sf::Sprite Token::getSprite() {
     return this->sprite;
 }
@@ -55,5 +59,3 @@ void Token::posModify(state::Player player) {
 void Token::draw(sf::RenderWindow & window) {
     window.draw(this->sprite);
 }
-
-

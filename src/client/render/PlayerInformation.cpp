@@ -22,7 +22,7 @@ void PlayerInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos) {
     for (auto &dict: this->dictPlayer) {
         if (dict.first->getRectangle().getFillColor() == sf::Color::Green) {
             this->listCasesPlayer->draw(window, cursorPos);
-            this->textMoney->setTextModify(to_string(dict.second));
+            this->textMoney->setStringText(to_string(dict.second));
             window.draw(this->textMoney->getText());
         }
         dict.first->draw(window);

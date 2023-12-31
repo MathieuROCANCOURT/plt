@@ -22,13 +22,8 @@ int main(int argc, char *argv[]) {
 
             state::State currentState = *new State();
             currentState.getBank().getBankProperties();
-            currentState.addPlayer(*new Player("boat", BOAT));
-            currentState.addPlayer(*new Player("car", CAR));
-            currentState.addPlayer(*new Player("dog", DOG));
-            currentState.addPlayer(*new Player("hat", HAT));
-            currentState.addPlayer(*new Player("iron", IRON));
-            currentState.addPlayer(*new Player("shoe", SHOE));
 
+            cout << currentState.getListPlayer().size() << endl;
             Render *r;
             r = new Render(currentState);
             while (r->getWindow().isOpen()) {

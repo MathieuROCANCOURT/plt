@@ -30,11 +30,15 @@ sf::Text & Text::getText() {
     return this->blocText;
 }
 
-void Text::setTextModify(const string& switchText){
+std::string Text::getStringText() {
+    return this->text;
+}
+
+void Text::setStringText(const string& switchText){
+    this->text = switchText;
     this->blocText.setString(switchText);
 }
 
 void Text::draw(sf::RenderWindow & window) {
     window.draw(this->blocText);
 }
-
