@@ -100,6 +100,7 @@ void Render::drawChoosePlayer(int nbPlayer) {
 
     Text menuText = *new Text("Choose your name and your token.", 250, 20);
     Text userText = *new Text("Input username:", 75, 100, 20);
+    Text messageUsername = *new Text("Size username: Between 2 and 8", 230, 130, 14, sf::Color::Red);
     TextField textField = *new TextField(120, 25, 250, 100, "");
     AllButtons listButtonToken = *new AllButtons();
     AllButtons listButtonAction = *new AllButtons();
@@ -140,12 +141,13 @@ void Render::drawChoosePlayer(int nbPlayer) {
                         if (buttonFocusAction->getText()->getStringText() == "Next") {
                             Button *buttonFocusToken = listButtonToken.getFocus();
                             buttonFocusAction->deselect();
-                            if (buttonFocusToken != nullptr) {
-
+                            if (buttonFocusToken != nullptr && textField.getText()->getStringText().size() >= 2) {
                                 string playerName = textField.getText()->getStringText();
                                 state::Token playerToken = buttonFocusToken->getToken()->getObj();
                                 currentState.addPlayer(*new Player(playerName, playerToken));
                                 listButtonToken.removeButton(buttonFocusToken);
+                                textField.setText("");
+                                textField.setColor(sf::Color::White);
                                 if (nbPlayer == (int) currentState.getListPlayer().size()) {
                                     windowChoice.close();
                                 }
@@ -169,6 +171,7 @@ void Render::drawChoosePlayer(int nbPlayer) {
 
         menuText.draw(windowChoice);
         userText.draw(windowChoice);
+        messageUsername.draw(windowChoice);
         listButtonToken.draw(windowChoice);
         listButtonAction.draw(windowChoice);
         textField.draw(windowChoice);

@@ -32,15 +32,26 @@ void TextField::setFocus(sf::Vector2i cursorPos) {
     }
 }
 
+void TextField::setText(const std::string& string1) {
+    this->getText()->setStringText(string1);
+    this->text = this->getText()->getStringText();
+}
+
+void TextField::setColor(const sf::Color & color) {
+    this->getRectangle().setFillColor(color);
+}
+
 void TextField::handleInput(sf::Event event) {
     if (this->hasFocus && event.type == sf::Event::TextEntered){
         if (event.text.unicode == 8) {   // Delete key
-            this->text = this->text.substr(0, this->text.size() - 1);
-            this->getText()->setStringText(this->text);
+            this->setText(this->text.substr(0, this->text.size() - 1));
         } else if (this->text.size() < 8) {
-            this->text += static_cast<char>(event.text.unicode);
-            this->getText()->setStringText(this->text);
+            this->setText(this->text + static_cast<char>(event.text.unicode));
+        }
+        if (this->text.size() < 2) {
+            this->setColor(sf::Color::Red);
+        } else {
+            this->setColor(sf::Color::Green);
         }
     }
 }
-
