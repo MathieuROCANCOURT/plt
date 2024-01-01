@@ -8,7 +8,7 @@ GameBoard::GameBoard(vector<state::Player> listPlayer) {
     for (state::Player player: listPlayer) {
         this->dictTokenPlayer.emplace(new Token(player.getToken()), player);
     }
-    //this->updatePos(); Work here
+    this->updatePos(); //Work here
 }
 
 sf::Vector2u GameBoard::getSizeBoard() {
@@ -29,7 +29,6 @@ void GameBoard::draw(sf::RenderWindow &window) {
     /* Draw board and tokens */
     window.draw(this->getSpriteBoard());
     for (auto tokenPlayer: this->dictTokenPlayer) {
-        //this->updatePos();
         tokenPlayer.first->draw(window);
     }
 }

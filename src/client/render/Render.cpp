@@ -9,7 +9,7 @@ using namespace state;
 Render::Render(State &currentState) : currentState(currentState) {
     int nbPlayer;
     do {
-        nbPlayer = this->drawInit();
+        nbPlayer = drawInit();
         if (nbPlayer != 0) {
             this->drawChoosePlayer(nbPlayer);
         }
@@ -185,6 +185,7 @@ void Render::drawGame() {
     static sf::Event event{};
     static sf::Vector2i cursorPos;
     this->window.clear(sf::Color::White);
+    bool test = true;
 
     /* Control event */
     while (this->window.pollEvent(event)) {
