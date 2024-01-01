@@ -3,14 +3,12 @@
 using namespace std;
 using namespace render;
 
-GameBoard::GameBoard(const vector<state::Player>& listPlayer) {
+GameBoard::GameBoard(vector<state::Player> listPlayer) {
     this->board = *new Board();
     for (state::Player player: listPlayer) {
         this->dictTokenPlayer.emplace(new Token(player.getToken()), player);
     }
-    for (auto tokenPlayer: this->dictTokenPlayer) {
-        tokenPlayer.first->posUpdate(tokenPlayer.second);
-    }
+    //this->updatePos(); Work here
 }
 
 sf::Vector2u GameBoard::getSizeBoard() {
@@ -21,10 +19,17 @@ sf::Sprite GameBoard::getSpriteBoard() {
     return this->board.getSprite();
 }
 
+void GameBoard::updatePos() {
+    for (auto tokenPlayer: this->dictTokenPlayer) {
+        tokenPlayer.first->posUpdate(tokenPlayer.second);
+    }
+}
+
 void GameBoard::draw(sf::RenderWindow &window) {
     /* Draw board and tokens */
     window.draw(this->getSpriteBoard());
     for (auto tokenPlayer: this->dictTokenPlayer) {
+        //this->updatePos();
         tokenPlayer.first->draw(window);
     }
 }

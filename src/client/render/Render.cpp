@@ -67,7 +67,7 @@ int Render::drawInit() {
                     if (event.mouseButton.button == sf::Mouse::Left) {
                         cursorPos = sf::Mouse::getPosition(windowInit);
 
-                        listButton.setFocus(cursorPos);
+                        listButton.setFocus(cursorPos, event);
                         if (listButton.getFocus() != nullptr) {
                             string nbPlayerString = listButton.getFocus()->getText()->getStringText();
                             windowInit.close();
@@ -123,42 +123,39 @@ void Render::drawChoosePlayer(int nbPlayer) {
                 case sf::Event::Closed:
                     windowChoice.close();
                     break;
+                case sf::Event::MouseButtonPressed: {
+                    cursorPos = sf::Mouse::getPosition(windowChoice);
+                    textField.setFocus(cursorPos);
 
-                case sf::Event::MouseButtonPressed:
-                    if (event.mouseButton.button == sf::Mouse::Left) {
-                        cursorPos = sf::Mouse::getPosition(windowChoice);
-                        textField.setFocus(cursorPos);
+                    listButtonToken.setFocus(cursorPos, event);
+                    listButtonAction.setFocus(cursorPos, event);
 
-                        listButtonToken.setFocus(cursorPos);
-                        listButtonAction.setFocus(cursorPos);
+                    Button *buttonFocusAction = listButtonAction.getFocus();
+                    if (buttonFocusAction != nullptr) {
+                        /* Condition click button EXIT */
+                        if (buttonFocusAction->getText()->getStringText() == "EXIT") {
+                            windowChoice.close();
+                            break;
+                        }
+                        if (buttonFocusAction->getText()->getStringText() == "Next") {
+                            Button *buttonFocusToken = listButtonToken.getFocus();
+                            buttonFocusAction->deselect();
+                            if (buttonFocusToken != nullptr) {
 
-                        Button *buttonFocusAction = listButtonAction.getFocus();
-                        if (buttonFocusAction != nullptr) {
-                            /* Condition click button EXIT */
-                            if (buttonFocusAction->getText()->getStringText() == "EXIT") {
-                                windowChoice.close();
+                                string playerName = textField.getText()->getStringText();
+                                state::Token playerToken = buttonFocusToken->getToken()->getObj();
+                                currentState.addPlayer(*new Player(playerName, playerToken));
+                                listButtonToken.removeButton(buttonFocusToken);
+                                if (nbPlayer == (int) currentState.getListPlayer().size()) {
+                                    windowChoice.close();
+                                }
                                 break;
                             }
-                            if (buttonFocusAction->getText()->getStringText() == "Next") {
-                                Button *buttonFocusToken = listButtonToken.getFocus();
-                                buttonFocusAction->deselect();
-                                if (buttonFocusToken != nullptr) {
-
-                                    string playerName = textField.getText()->getStringText();
-                                    state::Token playerToken = buttonFocusToken->getToken()->getObj();
-                                    currentState.addPlayer(*new Player(playerName, playerToken));
-                                    listButtonToken.removeButton(buttonFocusToken);
-                                    if (nbPlayer == (int) currentState.getListPlayer().size()) {
-                                        windowChoice.close();
-                                    }
-                                    break;
-                                }
-                            }
-                            string nbPlayerString = buttonFocusAction->getText()->getStringText();
                         }
+                        string nbPlayerString = buttonFocusAction->getText()->getStringText();
                     }
                     break;
-
+                }
                 case sf::Event::MouseMoved:
                     cursorPos = sf::Mouse::getPosition(windowChoice);
                     break;
@@ -195,10 +192,6 @@ void Render::drawGame() {
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     cursorPos = sf::Mouse::getPosition(this->getWindow());
-
-                    for (auto &rectangle: this->gameInfo->getPlayerInformation()->getDictPlayer()) {
-                        rectangle.first->setFocus(cursorPos);
-                    }
                 }
                 break;
             case sf::Event::MouseMoved:
@@ -210,7 +203,7 @@ void Render::drawGame() {
     }
     /* Display window with elements */
     this->gameBoard->draw(this->window);
-    this->gameInfo->draw(this->window, cursorPos);
+    this->gameInfo->draw(this->window, cursorPos, event);
 
     this->window.display();
 }
