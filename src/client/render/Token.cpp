@@ -4,7 +4,7 @@
 using namespace std;
 using namespace render;
 
-Token::Token(state::Token obj): obj(obj) {
+Token::Token(state::Token obj) : obj(obj) {
     string path = RES_DIR;
 
     string fileName = path + "Tokens/" + to_string(this->obj) + ".png";
@@ -26,18 +26,18 @@ void Token::posMove(sf::Vector2f move) {
     this->sprite.move(move);
 }
 
-void Token::posModify(state::Player player) {
+void Token::posUpdate(state::Player player) {
     switch (player.getGameStatus()) {
         case state::PLAYINGFREE: {
             switch (player.getPosition()) {
                 case 1 ... 10:
-                    this->posMove(sf::Vector2f(positionCase[player.getPosition() - 1], positionCase[9]));
+                    this->posMove(sf::Vector2f(positionCase[10 - player.getPosition()], positionCase[9]));
                     break;
                 case 11 ... 20:
                     this->posMove(sf::Vector2f(positionCase[0], positionCase[20 - player.getPosition()]));
                     break;
                 case 21 ... 30:
-                    this->posMove(sf::Vector2f(positionCase[21 - player.getPosition()], positionCase[0]));
+                    this->posMove(sf::Vector2f(positionCase[player.getPosition() - 21], positionCase[0]));
                     break;
                 case 31 ... 40:
                     this->posMove(sf::Vector2f(positionCase[9], positionCase[player.getPosition() - 31]));
@@ -56,6 +56,6 @@ void Token::posModify(state::Player player) {
     }
 }
 
-void Token::draw(sf::RenderWindow & window) {
+void Token::draw(sf::RenderWindow &window) {
     window.draw(this->sprite);
 }

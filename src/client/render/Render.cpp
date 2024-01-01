@@ -15,11 +15,12 @@ Render::Render(State &currentState) : currentState(currentState) {
         }
     } while (((int) currentState.getListPlayer().size() != nbPlayer) & (nbPlayer != 0));
     if (nbPlayer != 0) {
-        this->gameBoard = *new GameBoard(this->currentState.getNbPlayer());
-        this->gameInfo = new GameInformation(this->gameBoard.getSizeBoard(), currentState.getListPlayer(),
+        this->currentState.getCurrentPlayer()->setMoney(300000);
+        this->gameBoard = new GameBoard(this->currentState.getListPlayer());
+        this->gameInfo = new GameInformation(this->gameBoard->getSizeBoard(), currentState.getListPlayer(),
                                              currentState.getBank());
 
-        this->window.create(sf::VideoMode(this->gameBoard.getSizeBoard().x * 2, this->gameBoard.getSizeBoard().y),
+        this->window.create(sf::VideoMode(this->gameBoard->getSizeBoard().x * 2, this->gameBoard->getSizeBoard().y),
                             "Monopoly");
         this->window.setVerticalSyncEnabled(true);
     }
@@ -208,7 +209,7 @@ void Render::drawGame() {
         }
     }
     /* Display window with elements */
-    this->gameBoard.draw(this->window);
+    this->gameBoard->draw(this->window);
     this->gameInfo->draw(this->window, cursorPos);
 
     this->window.display();

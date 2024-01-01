@@ -29,6 +29,10 @@ void Player::addToPlayerProperties(Property property) {
     this->playerProperties.push_back(property);
 }
 
+Token Player::getToken() {
+    return this->token;
+}
+
 std::vector<Property> Player::getPlayerProperties() {
     return this->playerProperties;
 }
@@ -82,9 +86,3 @@ Debt Player::getDebt() {
 int Player::getNbdouble() {
     return this->NbDouble;
 }
-
-
-
-
-
-

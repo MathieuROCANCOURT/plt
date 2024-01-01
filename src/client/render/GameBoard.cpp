@@ -3,21 +3,13 @@
 using namespace std;
 using namespace render;
 
-GameBoard::GameBoard(int nbPlayer): nbPlayer(nbPlayer) {
+GameBoard::GameBoard(const vector<state::Player>& listPlayer) {
     this->board = *new Board();
-    for (int i = 0; i < this->nbPlayer; i++){
-        this->list_token.emplace_back(new Token(state::BOAT));
+    for (state::Player player: listPlayer) {
+        this->dictTokenPlayer.emplace(new Token(player.getToken()), player);
     }
-    float xmove, ymove = 35;
-    for (int i = 0; i <= (int) this->nbPlayer / 2; i++){
-        xmove = 80;
-        for (int j = 0; j < 2; j++){
-            if (i * 2 + j < this->nbPlayer) {
-                this->list_token[i * 2 + j]->posMove(sf::Vector2f(this->board.getSize()) - sf::Vector2f(xmove, ymove));
-                xmove = 35;
-            }
-        }
-        ymove += 25;
+    for (auto tokenPlayer: this->dictTokenPlayer) {
+        tokenPlayer.first->posUpdate(tokenPlayer.second);
     }
 }
 
@@ -29,15 +21,11 @@ sf::Sprite GameBoard::getSpriteBoard() {
     return this->board.getSprite();
 }
 
-std::vector<Token *> GameBoard::getListToken() {
-    return this->list_token;
-}
-
 void GameBoard::draw(sf::RenderWindow &window) {
     /* Draw board and tokens */
     window.draw(this->getSpriteBoard());
-    for (auto token: this->list_token) {
-        token->draw(window);
+    for (auto tokenPlayer: this->dictTokenPlayer) {
+        tokenPlayer.first->draw(window);
     }
 }
 

@@ -50,8 +50,7 @@ void GameInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos) {
 
     /* Buttons Actions */
     for (auto buttonA: this->listButtonAction) {
-        window.draw(buttonA->getRectangle());
-        window.draw(buttonA->getText()->getText());
+        buttonA->draw(window);
     }
 
     this->playerInfo->draw(window, cursorPos);
