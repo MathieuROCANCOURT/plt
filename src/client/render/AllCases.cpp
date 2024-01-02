@@ -18,17 +18,18 @@ AllCases::AllCases(sf::Vector2u sizeBoard, uint yMove) : sizeBoard(sizeBoard) {
             sf::Color(0x66666FF)
     };
     int rep = 0;
-    float posX_case = float(this->sizeBoard.x) * 1.12, posY_case = float(yMove);
+    float posX_case, posY_case = float(yMove);
+    posX_case = float(this->sizeBoard.x * 1.12);
     for (auto c: color) {
         if (c == sf::Color::Red) {
-            posY_case += 50, posX_case = float(this->sizeBoard.x) * 1.12; // New line
+            posY_case += 50, posX_case = float(this->sizeBoard.x * 1.12); // New line
         }
         if (c == sf::Color(0xFE90C9FF) || c == sf::Color::Blue) {
             rep = 2; // Number of case
         } else if (c == sf::Color(0xB8B8B8FF)) {
-            posX_case = float(this->sizeBoard.x) * 1.3, posY_case += 50; // New line
+            posX_case = float(this->sizeBoard.x * 1.3), posY_case += 50; // New line
         } else if (c == sf::Color(0x66666FF)) {
-            posX_case += float(this->sizeBoard.x) * 0.1; // Set big space
+            posX_case += float(this->sizeBoard.x * 0.1); // Set big space
             rep = 4;
         } else {
             rep = 3;
@@ -36,9 +37,9 @@ AllCases::AllCases(sf::Vector2u sizeBoard, uint yMove) : sizeBoard(sizeBoard) {
         for (int i = 0; i < rep; i++) {
             auto cases = new Cases(posX_case, posY_case, c);
             listCases.push_back(cases);
-            posX_case += float(sizeBoard.x) * 0.072;
+            posX_case += float(sizeBoard.x * 0.072);
         }
-        posX_case += float(sizeBoard.x) * 0.03;
+        posX_case += float(sizeBoard.x * 0.03);
     }
 }
 

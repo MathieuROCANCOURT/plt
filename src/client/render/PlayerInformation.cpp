@@ -1,19 +1,21 @@
 #include "PlayerInformation.h"
+#include <utility>
 
 using namespace std;
 using namespace render;
 
-PlayerInformation::PlayerInformation(const vector<state::Player> &listPlayer, sf::Vector2u sizeBoard) {
+PlayerInformation::PlayerInformation(vector<state::Player> listPlayer, sf::Vector2u sizeBoard) : listPlayer(
+        std::move(listPlayer)) {
     int i = 0;
-    for (auto player: listPlayer) {
-        Button *button = new Button(95, 40, float(sizeBoard.x) + float(i) * 110 + 10, 5, player.getName(),
+    for (auto player: this->listPlayer) {
+        auto *button = new Button(95, 40, float(sizeBoard.x) + float(i) * 110 + 10, 5, player.getName(),
                                     float(sizeBoard.x) + float(i) * 110 + 20, 10);
         this->dictPlayer.emplace(button, player.getMoney());
         this->listButtonPlayer->addButton(button);
         i++;
     }
     this->listCasesPlayer = new AllCases(sizeBoard, uint(sizeBoard.y * 0.15));
-    this->textMoney = new Text("", float(sizeBoard.x) * 1.1, float(sizeBoard.y) * 0.09, 25, sf::Color(0x288330FF));
+    this->textMoney = new Text("", float(sizeBoard.x * 1.1), float(sizeBoard.y * 0.09), 25, sf::Color(0x288330FF));
 }
 
 std::map<Button *, long long> PlayerInformation::getDictPlayer() {
@@ -28,14 +30,5 @@ void PlayerInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos, s
         this->textMoney->setStringText(to_string(this->dictPlayer.at(test)));
         window.draw(this->textMoney->getText());
     }
-    this->listButtonPlayer->draw(window);
-
-    /*for (auto &dict: this->dictPlayer) {
-        if (dict.first->getRectangle().getFillColor() == sf::Color::Green) {
-            this->listCasesPlayer->draw(window, cursorPos);
-            this->textMoney->setStringText(to_string(dict.second));
-            window.draw(this->textMoney->getText());
-        }
-        dict.first->draw(window);
-    }*/
+    this->listButtonPlayer->draw(window, cursorPos, event);
 }

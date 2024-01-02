@@ -26,14 +26,6 @@ Render::Render(State &currentState) : currentState(currentState) {
     }
 }
 
-state::State &Render::getCurrentState() const {
-    return this->currentState;
-}
-
-GameInformation *Render::getGameInfo() {
-    return this->gameInfo;
-}
-
 sf::RenderWindow &Render::getWindow() {
     return this->window;
 }
@@ -86,7 +78,7 @@ int Render::drawInit() {
         }
 
         menuText.draw(windowInit);
-        listButton.draw(windowInit);
+        listButton.draw(windowInit, cursorPos, event);
 
         windowInit.display();
     }
@@ -100,7 +92,7 @@ void Render::drawChoosePlayer(int nbPlayer) {
 
     Text menuText = *new Text("Choose your name and your token.", 250, 20);
     Text userText = *new Text("Input username:", 75, 100, 20);
-    Text messageUsername = *new Text("Size username: Between 2 and 8", 230, 130, 14, sf::Color::Red);
+    Text messageUsername = *new Text("Username size: between 2 and 8 characters.", 230, 130, 14, sf::Color::Red);
     TextField textField = *new TextField(120, 25, 250, 100, "");
     AllButtons listButtonToken = *new AllButtons();
     AllButtons listButtonAction = *new AllButtons();
@@ -144,11 +136,11 @@ void Render::drawChoosePlayer(int nbPlayer) {
                             if (buttonFocusToken != nullptr && textField.getText()->getStringText().size() >= 2) {
                                 string playerName = textField.getText()->getStringText();
                                 state::Token playerToken = buttonFocusToken->getToken()->getObj();
-                                currentState.addPlayer(*new Player(playerName, playerToken));
+                                this->currentState.addPlayer(*new Player(playerName, playerToken));
                                 listButtonToken.removeButton(buttonFocusToken);
                                 textField.setText("");
                                 textField.setColor(sf::Color::White);
-                                if (nbPlayer == (int) currentState.getListPlayer().size()) {
+                                if (nbPlayer == (int) this->currentState.getListPlayer().size()) {
                                     windowChoice.close();
                                 }
                                 break;
@@ -172,8 +164,8 @@ void Render::drawChoosePlayer(int nbPlayer) {
         menuText.draw(windowChoice);
         userText.draw(windowChoice);
         messageUsername.draw(windowChoice);
-        listButtonToken.draw(windowChoice);
-        listButtonAction.draw(windowChoice);
+        listButtonToken.draw(windowChoice, cursorPos, event);
+        listButtonAction.draw(windowChoice, cursorPos, event);
         textField.draw(windowChoice);
 
         windowChoice.display();
@@ -185,7 +177,6 @@ void Render::drawGame() {
     static sf::Event event{};
     static sf::Vector2i cursorPos;
     this->window.clear(sf::Color::White);
-    bool test = true;
 
     /* Control event */
     while (this->window.pollEvent(event)) {

@@ -21,9 +21,7 @@ int main(int argc, char *argv[]) {
             cout << "--- Render ---" << endl;
 
             state::State currentState = *new State();
-            currentState.getBank().getBankProperties();
 
-            cout << currentState.getListPlayer().size() << endl;
             Render *r;
             r = new Render(currentState);
             while (r->getWindow().isOpen()) {

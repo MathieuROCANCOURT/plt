@@ -30,6 +30,15 @@ Button *AllButtons::getFocus() {
     return nullptr;
 }
 
+Button *AllButtons::getHover() {
+    for (auto button: this->listButtons) {
+        if (button->getRectangle().getFillColor() == sf::Color::Cyan) {
+            return button;
+        }
+    }
+    return nullptr;
+}
+
 void AllButtons::setFocus(sf::Vector2i cursorPos, sf::Event event) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         for (auto button: this->listButtons) {
@@ -46,7 +55,16 @@ void AllButtons::setFocus(sf::Vector2i cursorPos, sf::Event event) {
     }
 }
 
-void AllButtons::draw(sf::RenderWindow &window) {
+void AllButtons::setHover(sf::Vector2i cursorPos) {
+    for (auto *button: this->listButtons) {
+        button->hover(cursorPos);
+    }
+}
+
+void AllButtons::draw(sf::RenderWindow &window, sf::Vector2i cursorPos, sf::Event event) {
+    this->setFocus(cursorPos, event);
+    this->setHover(cursorPos);
+
     for (Button *button: this->listButtons) {
         button->draw(window);
     }

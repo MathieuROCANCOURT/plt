@@ -35,7 +35,7 @@ Button::Button(state::Token chooseToken, float sizeXButton, float sizeYButton, f
                                                                  posYButton(posYButton),
                                                                  buttonColor(sf::Color::White),
                                                                  buttonOutline(buttonOutline),
-                                                                 thicknessButton(thicknessButton){
+                                                                 thicknessButton(thicknessButton) {
     this->rectangle = sf::RectangleShape(sf::Vector2f(this->sizeXButton, this->sizeYButton));
     this->rectangle.setPosition(this->posXButton, this->posYButton);
     this->rectangle.setFillColor(this->buttonColor);
@@ -68,6 +68,16 @@ void Button::select() {
 
 void Button::deselect() {
     this->getRectangle().setFillColor(this->buttonColor); // On remet sa couleur d'origine
+}
+
+void Button::hover(sf::Vector2i cursorPos) {
+    if (this->getRectangle().getFillColor() != sf::Color::Green) {
+        if (this->getRectangle().getGlobalBounds().contains(float(cursorPos.x), float(cursorPos.y))) {
+            this->getRectangle().setFillColor(sf::Color::Cyan);
+        } else {
+            this->deselect();
+        }
+    }
 }
 
 void Button::setFocus(sf::Vector2i cursorPos) {

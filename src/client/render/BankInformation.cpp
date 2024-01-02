@@ -5,7 +5,7 @@ using namespace state;
 using namespace render;
 using namespace std;
 
-BankInformation::BankInformation(Bank bank, sf::Vector2u sizeBoard) {
+BankInformation::BankInformation(Bank bank, sf::Vector2u sizeBoard) : bank(bank){
     string pathname = RES_DIR;
     if (!this->textureApart.loadFromFile(pathname + "iconApart.png")) {
         perror("Error load icon apart");
@@ -16,8 +16,8 @@ BankInformation::BankInformation(Bank bank, sf::Vector2u sizeBoard) {
     this->spriteApart.setTexture(this->textureApart);
     this->spriteHostel.setTexture(this->textureHostel);
 
-    this->spriteApart.move(sizeBoard.x * 1.65, sizeBoard.y * 0.39);
-    this->spriteHostel.move(sizeBoard.x * 1.8, sizeBoard.y * 0.39);
+    this->spriteApart.move(float(sizeBoard.x * 1.65), float(sizeBoard.y * 0.39));
+    this->spriteHostel.move(float(sizeBoard.x * 1.8), float(sizeBoard.y * 0.39));
 
     this->textBank = *new Text("BANQUE", float(sizeBoard.x * 1.42), float(sizeBoard.y * 0.39));
     this->textApart = *new Text(to_string(bank.getNbApartBank()), float(sizeBoard.x * 1.72), float(sizeBoard.y * 0.39));
@@ -33,18 +33,6 @@ sf::Sprite BankInformation::getSpriteApart() {
 
 sf::Sprite BankInformation::getSpriteHostel() {
     return this->spriteHostel;
-}
-
-Text BankInformation::getTextBank() {
-    return this->textBank;
-}
-
-Text BankInformation::getTextApart() {
-    return this->textApart;
-}
-
-Text BankInformation::getTextHostel() {
-    return this->textHostel;
 }
 
 void BankInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos) {
