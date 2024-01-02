@@ -43,6 +43,10 @@ AllCases::AllCases(sf::Vector2u sizeBoard, uint yMove) : sizeBoard(sizeBoard) {
     }
 }
 
+std::vector<Cases *> AllCases::getListCases() {
+    return this->listCases;
+}
+
 void render::AllCases::hover(sf::RenderWindow &window, sf::Vector2i cursorPos) {
     int whichCase = 0;
     for (auto *box: this->listCases) {
@@ -162,4 +166,3 @@ render::AllCases::~AllCases() {
     this->listCases.clear();
     delete this;
 }
-

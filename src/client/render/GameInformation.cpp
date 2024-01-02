@@ -31,6 +31,10 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, vector<state::Player> l
 
 }
 
+std::vector<state::Player> GameInformation::getPlayerInformation() {
+    return this->listPlayer;
+}
+
 void GameInformation::setBankInformation(state::Bank actBank) {
     this->bank = std::move(actBank);
 }
