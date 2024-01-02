@@ -27,12 +27,12 @@ Un état du jeu est toujours constitué d’un visuel du plateau. Ce visuel ne c
 ## State
 
 Il y a un nombre de joueurs compris entre 2 et 6 et ne variant pas au cours d’une même partie.
-Chaque joueur possède donc un statut : il a gagné, il a perdu, il est en train de jouer et n’est pas en prison, il est en train de jouer mais est en prison.
+Chaque joueur possède donc un statut : il a gagné, il a perdu, il est en train de jouer et n’est pas en prison, il est en train de jouer, mais est en prison.
 À tout moment du jeu correspond le tour d’un des joueurs ou un état d'absence de joueur (avant le démarrage d’une partie) ou de jeu terminé.
 
 Enfin, à chaque tour de chaque joueur est associé une valeur obtenue aux dés valant entre 2 et 12 ainsi qu’un booléen indiquant s’il s’agit d’un double ou non.
 
-L’état du jeu conserve également le nombre de double fait lors d’un tour d’un joueur (le troisième double d’affilé conduit le joueur directement en prison).
+L’état du jeu conserve également le nombre de doubles fait lors d’un tour d’un joueur (le troisième double d’affilé conduit le joueur directement en prison).
 
 ## Banque
 
@@ -75,7 +75,10 @@ Pour le rendu de cet état, nous avons fait le choix d'utiliser la librairie gra
 Le plateau est fait à partir d'un fichier image "Plateau_monopoly_resize.jpg" avec toutes les informations affichées. Si on souhaite changer de plateau, il faut changer l'image avec environ la même taille ou légèrement plus grande pour éviter que la fenêtre sort de l'écran.
 Les pions sont aussi des images, mais il a fallut les mettre en transparence pour éviter l'affichage du fond blanc. Si on souhaite changer de pion, il faut changer l'image avec approximativement la même taille ou légèrement plus petite pour éviter que l'image du pion déborde de la case.
 
-Lorsqu'un évènement se produit, un changement d'état est effectué et alors, l'affichage doit être modifié en conséquence et mis à jour.
+Voici ci-dessous les différents états possibles avec les transitions lors du tour du joueur, cela ne fait pas office des affichages différents.
+<p align="center">
+ <img src=https://github.com/MathieuROCANCOURT/plt/assets/114499096/302c631f-8a77-40dd-89e5-0b630423c6c2 alt=Diagramme d'état pour le rendu>
+</p>
 
 ## Conception logicielle
 ### StateLayer
@@ -101,3 +104,4 @@ Cette classe permet d'afficher les valeurs des joueurs et de la banque (nombre d
 Cette classe permet d'afficher les pions sur le plateau avec leurs textures et leurs sprites.
 
 ![render.dia](https://github.com/MathieuROCANCOURT/plt/blob/SFML/res/render.png "render")
+
