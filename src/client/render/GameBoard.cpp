@@ -1,11 +1,12 @@
 #include "GameBoard.h"
+#include <utility>
 
 using namespace std;
 using namespace render;
 
-GameBoard::GameBoard(vector<state::Player> listPlayer) {
+GameBoard::GameBoard(vector<state::Player> listPlayer) : listPlayer(std::move(listPlayer)) {
     this->board = *new Board();
-    for (state::Player player: listPlayer) {
+    for (state::Player player: this->listPlayer) {
         this->dictTokenPlayer.emplace(new Token(player.getToken()), player);
     }
     this->updatePos(); //Work here
