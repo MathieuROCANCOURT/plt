@@ -14,7 +14,7 @@ PlayerInformation::PlayerInformation(vector<state::Player> listPlayer, sf::Vecto
         this->listButtonPlayer->addButton(button);
         i++;
     }
-    this->listCasesPlayer = new AllCases(this->sizeBoard, uint(this->sizeBoard.y * 0.15));
+    this->listCasesPlayer = new AllCases(this->sizeBoard, vector<state::Property *>{}, uint(this->sizeBoard.y * 0.15));
     this->textMoney = new Text("", float(this->sizeBoard.x * 1.1), float(this->sizeBoard.y * 0.09), 25,
                                sf::Color(0x288330FF));
 }

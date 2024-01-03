@@ -1,10 +1,15 @@
 #include "AllCases.h"
+
+#include <utility>
 #include "config.h"
 
 using namespace std;
 using namespace render;
 
-AllCases::AllCases(sf::Vector2u sizeBoard, uint yMove) : sizeBoard(sizeBoard) {
+AllCases::AllCases(sf::Vector2u sizeBoard, vector<state::Property *> listProperty, uint yMove) : sizeBoard(sizeBoard),
+                                                                                                 listProperty(
+                                                                                                         std::move(
+                                                                                                                 listProperty)) {
     const sf::Color color[10] = {
             sf::Color(0xFE90C9FF),
             sf::Color::Cyan,
@@ -22,7 +27,7 @@ AllCases::AllCases(sf::Vector2u sizeBoard, uint yMove) : sizeBoard(sizeBoard) {
     posX_case = float(this->sizeBoard.x * 1.12);
     for (auto c: color) {
         if (c == sf::Color::Red) {
-            posY_case += 50, posX_case = float(this->sizeBoard.x * 1.12); // New line
+            posX_case = float(this->sizeBoard.x * 1.12), posY_case += 50; // New line
         }
         if (c == sf::Color(0xFE90C9FF) || c == sf::Color::Blue) {
             rep = 2; // Number of case
@@ -37,9 +42,9 @@ AllCases::AllCases(sf::Vector2u sizeBoard, uint yMove) : sizeBoard(sizeBoard) {
         for (int i = 0; i < rep; i++) {
             auto cases = new Cases(posX_case, posY_case, c);
             listCases.push_back(cases);
-            posX_case += float(sizeBoard.x * 0.072);
+            posX_case += float(this->sizeBoard.x * 0.072);
         }
-        posX_case += float(sizeBoard.x * 0.03);
+        posX_case += float(this->sizeBoard.x * 0.03);
     }
 }
 
@@ -155,7 +160,111 @@ void render::AllCases::hover(sf::RenderWindow &window, sf::Vector2i cursorPos) {
     }
 }
 
+void AllCases::updateCases() {
+    for (auto cases: this->listCases) {
+        cases->setFillColor(sf::Color::White);
+    }
+    for (auto property: this->listProperty) {
+        switch (property->getPosition()) {
+            case 2:
+                this->listCases[0]->setFillColor(this->listCases[0]->getSquare().getOutlineColor());
+                break;
+            case 4:
+                this->listCases[1]->setFillColor(this->listCases[1]->getSquare().getOutlineColor());
+                break;
+            case 7:
+                this->listCases[2]->setFillColor(this->listCases[2]->getSquare().getOutlineColor());
+                break;
+            case 9:
+                this->listCases[3]->setFillColor(this->listCases[3]->getSquare().getOutlineColor());
+                break;
+            case 10:
+                this->listCases[4]->setFillColor(this->listCases[4]->getSquare().getOutlineColor());
+                break;
+            case 12:
+                this->listCases[5]->setFillColor(this->listCases[5]->getSquare().getOutlineColor());
+                break;
+            case 14:
+                this->listCases[6]->setFillColor(this->listCases[6]->getSquare().getOutlineColor());
+                break;
+            case 15:
+                this->listCases[7]->setFillColor(this->listCases[7]->getSquare().getOutlineColor());
+                break;
+            case 17:
+                this->listCases[8]->setFillColor(this->listCases[8]->getSquare().getOutlineColor());
+                break;
+            case 19:
+                this->listCases[9]->setFillColor(this->listCases[9]->getSquare().getOutlineColor());
+                break;
+            case 20:
+                this->listCases[10]->setFillColor(this->listCases[10]->getSquare().getOutlineColor());
+                break;
+            case 22:
+                this->listCases[11]->setFillColor(this->listCases[11]->getSquare().getOutlineColor());
+                break;
+            case 24:
+                this->listCases[12]->setFillColor(this->listCases[12]->getSquare().getOutlineColor());
+                break;
+            case 25:
+                this->listCases[13]->setFillColor(this->listCases[13]->getSquare().getOutlineColor());
+                break;
+            case 27:
+                this->listCases[14]->setFillColor(this->listCases[14]->getSquare().getOutlineColor());
+                break;
+            case 28:
+                this->listCases[15]->setFillColor(this->listCases[15]->getSquare().getOutlineColor());
+                break;
+            case 30:
+                this->listCases[16]->setFillColor(this->listCases[16]->getSquare().getOutlineColor());
+                break;
+            case 32:
+                this->listCases[17]->setFillColor(this->listCases[17]->getSquare().getOutlineColor());
+                break;
+            case 33:
+                this->listCases[18]->setFillColor(this->listCases[18]->getSquare().getOutlineColor());
+                break;
+            case 35:
+                this->listCases[19]->setFillColor(this->listCases[19]->getSquare().getOutlineColor());
+                break;
+            case 38:
+                this->listCases[20]->setFillColor(this->listCases[20]->getSquare().getOutlineColor());
+                break;
+            case 40:
+                this->listCases[21]->setFillColor(this->listCases[21]->getSquare().getOutlineColor());
+                break;
+
+                /* Cases publics services */
+            case 13:
+                this->listCases[22]->setFillColor(this->listCases[22]->getSquare().getOutlineColor());
+                break;
+            case 29:
+                this->listCases[23]->setFillColor(this->listCases[23]->getSquare().getOutlineColor());
+                break;
+
+                /* Cases stations */
+            case 6:
+                this->listCases[24]->setFillColor(this->listCases[24]->getSquare().getOutlineColor());
+                break;
+            case 16:
+                this->listCases[25]->setFillColor(this->listCases[25]->getSquare().getOutlineColor());
+                break;
+            case 26:
+                this->listCases[26]->setFillColor(this->listCases[26]->getSquare().getOutlineColor());
+                break;
+            case 36:
+                this->listCases[27]->setFillColor(this->listCases[27]->getSquare().getOutlineColor());
+                break;
+
+            default:
+                perror("Error fill color case.");
+                break;
+        }
+
+    }
+}
+
 void render::AllCases::draw(sf::RenderWindow &window, sf::Vector2i cursorPos) {
+    this->updateCases();
     for (auto box: this->listCases) {
         box->draw(window);
     }
@@ -164,5 +273,6 @@ void render::AllCases::draw(sf::RenderWindow &window, sf::Vector2i cursorPos) {
 
 render::AllCases::~AllCases() {
     this->listCases.clear();
+    this->listProperty.clear();
     delete this;
 }
