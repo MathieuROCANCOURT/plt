@@ -49,6 +49,10 @@ std::string Player::getName() {
     return this->name;
 }
 
+Token Player::getToken(){
+    return this->token;
+}
+
 bool Player::operator==(const Player &other) const {
     return (this->name == other.name);
 }
