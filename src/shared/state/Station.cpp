@@ -38,3 +38,7 @@ void Station::modifyNbPossessed(Player player){
     }
     this->nbStationPossessed = nbStation;
 }
+
+void Station::resetPossessions() {
+    this->nbStationPossessed = 0;
+}
