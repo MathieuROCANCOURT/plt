@@ -1,6 +1,4 @@
 #include "AllCases.h"
-
-#include <utility>
 #include "config.h"
 
 using namespace std;
