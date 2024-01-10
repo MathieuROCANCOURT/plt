@@ -48,23 +48,27 @@ Bank::Bank() : nbApart(32), nbHostel(12) {
                                      {"DARK_BLUE",  DARK_BLUE}};
 
     int pos;
+    long long purchaseprice;
     long long rent[6];
     long long apparthostel;
     for (int i = 0; i < 22; i++) {
+        std::getline(sstream, record);
         istringstream line(record);
         getline(line, record, delimiter);
         pos = stoi(record);
         getline(line, record, delimiter);
         name = record;
+        getline(line, record, delimiter);
+        purchaseprice = stoll(record);
         for (int j = 0; j < 6; ++j) {
             getline(line, record, delimiter);
             rent[j] = stoll(record);
         }
 
         getline(line, record, delimiter);
-        color=colormap[record];
+        color = colormap[record];
         getline(line, record, delimiter);
-
+        apparthostel = stoll(record);
         /*
         iscard = (strcasecmp("true", record.c_str()) == 0);
         getline(line, record, delimiter);
@@ -74,8 +78,8 @@ Bank::Bank() : nbApart(32), nbHostel(12) {
         getline(line, record, delimiter);
         gojail = (strcasecmp("true", record.c_str()) == 0);
          */
-        City(pos, name, 600000, new long long[6]{20000, 100000, 300000, 900000, 1600000, 2500000}, PINK,
-             500000);
+        City(pos, name, purchaseprice, rent, color, apparthostel
+        );
 
     }
     /*
