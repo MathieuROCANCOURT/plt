@@ -789,7 +789,7 @@ void print_include_stdlib(struct stdlib_includes* si,char* name) {
            si->random = 1;
        }
        if (!si->sfmlGraphics 
-       && (strstr(name,"sf::RenderWindow")
+       && (strstr(name,"sf::")
        ||  strstr(name,"sf::VertexArray")
        ||  strstr(name,"sf::Texture"))) {
            print ("#include <SFML/Graphics.hpp>\n");
