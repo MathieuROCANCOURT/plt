@@ -11,11 +11,11 @@ const state::State &engine::Engine::getState() const {
 }
 
 engine::Engine::Engine() {
-    this->CurrentState=State();
+    this->CurrentState = State();
 }
 
-void engine::Engine::update(state::State&  state) {
-    this->currentCommands[0].execute();
+void engine::Engine::update(state::State &state) {
+    this->currentCommands[0].execute(state);
 
 }
 

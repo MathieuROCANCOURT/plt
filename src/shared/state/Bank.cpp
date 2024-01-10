@@ -26,7 +26,7 @@ string readFileIntoStringBank(const string &path) {
 Bank::Bank() : nbApart(32), nbHostel(12) {
 
     string path = RES_DIR;
-    string filename(path + "Properties/bank.csv");
+    string filename(path + "CSV/Bank.csv");
     string file_contents;
 
     char delimiter = ',';

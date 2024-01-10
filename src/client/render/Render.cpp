@@ -106,7 +106,7 @@ void Render::drawChoosePlayer(int nbPlayer) {
     listButtonAction.addButton(new Button(100, 30, 30 + float(160 * 5), 160, "EXIT",
                                           55 + float(160 * 5), 160, sf::Color::Red));
     sf::Vector2i cursorPos;
-
+    vector<state::Player> listPlayerTmp;
 
     while (windowChoice.isOpen()) {
         windowChoice.clear(sf::Color::White);
@@ -118,8 +118,8 @@ void Render::drawChoosePlayer(int nbPlayer) {
                     break;
                 case sf::Event::MouseButtonPressed: {
                     cursorPos = sf::Mouse::getPosition(windowChoice);
+                    /* Functions pressed left button mouse */
                     textField.setFocus(cursorPos);
-
                     listButtonToken.setFocus(cursorPos, event);
                     listButtonAction.setFocus(cursorPos, event);
 
@@ -136,14 +136,17 @@ void Render::drawChoosePlayer(int nbPlayer) {
                             if (buttonFocusToken != nullptr && textField.getText()->getStringText().size() >= 2) {
                                 string playerName = textField.getText()->getStringText();
                                 state::Token playerToken = buttonFocusToken->getToken()->getObj();
-                                this->currentState.addPlayer(*new Player(playerName, playerToken));
+                                listPlayerTmp.push_back(*new Player(playerName, playerToken));
                                 listButtonToken.removeButton(buttonFocusToken);
                                 textField.setText("");
                                 textField.setColor(sf::Color::White);
-                                if (nbPlayer == (int) this->currentState.getListPlayer().size()) {
+                                if (nbPlayer == (int) listPlayerTmp.size()) {
                                     windowChoice.close();
+                                    for (const auto& player: listPlayerTmp) {
+                                        this->currentState.addPlayer(player);
+                                    }
+                                    break;
                                 }
-                                break;
                             }
                         }
                         string nbPlayerString = buttonFocusAction->getText()->getStringText();
@@ -155,8 +158,6 @@ void Render::drawChoosePlayer(int nbPlayer) {
                     break;
                 default:
                     break;
-            }
-            if (event.type == sf::Event::MouseMoved) {
             }
             textField.handleInput(event);
         }

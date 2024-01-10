@@ -24,7 +24,7 @@ string readFileIntoString(const string &path) {
 
 State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), stackLuck(), turn(PLAYERA) {
     string path = RES_DIR;
-    string filename(path + "Properties/propiété.csv");
+    string filename(path + "CSV/Property.csv");
     string file_contents;
 
     char delimiter = ',';
