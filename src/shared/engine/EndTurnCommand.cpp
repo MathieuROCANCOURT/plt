@@ -1,7 +1,3 @@
-//
-// Created by alexis on 15/12/23.
-//
-
 #include "EndTurnCommand.h"
 
 void engine::EndTurnCommand::changeTurn(state::State& state) {

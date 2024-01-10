@@ -9,7 +9,8 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, vector<state::Player> l
     vector<string> listStartAction = {"Launch Dices", "Buy appart", "Sell appart", "Abandon"};
     vector<string> listStartJail = {"Launch Dices", "Free jail", "Abandon"};
     vector<string> listActionBuyAppart = {"Buy", "No buy"};
-    vector<string> listEndAction = {"End Turn", "Abandon"};
+    vector<string> listEndAction = {"End Turn", "Buy appart", "Abandon"};
+    vector<string> listDebt = {"Sell", "Abandon"};
 
     vector<Button *> listButtonActionInit;
     vector<Button *> listButtonInJail;

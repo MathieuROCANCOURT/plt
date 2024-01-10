@@ -1,6 +1,3 @@
-//
-// Created by alexis on 15/12/23.
-//
 #include "BuyApartCommand.h"
 #include "state/City.h"
 
@@ -38,7 +35,8 @@ bool engine::BuyApartCommand::buyApart(state::State &state) {
     }
 
     state::City cityApartAchetable=listville[listville.size()-1];
-    if (nbMemenbApart==int(listville.size())){//si toutes les ville ont le même nombre d'appartement choisi la ville ayant la position la plus faible
+    //si toutes les villes ont le même nombre d'appartements choisi la ville ayant la position la plus faible
+    if (nbMemenbApart==int(listville.size())){
         for (int i = 0; i < int(listville.size()); i++) {
             if (listville[i].getPosition() < cityApartAchetable.getPosition()){
                 cityApartAchetable=listville[i];
@@ -47,12 +45,14 @@ bool engine::BuyApartCommand::buyApart(state::State &state) {
     }
     std::vector<state::City> cityLessApart;
     if (nbMemenbApart<int(listville.size())){
-        for (int i = 0; i < int(listville.size()); i++) {//si pas toutes les villes ont le même nombre d'appartement choisi les ville ayant le moins d'appartement
+        //si pas toutes les villes ont le même nombre d'appartements choisi les villes ayant le moins d'appartement
+        for (int i = 0; i < int(listville.size()); i++) {
             if (listville[i].getNbApart()<=cityApartAchetable.getNbApart()){
                 cityLessApart.push_back(listville[i]);
             }
         }
-        for (int i = 0; i < int(cityLessApart.size()); i++) {//choisi la ville parmi celle qui ont le moins d'apârtement la ville avec la position la moins élevé
+        for (int i = 0; i < int(cityLessApart.size()); i++) {
+            //choisi la ville parmi celle qui ont le moins d'appartement la ville avec la position la moins élevée
             if (cityApartAchetable.getPosition() > cityLessApart[i].getPosition()){
                 cityApartAchetable=cityLessApart[i];
             }
@@ -70,7 +70,7 @@ bool engine::BuyApartCommand::buyApart(state::State &state) {
     payTheBank(state,cityApartAchetable.getPriceApartHostel());//paiement de l'argent
     playerAchetant=state.getCurrentPlayer();
     playerAchetant->setNbTotalApart(playerAchetant->getNbTotalApart()+1);//nbApartTotal du joueur augmenté de 1
-    cityApartAchetable.setNbApart(cityApartAchetable.getNbApart()+1);//nbApart de la propriété augmenter de 1
+    cityApartAchetable.setNbApart(cityApartAchetable.getNbApart()+1);//nbApart de la propriété augmentée de 1
     bank.setNbApartBank(bank.getNbApartBank()-1);
     return true;
 }
@@ -80,5 +80,5 @@ void engine::BuyApartCommand::payTheBank(state::State &state, long long int valu
     if((playerCurrent->getMoney() - valueMoney)<0){
         playerCurrent->setDebt(state::DEBT_BANK);
     }
-    state.modifyMoney(*playerCurrent, -valueMoney); return ;
+    state.modifyMoney(*playerCurrent, -valueMoney);
 }

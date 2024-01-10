@@ -1,7 +1,3 @@
-//
-// Created by ensea on 20/12/23.
-//
-
 #include "BuyPropertyCommand.h"
 
 

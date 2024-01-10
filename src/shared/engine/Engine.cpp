@@ -1,6 +1,3 @@
-//
-// Created by alexis on 27/11/23.
-//
 #include <random>
 #include "Engine.h"
 

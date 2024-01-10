@@ -176,6 +176,10 @@ void Render::drawChoosePlayer(int nbPlayer) {
 void Render::drawGame() {
     static sf::Event event{};
     static sf::Vector2i cursorPos;
+
+    this->gameInfo->setPlayerInformation(this->currentState.getListPlayer());
+    this->gameInfo->setBankInformation(this->currentState.getBank());
+
     this->window.clear(sf::Color::White);
 
     /* Control event */
