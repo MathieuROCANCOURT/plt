@@ -23,7 +23,7 @@ string readFileIntoString(const string &path) {
     return ss.str();
 }
 
-State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), stackLuck(), turn(NO_PLAYER) {
+State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), stackLuck(), turn(PLAYERA) {
     string path = RES_DIR;
     string filename(path + "Properties/propiété.csv");
     string file_contents;
@@ -56,7 +56,6 @@ State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), st
 
     }
 }
-
 
 
 void State::modifyNbPlayer(int nbPlayer) {
@@ -145,7 +144,7 @@ void State::addPropertyBank(Property property) {
 
 void State::removePropertyBank(Property property) {
 
-    const vector<Property > &myListOfBankProperties = this->bank.getBankProperties();
+    const vector<Property> &myListOfBankProperties = this->bank.getBankProperties();
     auto it = std::find(myListOfBankProperties.begin(), myListOfBankProperties.end(),
                         property);
 
@@ -349,6 +348,16 @@ bool State::getIsDouble() {
 
 std::map<int, Box> State::getBoard() {
     return this->board;
+}
+
+void State::setCurrentPlayer(const Player& currentPlayer) {
+    int count = 0;
+    for (const auto& player: this->getListPlayer()) {
+        if (currentPlayer == player) {
+            this->indiceCurrentPlayer = count;
+        }
+        count++;
+    }
 }
 
 
