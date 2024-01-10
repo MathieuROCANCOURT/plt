@@ -44,3 +44,7 @@ void BankInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos) {
     window.draw(this->textHostel.getText());
     this->listCases->draw(window, cursorPos);
 }
+
+BankInformation::~BankInformation(){
+    delete this;
+}

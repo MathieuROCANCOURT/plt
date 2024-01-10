@@ -6,10 +6,10 @@ using namespace render;
 
 GameInformation::GameInformation(sf::Vector2u sizeBoard, vector<state::Player> listPlayer, state::Bank bank)
         : sizeBoard(sizeBoard), listPlayer(std::move(listPlayer)), bank(std::move(bank)) {
-    vector<string> listStartAction = {"Launch Dices", "Buy appart", "Sell appart", "Abandon"};
-    vector<string> listStartJail = {"Launch Dices", "Free jail", "Abandon"};
+    vector<string> listStartAction = {"Roll dices", "Buy appart", "Sell apart", "Abandon"};
+    vector<string> listStartJail = {"Roll dices", "Free jail", "Abandon"};
     vector<string> listActionBuyAppart = {"Buy", "No buy"};
-    vector<string> listEndAction = {"End Turn", "Buy appart", "Abandon"};
+    vector<string> listEndAction = {"End turn", "Buy appart", "Abandon"};
     vector<string> listDebt = {"Sell", "Abandon"};
 
     vector<Button *> listButtonActionInit;
@@ -17,14 +17,14 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, vector<state::Player> l
     vector<Button *> listButtonBuyAppart;
     vector<Button *> listButtonEndTurn;
 
-    listButtonActionInit.emplace_back(new Button(140, 40, float(this->sizeBoard.x) + 10, float(this->sizeBoard.y * 0.9),
+    listButtonActionInit.emplace_back(new Button(105, 40, float(this->sizeBoard.x) + 10, float(this->sizeBoard.y * 0.9),
                                                  listStartAction[0], float(this->sizeBoard.x) + 20,
                                                  float(this->sizeBoard.y * 0.91)));
-    listButtonActionInit.emplace_back(new Button(120, 40, float(this->sizeBoard.x) + 160, float(this->sizeBoard.y * 0.9),
-                                                 listStartAction[1], float(this->sizeBoard.x) + 170,
+    listButtonActionInit.emplace_back(new Button(120, 40, float(this->sizeBoard.x) + 125, float(this->sizeBoard.y * 0.9),
+                                                 listStartAction[1], float(this->sizeBoard.x) + 135,
                                                  float(this->sizeBoard.y * 0.91)));
-    listButtonActionInit.emplace_back(new Button(120, 40, float(this->sizeBoard.x) + 290, float(this->sizeBoard.y * 0.9),
-                                                 listStartAction[2], float(this->sizeBoard.x) + 300,
+    listButtonActionInit.emplace_back(new Button(105, 40, float(this->sizeBoard.x) + 255, float(this->sizeBoard.y * 0.9),
+                                                 listStartAction[2], float(this->sizeBoard.x) + 265,
                                                  float(this->sizeBoard.y * 0.91)));
     listButtonActionInit.emplace_back(new Button(90, 40, float(this->sizeBoard.x) + 565, float(this->sizeBoard.y * 0.9),
                                                  listStartAction[3], float(this->sizeBoard.x) + 570,
@@ -61,4 +61,10 @@ void GameInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos, sf:
 
     this->playerInfo->draw(window, cursorPos, event);
     this->bankInfo->draw(window, cursorPos);
+}
+
+GameInformation::~GameInformation(){
+    this->listPlayer.clear();
+    this->listButtonAction.clear();
+    delete this;
 }
