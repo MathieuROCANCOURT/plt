@@ -315,6 +315,7 @@ int State::getNbPlayer() {
     return this->nbPlayer;
 }
 
+
 void State::modifyNbTurnInJail(bool isInJail) {
 
     Player *playerCurrent = getCurrentPlayer();
