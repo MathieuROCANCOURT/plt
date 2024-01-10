@@ -1,13 +1,27 @@
 #include "Bank.h"
-#include "City.h"
-#include "Station.h"
-#include "Service.h"
+
 
 using namespace std;
 #include <vector>
-namespace state{
+#include <iostream>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <sstream>
 
+using namespace state;
 
+    string readFileIntoString(const string& path) {
+
+        auto ss = ostringstream{};
+        ifstream input_file(path);
+        if (!input_file.is_open()) {
+            cerr << "Could not open the file - '" << path << "'" << endl;
+            exit(EXIT_FAILURE);
+        }
+        ss << input_file.rdbuf();
+        return ss.str();
+    }
     Bank::Bank() : nbApart(32), nbHostel(12){
 
         City* lens = new City(2, "LENS", 600000, new long long[6]{20000, 100000, 300000, 900000, 1600000, 2500000}, PINK, 500000);

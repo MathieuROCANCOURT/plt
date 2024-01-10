@@ -20,11 +20,12 @@ BOOST_AUTO_TEST_CASE(TestStaticAssert){
     state1.addPlayer( A);
     BOOST_CHECK_EQUAL(state1.getNbPlayer(), 1);
 
-
-
-
-
 }
+BOOST_AUTO_TEST_CASE(TestState) {
+    State a;
+    a=State();
+}
+
 
 /* Effacer TestExemple car suppression Exemple.cpp */
 //BOOST_AUTO_TEST_CASE(TestExemple){

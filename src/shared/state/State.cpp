@@ -1,54 +1,59 @@
 #include <iostream>
 #include <algorithm>
 #include "State.h"
+#include <fstream>
+#include <map>
+#include <sstream>
+#include <vector>
+#include <cstring>
+#include "config.h"
 
 using namespace std;
 using namespace state;
 
+string readFileIntoString(const string& path) {
 
+    auto ss = ostringstream{};
+    ifstream input_file(path);
+    if (!input_file.is_open()) {
+        cerr << "Could not open the file - '" << path << "'" << endl;
+        exit(EXIT_FAILURE);
+    }
+    ss << input_file.rdbuf();
+    return ss.str();
+}
 State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), stackLuck(), turn(NO_PLAYER) {
+    string path = RES_DIR;
+    string filename(path +"Properties/propiété.csv");
+    string file_contents;
 
+    char delimiter = ',';
 
-    //instanciation des cases propriétés
-    this->board.emplace(2, Box(2, true, false, false, false, false));
-    this->board.emplace(4, Box(4, true, false, false, false, false));
-    this->board.emplace(7, Box(7, true, false, false, false, false));
-    this->board.emplace(9, Box(9, true, false, false, false, false));
-    this->board.emplace(10, Box(10, true, false, false, false, false));
-    this->board.emplace(12, Box(12, true, false, false, false, false));
-    this->board.emplace(14, Box(14, true, false, false, false, false));
-    this->board.emplace(15, Box(15, true, false, false, false, false));
-    this->board.emplace(17, Box(17, true, false, false, false, false));
-    this->board.emplace(19, Box(19, true, false, false, false, false));
-    this->board.emplace(20, Box(20, true, false, false, false, false));
-    this->board.emplace(22, Box(22, true, false, false, false, false));
-    this->board.emplace(24, Box(24, true, false, false, false, false));
-    this->board.emplace(25, Box(25, true, false, false, false, false));
-    this->board.emplace(27, Box(27, true, false, false, false, false));
-    this->board.emplace(28, Box(28, true, false, false, false, false));
-    this->board.emplace(30, Box(30, true, false, false, false, false));
-    this->board.emplace(32, Box(32, true, false, false, false, false));
-    this->board.emplace(33, Box(33, true, false, false, false, false));
-    this->board.emplace(35, Box(35, true, false, false, false, false));
-    this->board.emplace(38, Box(38, true, false, false, false, false));
-    this->board.emplace(40, Box(40, true, false, false, false, false));
+    file_contents = readFileIntoString(filename);
 
-    //instanciation des cases communauté
-    this->board.emplace(3, Box(3, false, true, false, false, false));
-    this->board.emplace(18, Box(18, false, true, false, false, false));
-    this->board.emplace(34, Box(34, false, true, false, false, false));
-    //instanciation des cases chance
-    this->board.emplace(8, Box(8, false, true, false, true, false));
-    this->board.emplace(23, Box(23, false, true, false, true, false));
-    this->board.emplace(37, Box(37, false, true, false, true, false));
+    istringstream sstream(file_contents);
+    std::vector<string> items;
+    string record;
+    int pos;
+    bool isprop,iscard,money,chance,gojail;
 
-    //instanciation des autres cases
-    this->board.emplace(1, Box(1, false, false, true, false, false));
-    this->board.emplace(5, Box(5, false, false, true, false, false));
-    this->board.emplace(11, Box(11, false, false, false, false, false));
-    this->board.emplace(21, Box(21, false, false, false, false, false));
-    this->board.emplace(31, Box(31, false, false, true, false, true));
-    this->board.emplace(39, Box(39, false, false, true, false, false));
+    while (std::getline(sstream, record)) {
+        istringstream line(record);
+        getline(line, record, delimiter);
+        pos = stoi(record);
+        getline(line, record, delimiter);
+        isprop = (strcasecmp("true", record.c_str()) == 0);
+        getline(line, record, delimiter);
+        iscard = (strcasecmp("true", record.c_str()) == 0);
+        getline(line, record, delimiter);
+        money = (strcasecmp("true", record.c_str()) == 0);
+        getline(line, record, delimiter);
+        chance = (strcasecmp("true", record.c_str()) == 0);
+        getline(line, record, delimiter);
+        gojail = (strcasecmp("true", record.c_str()) == 0);
+        this->board.emplace(pos, Box(pos, isprop, iscard, money, chance,gojail));
+
+    }
 
 
 }
