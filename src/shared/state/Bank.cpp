@@ -1,24 +1,18 @@
 #include "Bank.h"
-
-
-using namespace std;
-
 #include <vector>
 #include <iostream>
 #include <fstream>
-
 #include <map>
 #include <sstream>
 #include "config.h"
 #include <string>
 
 
-
-
+using namespace std;
 using namespace state;
 
 
-string readFileIntoString(const string &path) {
+string readFileIntoStringBank(const string &path) {
 
     auto ss = ostringstream{};
     ifstream input_file(path);
@@ -38,7 +32,7 @@ Bank::Bank() : nbApart(32), nbHostel(12) {
 
     char delimiter = ',';
 
-    file_contents = readFileIntoString(filename);
+    file_contents = readFileIntoStringBank(filename);
 
     istringstream sstream(file_contents);
     string name;

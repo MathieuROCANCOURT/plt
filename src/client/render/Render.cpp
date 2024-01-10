@@ -15,7 +15,7 @@ Render::Render(State &currentState) : currentState(currentState) {
         }
     } while (((int) currentState.getListPlayer().size() != nbPlayer) & (nbPlayer != 0));
     if (nbPlayer != 0) {
-        this->currentState.getCurrentPlayer()->setMoney(300000);
+        this->currentState.getCurrentPlayer().setMoney(300000);
         this->gameBoard = new GameBoard(this->currentState.getListPlayer());
         this->gameInfo = new GameInformation(this->gameBoard->getSizeBoard(), currentState.getListPlayer(),
                                              currentState.getBank());

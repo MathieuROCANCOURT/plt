@@ -1,11 +1,26 @@
 #include "GameInformation.h"
 #include <utility>
+#include <fstream>
+#include <sstream>
+#include "config.h"
 
 using namespace std;
 using namespace render;
 
 GameInformation::GameInformation(sf::Vector2u sizeBoard, vector<state::Player> listPlayer, state::Bank bank)
         : sizeBoard(sizeBoard), listPlayer(std::move(listPlayer)), bank(std::move(bank)) {
+    string path = RES_DIR;
+    /* Lire fichier ButtonAction.csv*/
+    auto fileContent = ostringstream{};
+    ifstream input_file(path + "CSV/ButtonAction.csv");
+    if (!input_file.is_open()) {
+        perror("Could not open the file");
+        exit(EXIT_FAILURE);
+    }
+    fileContent << input_file.rdbuf();
+    istringstream sstream(fileContent.str());
+    std::vector<string> items;
+
     vector<string> listStartAction = {"Roll dices", "Buy appart", "Sell apart", "Abandon"};
     vector<string> listStartJail = {"Roll dices", "Free jail", "Abandon"};
     vector<string> listActionBuyAppart = {"Buy", "No buy"};

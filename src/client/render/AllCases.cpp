@@ -4,7 +4,7 @@
 using namespace std;
 using namespace render;
 
-AllCases::AllCases(sf::Vector2u sizeBoard, vector<state::Property *> listProperty, uint yMove) : sizeBoard(sizeBoard),
+AllCases::AllCases(sf::Vector2u sizeBoard, vector<state::Property> listProperty, uint yMove) : sizeBoard(sizeBoard),
                                                                                                  listProperty(
                                                                                                          std::move(
                                                                                                                  listProperty)) {
@@ -163,7 +163,7 @@ void AllCases::updateCases() {
         cases->setFillColor(sf::Color::White);
     }
     for (auto property: this->listProperty) {
-        switch (property->getPosition()) {
+        switch (property.getPosition()) {
             case 2:
                 this->listCases[0]->setFillColor(this->listCases[0]->getSquare().getOutlineColor());
                 break;
