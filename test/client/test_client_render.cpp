@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_CASE(TestButtonPlayer) {
 }
 
 BOOST_AUTO_TEST_CASE(TestColorOutlineCases) {
-    render::AllCases *cases = new render::AllCases(sf::Vector2u(0, 0), std::vector<state::Property *>{}, 6);
+    render::AllCases *cases = new render::AllCases(sf::Vector2u(0, 0), std::vector<state::Property>{}, 6);
     BOOST_CHECK_EQUAL(28, cases->getListCases().size());
     std::vector<render::Cases *> listCases = cases->getListCases();
 
@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(TestColorOutlineCases) {
 }
 
 BOOST_AUTO_TEST_CASE(TestFillColorCase) {
-    render::AllCases *listCases = new render::AllCases(sf::Vector2u(0, 0), std::vector<state::Property *>{}, 6);
+    render::AllCases *listCases = new render::AllCases(sf::Vector2u(0, 0), std::vector<state::Property>{}, 6);
     for (auto cases: listCases->getListCases()) {
         cases->setFillColor(cases->getSquare().getOutlineColor());
     }
