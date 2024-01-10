@@ -15,5 +15,10 @@ engine::Engine::Engine() {
 }
 
 void engine::Engine::update(state::State&  state) {
-    this->CurrentState=state;
+    this->currentCommands[0].execute();
+
+}
+
+void engine::Engine::addCommand(engine::Command *cmd) {
+    this->currentCommands.push_back(*cmd);
 }
