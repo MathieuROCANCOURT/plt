@@ -3,13 +3,13 @@
 
 void engine::FreeUsingCardCommand::freeByCard(state::State &state) {
 
-    state::Player* playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
 
-    int nbFreeJailCard = playerCurrent->getFreeJailCard();
-    playerCurrent->setFreeJailCard(nbFreeJailCard -1);
+    int nbFreeJailCard = playerCurrent.getFreeJailCard();
+    playerCurrent.setFreeJailCard(nbFreeJailCard -1);
     state.returnJailCard();
 
-    playerCurrent->setGameStatus(state::PLAYINGFREE);
+    playerCurrent.setGameStatus(state::PLAYINGFREE);
     state.modifyNbTurnInJail(0);
 }
 

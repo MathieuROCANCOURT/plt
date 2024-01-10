@@ -33,7 +33,7 @@ State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), st
     file_contents = readFileIntoString(filename);
 
     istringstream sstream(file_contents);
-    std::vector<string> items;
+
     string record;
     int pos;
     bool isprop, iscard, money, chance, gojail;
@@ -132,7 +132,7 @@ void State::modifyMoney(Player player, long long value) {
 
 }
 
-void State::addPropertyBank(Property *property) {
+void State::addPropertyBank(Property property) {
 
     this->bank.addToBankProperties(property);
 
@@ -143,9 +143,9 @@ void State::addPropertyBank(Property *property) {
     //}
 }
 
-void State::removePropertyBank(Property *property) {
+void State::removePropertyBank(Property property) {
 
-    const vector<Property *> &myListOfBankProperties = this->bank.getBankProperties();
+    const vector<Property > &myListOfBankProperties = this->bank.getBankProperties();
     auto it = std::find(myListOfBankProperties.begin(), myListOfBankProperties.end(),
                         property);
 
@@ -213,7 +213,7 @@ void State::removePropertyPlayer(Player player, Property property) {
 }
 
 int State::getNbDouble() {
-    return this->getCurrentPlayer()->getNbdouble();
+    return this->getCurrentPlayer().getNbdouble();
 }
 
 Card *State::drawCardCommunity() {
@@ -272,7 +272,7 @@ void State::debtPlayer(Player playerInDebt, Player playerCreditor) {
 
 }
 
-Player *State::getCurrentPlayer() {
+Player State::getCurrentPlayer() {
 
     Player *currentPlayer;
 
@@ -296,7 +296,7 @@ Player *State::getCurrentPlayer() {
         currentPlayer = &listPlayer[5];
     }
 
-    return currentPlayer;
+    return *currentPlayer;
 }
 
 void State::debtBank(Player player) {
@@ -323,15 +323,15 @@ int State::getNbPlayer() {
 
 void State::modifyNbTurnInJail(bool isInJail) {
 
-    Player *playerCurrent = getCurrentPlayer();
+    Player playerCurrent = getCurrentPlayer();
 
     if (isInJail) {
-        if (int nbTurn = playerCurrent->getNbTurnInJail() < 3) {
-            playerCurrent->setNbTurnInJail(nbTurn + 1);
+        if (int nbTurn = playerCurrent.getNbTurnInJail() < 3) {
+            playerCurrent.setNbTurnInJail(nbTurn + 1);
         } else { std::cout << "le nombre de tours en prison est supérieur à 3" << std::endl; }
     }
     if (!isInJail) {
-        playerCurrent->setNbTurnInJail(0);
+        playerCurrent.setNbTurnInJail(0);
     }
 }
 

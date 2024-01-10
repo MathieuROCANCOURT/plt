@@ -24,6 +24,7 @@ BankInformation::BankInformation(Bank bank, sf::Vector2u sizeBoard) : bank(bank)
     this->textHostel = *new Text(to_string(bank.getNbHostelBank()), float(sizeBoard.x * 1.86),
                                  float(sizeBoard.y * 0.39));
 
+
     this->listCases = new AllCases(sizeBoard, this->bank.getBankProperties(), uint(sizeBoard.y * 0.47));
 }
 

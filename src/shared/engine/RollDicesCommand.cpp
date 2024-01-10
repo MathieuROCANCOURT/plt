@@ -3,12 +3,12 @@
 
 
 void engine::RollDicesCommand::payTheBank(state::State &state, long long int valueMoney) {
-    state::Player *playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
 
-    if ((playerCurrent->getMoney() - valueMoney) < 0) {
-        playerCurrent->setDebt(state::DEBT_BANK);
+    if ((playerCurrent.getMoney() - valueMoney) < 0) {
+        playerCurrent.setDebt(state::DEBT_BANK);
     }
-    state.modifyMoney(*playerCurrent, -valueMoney);
+    state.modifyMoney(playerCurrent, -valueMoney);
 }
 
 void engine::RollDicesCommand::rollDices(state::State &state) {
@@ -28,21 +28,21 @@ void engine::RollDicesCommand::rollDices(state::State &state) {
 
     /*Identification de la situation du joueur*/
 
-    state::Player *playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
 
-    if (playerCurrent->getGameStatus() == state::PLAYINGFREE) {
+    if (playerCurrent.getGameStatus() == state::PLAYINGFREE) {
         if (state.getNbDouble() == 3) {
             moveInJail(state);
         } else {
             int score = state.getScoreDices();
-            int position = playerCurrent->getPosition();
+            int position = playerCurrent.getPosition();
             int futurPosition = (position + score) % 40 + 1;
             moveToken(state, position, futurPosition, true);
         }
     } else {
         if (state.getIsDouble()) {
             freeByDices(state);
-        } else if (playerCurrent->getNbTurnInJail() == 3) {
+        } else if (playerCurrent.getNbTurnInJail() == 3) {
             freeMandatory(state);
         }
     }
@@ -60,8 +60,8 @@ engine::RollDicesCommand::moveToken(state::State &state, int currentPosition, in
     }
 
     if (futurPosition < 41 and futurPosition > 0) {
-        state::Player *playerCurrent = state.getCurrentPlayer();
-        state.modifyPosition(*playerCurrent, futurPosition);
+        state::Player playerCurrent = state.getCurrentPlayer();
+        state.modifyPosition(playerCurrent, futurPosition);
 
         std::map<int, state::Box> board = state.getBoard();
         state::Box currentBox = board.at(futurPosition);
@@ -74,17 +74,17 @@ engine::RollDicesCommand::moveToken(state::State &state, int currentPosition, in
 void engine::RollDicesCommand::startBox(state::State &state, int previousPosition, int newPosition) {
 
     if (newPosition < previousPosition) {
-        state::Player *playerCurrent = state.getCurrentPlayer();
-        state.modifyMoney(*playerCurrent, 2000000);
+        state::Player playerCurrent = state.getCurrentPlayer();
+        state.modifyMoney(playerCurrent, 2000000);
     }
 }
 
 void engine::RollDicesCommand::boxEffect(state::State &state, state::Box box) {
 
-    state::Player *playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
 
     if (box.getIsProperty()) {
-        propertyBox(state, playerCurrent->getPosition());
+        propertyBox(state, playerCurrent.getPosition());
         return;
     } else if (box.getIsCard()) {
         if (box.getChance()) {
@@ -95,11 +95,11 @@ void engine::RollDicesCommand::boxEffect(state::State &state, state::Box box) {
             return;
         }
     } else if (box.getMoney()) {
-        if (playerCurrent->getPosition() == 5) {
-            state.modifyMoney(*playerCurrent, -2000000);
+        if (playerCurrent.getPosition() == 5) {
+            state.modifyMoney(playerCurrent, -2000000);
             return;
-        } else if (playerCurrent->getPosition() == 39) {
-            state.modifyMoney(*playerCurrent, -1000000);
+        } else if (playerCurrent.getPosition() == 39) {
+            state.modifyMoney(playerCurrent, -1000000);
             return;
         }
     } else if (box.getGoToJail()) {
@@ -121,10 +121,10 @@ void engine::RollDicesCommand::communityBox(state::State &state) {
 
 void engine::RollDicesCommand::cardEffect(state::State &state, state::Card card) {
 
-    state::Player *playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
 
     if (card.getFreeJail()) {
-        state.modifyNbFreeJailCard(*playerCurrent, true);
+        state.modifyNbFreeJailCard(playerCurrent, true);
         return;
     } else if (card.getMoney()) {
         if (card.getFctHostel()) {
@@ -139,7 +139,7 @@ void engine::RollDicesCommand::cardEffect(state::State &state, state::Card card)
         }
     } else if (card.getMoveForward()) {
         std::vector<int> arguments = card.getArgs();
-        moveToken(state, playerCurrent->getPosition(), arguments[0], true);
+        moveToken(state, playerCurrent.getPosition(), arguments[0], true);
         return;
     } else if (card.getJail()) {
         moveInJail(state);
@@ -147,10 +147,10 @@ void engine::RollDicesCommand::cardEffect(state::State &state, state::Card card)
     } else {
         std::vector<int> arguments = card.getArgs();
         if (arguments[0] < 0) {
-            moveToken(state, playerCurrent->getPosition(), playerCurrent->getPosition() - arguments[0], false);
+            moveToken(state, playerCurrent.getPosition(), playerCurrent.getPosition() - arguments[0], false);
             return;
         } else {
-            moveToken(state, playerCurrent->getPosition(), arguments[0], false);
+            moveToken(state, playerCurrent.getPosition(), arguments[0], false);
             return;
         }
 
@@ -160,17 +160,17 @@ void engine::RollDicesCommand::cardEffect(state::State &state, state::Card card)
 
 void engine::RollDicesCommand::moveInJail(state::State &state) {
 
-    state::Player *playerCurrent = state.getCurrentPlayer();
-    moveToken(state, playerCurrent->getPosition(), 11, false);
-    state.gameStatus(*playerCurrent, state::PLAYINGJAIL);
+    state::Player playerCurrent = state.getCurrentPlayer();
+    moveToken(state, playerCurrent.getPosition(), 11, false);
+    state.gameStatus(playerCurrent, state::PLAYINGJAIL);
 
 }
 
 void engine::RollDicesCommand::freeMandatory(state::State &state) {
 
-    state::Player *playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
     payTheBank(state, 500000);
-    state.gameStatus(*playerCurrent, state::PLAYINGFREE);
+    state.gameStatus(playerCurrent, state::PLAYINGFREE);
     state.modifyNbTurnInJail(false);
 
     int score = state.getScoreDices();
@@ -182,9 +182,9 @@ void engine::RollDicesCommand::freeMandatory(state::State &state) {
 
 void engine::RollDicesCommand::freeByDices(state::State &state) {
 
-    state::Player *playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
 
-    state.gameStatus(*playerCurrent, state::PLAYINGFREE);
+    state.gameStatus(playerCurrent, state::PLAYINGFREE);
     state.modifyNbTurnInJail(false);
 
     int score = state.getScoreDices();
@@ -197,28 +197,28 @@ void engine::RollDicesCommand::freeByDices(state::State &state) {
 
 void engine::RollDicesCommand::cardWinLostMoney(state::State &state, state::Card card) {
 
-    state::Player *playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
     std::vector<int> arguments = card.getArgs();
 
     if (arguments[0] < 0) { //Lost Money
         payTheBank(state, arguments[0]);
     } else { //Win Money
-        state.modifyMoney(*playerCurrent, arguments[0]);
+        state.modifyMoney(playerCurrent, arguments[0]);
     }
 
 }
 
 void engine::RollDicesCommand::cardBirthday(state::State &state, state::Card card) {
 
-    state::Player *playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
     std::vector<state::Player> listPlayers = state.getListPlayer();
     int nbPlayers = state.getNbPlayer();
     std::vector<int> arguments = card.getArgs();
 
     for (int i = 0; i < nbPlayers; i++) {
-        if (listPlayers[i] != *playerCurrent) {
+        if (listPlayers[i] != playerCurrent) {
             if (listPlayers[i].getGameStatus() != state::LOST) {
-                payOtherPlayer(state, listPlayers[i], *playerCurrent, arguments[0]);
+                payOtherPlayer(state, listPlayers[i], playerCurrent, arguments[0]);
             }
         }
     }
@@ -239,9 +239,9 @@ void engine::RollDicesCommand::payOtherPlayer(state::State &state, state::Player
 
 void engine::RollDicesCommand::cardFctHostels(state::State &state, state::Card card) {
 
-    state::Player *playerCurrent = state.getCurrentPlayer();
-    int nbApartPossessed = playerCurrent->getNbTotalApart();
-    int nbHostelPossessed = playerCurrent->getNbTotalHostel();
+    state::Player playerCurrent = state.getCurrentPlayer();
+    int nbApartPossessed = playerCurrent.getNbTotalApart();
+    int nbHostelPossessed = playerCurrent.getNbTotalHostel();
 
     std::vector<int> arguments = card.getArgs();
 
@@ -253,8 +253,8 @@ void engine::RollDicesCommand::cardFctHostels(state::State &state, state::Card c
 
 void engine::RollDicesCommand::propertyBox(state::State &state, int position) {
 
-    state::Player *playerCurrent = state.getCurrentPlayer();
-    std::vector<state::Property> propertiesCurrentPlayer = playerCurrent->getPlayerProperties();
+    state::Player playerCurrent = state.getCurrentPlayer();
+    std::vector<state::Property> propertiesCurrentPlayer = playerCurrent.getPlayerProperties();
 
     /* Vérifie si le joueur qui tombe sur la case propriété, la possède déjà*/
     for (auto property: propertiesCurrentPlayer) {
@@ -269,13 +269,13 @@ void engine::RollDicesCommand::propertyBox(state::State &state, int position) {
     int nbPlayers = state.getNbPlayer();
 
     for (int i = 0; i < nbPlayers; i++) {
-        if (listPlayers[i] != *playerCurrent) {
+        if (listPlayers[i] != playerCurrent) {
             if (listPlayers[i].getGameStatus() != state::LOST) {
-                std::vector<state::Property> propertiesOtherPlayer = playerCurrent->getPlayerProperties();
+                std::vector<state::Property> propertiesOtherPlayer = playerCurrent.getPlayerProperties();
                 for (auto property: propertiesOtherPlayer) {
                     if (property.getPosition() == position) {
                         long long rent = state.getRentToPay(property);
-                        payOtherPlayer(state, listPlayers[i], *playerCurrent, rent);
+                        payOtherPlayer(state, listPlayers[i], playerCurrent, rent);
                         return;
                     }
                 }

@@ -9,8 +9,8 @@ void engine::BuyApartCommand::execute (state::State& state){
 
 
 bool engine::BuyApartCommand::buyApart(state::State &state) {
-    state::Player* playerAchetant=state.getCurrentPlayer();
-    std::vector<state::Property> myproperties=playerAchetant->getPlayerProperties();
+    state::Player playerAchetant=state.getCurrentPlayer();
+    std::vector<state::Property> myproperties=playerAchetant.getPlayerProperties();
     std::vector<state::Property> propertySameColor;
     std::vector<state::City> listville;
     for (int i=0;i<(int)myproperties.size();i++) {//met toute les propriété ayant la même couleur dans un vecteur à part
@@ -69,16 +69,16 @@ bool engine::BuyApartCommand::buyApart(state::State &state) {
     }
     payTheBank(state,cityApartAchetable.getPriceApartHostel());//paiement de l'argent
     playerAchetant=state.getCurrentPlayer();
-    playerAchetant->setNbTotalApart(playerAchetant->getNbTotalApart()+1);//nbApartTotal du joueur augmenté de 1
+    playerAchetant.setNbTotalApart(playerAchetant.getNbTotalApart()+1);//nbApartTotal du joueur augmenté de 1
     cityApartAchetable.setNbApart(cityApartAchetable.getNbApart()+1);//nbApart de la propriété augmentée de 1
     bank.setNbApartBank(bank.getNbApartBank()-1);
     return true;
 }
 void engine::BuyApartCommand::payTheBank(state::State &state, long long int valueMoney) {
-    state::Player* playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
 
-    if((playerCurrent->getMoney() - valueMoney)<0){
-        playerCurrent->setDebt(state::DEBT_BANK);
+    if((playerCurrent.getMoney() - valueMoney)<0){
+        playerCurrent.setDebt(state::DEBT_BANK);
     }
-    state.modifyMoney(*playerCurrent, -valueMoney);
+    state.modifyMoney(playerCurrent, -valueMoney);
 }

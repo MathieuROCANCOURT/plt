@@ -2,14 +2,14 @@
 
 
 void engine::BuyPropertyCommand::buyTheProperty(state::State &state) {
-    state::Player* playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
     long long valuePurchase = this->property.getValuePurchase();
 
-    if((playerCurrent->getMoney() - valuePurchase) > 0){
+    if((playerCurrent.getMoney() - valuePurchase) > 0){
         payTheBank(state, valuePurchase);
-        state.addPropertyPlayer(*playerCurrent, this->property);
-        state.removePropertyBank(&this->property);
-        state.modifyNbPropertyType(*playerCurrent, this->property);
+        state.addPropertyPlayer(playerCurrent, this->property);
+        state.removePropertyBank(this->property);
+        state.modifyNbPropertyType(playerCurrent, this->property);
     }
     //Achat de property (argument de la commande)
 }
@@ -19,10 +19,10 @@ void engine::BuyPropertyCommand::execute(state::State &state) {
 }
 
 void engine::BuyPropertyCommand::payTheBank(state::State &state, long long int valueMoney) {
-    state::Player* playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
 
-    if((playerCurrent->getMoney() - valueMoney)<0){
-        playerCurrent->setDebt(state::DEBT_BANK);
+    if((playerCurrent.getMoney() - valueMoney)<0){
+        playerCurrent.setDebt(state::DEBT_BANK);
     }
-    state.modifyMoney(*playerCurrent, -valueMoney);
+    state.modifyMoney(playerCurrent, -valueMoney);
 }

@@ -4,16 +4,16 @@ void engine::EndTurnCommand::changeTurn(state::State& state) {
 
     std::vector<state::Player> listPlayers = state.getListPlayer();
     int nbPlayers = state.getNbPlayer();
-    state::Player* playerCurrent = state.getCurrentPlayer();
+    state::Player playerCurrent = state.getCurrentPlayer();
 
 
     //On récupère l'indice du joueur courant dans la liste des players
     int indice = 0;
     for(int i = 0; i < nbPlayers; i++ ){
-        if(playerCurrent == &listPlayers[i]){
+        if(playerCurrent == listPlayers[i]){
             indice = i;
             //On incrémente le nombre de tours en prison si le joueur dont le tour se termine est en prison
-            if(playerCurrent->getGameStatus() == state::PLAYINGJAIL){
+            if(playerCurrent.getGameStatus() == state::PLAYINGJAIL){
                 state.modifyNbTurnInJail(1);
             }
             break;
