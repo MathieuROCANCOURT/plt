@@ -11,7 +11,7 @@
 using namespace std;
 using namespace state;
 
-string readFileIntoString(const string& path) {
+string readFileIntoString(const string &path) {
 
     auto ss = ostringstream{};
     ifstream input_file(path);
@@ -22,9 +22,10 @@ string readFileIntoString(const string& path) {
     ss << input_file.rdbuf();
     return ss.str();
 }
+
 State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), stackLuck(), turn(NO_PLAYER) {
     string path = RES_DIR;
-    string filename(path +"Properties/propiété.csv");
+    string filename(path + "Properties/propiété.csv");
     string file_contents;
 
     char delimiter = ',';
@@ -35,7 +36,7 @@ State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), st
     std::vector<string> items;
     string record;
     int pos;
-    bool isprop,iscard,money,chance,gojail;
+    bool isprop, iscard, money, chance, gojail;
 
     while (std::getline(sstream, record)) {
         istringstream line(record);
@@ -51,12 +52,11 @@ State::State() : nbPlayer(0), bank(), dices(), nbDouble(0), stackCommunity(), st
         chance = (strcasecmp("true", record.c_str()) == 0);
         getline(line, record, delimiter);
         gojail = (strcasecmp("true", record.c_str()) == 0);
-        this->board.emplace(pos, Box(pos, isprop, iscard, money, chance,gojail));
+        this->board.emplace(pos, Box(pos, isprop, iscard, money, chance, gojail));
 
     }
-
-
 }
+
 
 
 void State::modifyNbPlayer(int nbPlayer) {
@@ -71,7 +71,7 @@ void State::modifyNbPlayer(int nbPlayer) {
 void State::addPlayer(Player player) {
 
     this->listPlayer.push_back(player);
-    this->nbPlayer= this->nbPlayer+1;
+    this->nbPlayer = this->nbPlayer + 1;
     //test non effectue
     //for (Player i : this->listPlayer){
     //  cout << i << endl;
