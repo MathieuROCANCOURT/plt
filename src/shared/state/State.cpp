@@ -1,19 +1,18 @@
-#include <iostream>
-#include <algorithm>
 #include "State.h"
 #include <fstream>
 #include <map>
 #include <sstream>
 #include <vector>
 #include <cstring>
+#include <iostream>
+#include <algorithm>
 #include "config.h"
 
 using namespace std;
 using namespace state;
 
 string readFileIntoString(const string &path) {
-
-    auto ss = ostringstream{};
+    ostringstream ss;
     ifstream input_file(path);
     if (!input_file.is_open()) {
         cerr << "Could not open the file - '" << path << "'" << endl;
@@ -350,27 +349,12 @@ std::map<int, Box> State::getBoard() {
     return this->board;
 }
 
-void State::setCurrentPlayer(const Player& currentPlayer) {
+void State::setCurrentPlayer(Player currentPlayer) {
     int count = 0;
-    for (const auto& player: this->getListPlayer()) {
+    for (auto player: this->getListPlayer()) {
         if (currentPlayer == player) {
             this->indiceCurrentPlayer = count;
         }
         count++;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
