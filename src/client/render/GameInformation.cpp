@@ -63,8 +63,4 @@ void GameInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos, sf:
     this->bankInfo->draw(window, cursorPos);
 }
 
-GameInformation::~GameInformation(){
-    this->listPlayer.clear();
-    this->listButtonAction.clear();
-    delete this;
-}
+GameInformation::~GameInformation() = default;
