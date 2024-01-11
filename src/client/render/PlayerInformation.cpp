@@ -23,6 +23,15 @@ std::map<Button *, state::Player> PlayerInformation::getDictPlayer() {
     return this->dictPlayer;
 }
 
+void PlayerInformation::setListPlayer(std::vector<state::Player> listPlayerModify) {
+    this->listPlayer = std::move(listPlayerModify);
+    for (int i = 0; i < (int) this->listPlayer.size(); i++){
+        if (this->listPlayer[i].getGameStatus() == state::GameStatus::LOST){
+            this->listButtonPlayer->getListButtons()[i]->setColor(sf::Color::Red);
+        }
+    }
+}
+
 void PlayerInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos, sf::Event event) {
     this->listButtonPlayer->setFocus(cursorPos, event);
     Button *test = this->listButtonPlayer->getFocus();

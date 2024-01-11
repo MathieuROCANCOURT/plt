@@ -12,13 +12,8 @@ AllButtons::AllButtons(vector<Button *> listButtons) : listButtons(std::move(lis
 
 }
 
-void AllButtons::addButton(Button *button) {
-    this->listButtons.push_back(button);
-}
-
-void AllButtons::removeButton(Button *button) {
-    auto it = std::remove(this->listButtons.begin(), this->listButtons.end(), button);
-    listButtons.erase(it, listButtons.end());
+std::vector<Button *> AllButtons::getListButtons() {
+    return this->listButtons;
 }
 
 Button *AllButtons::getFocus() {
@@ -59,6 +54,23 @@ void AllButtons::setHover(sf::Vector2i cursorPos) {
     for (auto *button: this->listButtons) {
         button->hover(cursorPos);
     }
+}
+
+void AllButtons::addButton(Button *button) {
+    this->listButtons.push_back(button);
+}
+
+void AllButtons::removeButton(Button *button) {
+    auto it = std::remove(this->listButtons.begin(), this->listButtons.end(), button);
+    this->listButtons.erase(it, this->listButtons.end());
+}
+
+void AllButtons::changeListButton(vector<Button *> listButtonChange) {
+    for (auto button: this->listButtons){
+        this->removeButton(button);
+    }
+    this->listButtons = std::move(listButtonChange);
+    this->selectedButton = nullptr;
 }
 
 void AllButtons::draw(sf::RenderWindow &window, sf::Vector2i cursorPos, sf::Event event) {

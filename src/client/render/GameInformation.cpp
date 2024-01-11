@@ -7,8 +7,8 @@
 using namespace std;
 using namespace render;
 
-GameInformation::GameInformation(sf::Vector2u sizeBoard, vector<state::Player> listPlayer, state::Bank bank)
-        : sizeBoard(sizeBoard), listPlayer(std::move(listPlayer)), bank(std::move(bank)) {
+GameInformation::GameInformation(sf::Vector2u sizeBoard, state::State currentState)
+        : sizeBoard(sizeBoard), currentState(std::move(currentState)) {
     string path = RES_DIR;
     /* Lire fichier ButtonAction.csv*/
     auto fileContent = ostringstream{};
@@ -19,37 +19,46 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, vector<state::Player> l
     }
     fileContent << input_file.rdbuf();
     istringstream sstream(fileContent.str());
-    std::vector<string> items;
+    /* Variables to recuperate in csv file */
+    string textButton, record;
+    float sizeXButton, sizeYButton, posXButton, posYButton, posXText, posYText;
 
-    vector<string> listStartAction = {"Roll dices", "Buy appart", "Sell apart", "Abandon"};
-    vector<string> listStartJail = {"Roll dices", "Free jail", "Abandon"};
-    vector<string> listActionBuyAppart = {"Buy", "No buy"};
-    vector<string> listEndAction = {"End turn", "Buy appart", "Abandon"};
-    vector<string> listDebt = {"Sell", "Abandon"};
+    getline(sstream, record);
+    istringstream line(record);
+    getline(line, record, '\n'); // Line header
 
-    vector<Button *> listButtonActionInit;
-    vector<Button *> listButtonInJail;
-    vector<Button *> listButtonBuyAppart;
-    vector<Button *> listButtonEndTurn;
+    for (int i = 0; i < 8; i++) {
+        getline(sstream, record);
+        istringstream line(record);
+        getline(line, record, ',');
+        sizeXButton = stof(record);
+        getline(line, record, ',');
+        sizeYButton = stof(record);
+        getline(line, record, ',');
+        posXButton = float(this->sizeBoard.x) + stof(record);
+        getline(line, record, ',');
+        posYButton = float(this->sizeBoard.y) * stof(record);
+        getline(line, record, ',');
+        textButton = record;
+        getline(line, record, ',');
+        posXText = float(this->sizeBoard.x) + stof(record);
+        getline(line, record, ',');
+        posYText = float(this->sizeBoard.y) * stof(record);
 
-    listButtonActionInit.emplace_back(new Button(105, 40, float(this->sizeBoard.x) + 10, float(this->sizeBoard.y * 0.9),
-                                                 listStartAction[0], float(this->sizeBoard.x) + 20,
-                                                 float(this->sizeBoard.y * 0.91)));
-    listButtonActionInit.emplace_back(new Button(120, 40, float(this->sizeBoard.x) + 125, float(this->sizeBoard.y * 0.9),
-                                                 listStartAction[1], float(this->sizeBoard.x) + 135,
-                                                 float(this->sizeBoard.y * 0.91)));
-    listButtonActionInit.emplace_back(new Button(105, 40, float(this->sizeBoard.x) + 255, float(this->sizeBoard.y * 0.9),
-                                                 listStartAction[2], float(this->sizeBoard.x) + 265,
-                                                 float(this->sizeBoard.y * 0.91)));
-    listButtonActionInit.emplace_back(new Button(90, 40, float(this->sizeBoard.x) + 565, float(this->sizeBoard.y * 0.9),
-                                                 listStartAction[3], float(this->sizeBoard.x) + 570,
-                                                 float(this->sizeBoard.y * 0.91), sf::Color::Red));
-
-    this->listButtonAction.push_back(new AllButtons(listButtonActionInit));
+        if (textButton != "Abandon") {
+            this->listButtonAction.push_back(
+                    new Button(sizeXButton, sizeYButton, posXButton, posYButton, textButton, posXText, posYText));
+        } else {
+            this->listButtonAction.push_back(
+                    new Button(sizeXButton, sizeYButton, posXButton, posYButton, textButton, posXText, posYText,
+                               sf::Color::Red));
+        }
+    }
+    this->listPlayer = this->currentState.getListPlayer();
+    this->bank = this->currentState.getBank();
 
     this->playerInfo = new PlayerInformation(this->listPlayer, this->sizeBoard);
     this->bankInfo = new BankInformation(this->bank, this->sizeBoard);
-
 }
 
 std::vector<state::Player> GameInformation::getPlayerInformation() {
@@ -64,15 +73,39 @@ void GameInformation::setPlayerInformation(vector<state::Player> modifyListPlaye
     this->listPlayer = std::move(modifyListPlayer);
 }
 
+void GameInformation::setButtonInteractive() {
+    static int startTurnIndex[6] = {0, 2, 3, 4, 5, 6};
+    static int endTurnIndex[6] = {1, 2, 3, 4, 5, 6};
+
+    vector<Button *> startTurnButton;
+    vector<Button *> endTurnButton;
+
+    for (int index: startTurnIndex) {
+        startTurnButton.push_back(this->listButtonAction[index]);
+    }
+    for (int index: endTurnIndex) {
+        endTurnButton.push_back(this->listButtonAction[index]);
+    }
+
+    if (this->buttonInteractive->getListButtons().empty() ||
+        this->buttonInteractive->getFocus() == this->listButtonAction[1]) {
+        this->buttonInteractive->changeListButton(startTurnButton);
+    } else if (this->buttonInteractive->getFocus() == this->listButtonAction[0]) {
+        this->buttonInteractive->changeListButton(endTurnButton);
+    } else if (this->buttonInteractive->getFocus() == this->listButtonAction[6]) {
+        this->playerInfo->setListPlayer(this->currentState.getListPlayer());
+        this->buttonInteractive->changeListButton(startTurnButton);
+    }
+}
+
 void GameInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos, sf::Event event) {
     static vector<Cases *> listCasesPlayer;
     /* Cases Bank */
     this->bankInfo->draw(window, cursorPos);
 
     /* Buttons Actions */
-    for (auto listButton: this->listButtonAction) {
-        listButton->draw(window, cursorPos, event);
-    }
+    this->setButtonInteractive();
+    this->buttonInteractive->draw(window, cursorPos, event);
 
     this->playerInfo->draw(window, cursorPos, event);
     this->bankInfo->draw(window, cursorPos);

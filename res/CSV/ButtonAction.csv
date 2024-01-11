@@ -1,10 +1,9 @@
-Text,sizeXButton,sizeYButton,posXButton,posYButton,posXText,posYText
-Roll Dices,105,40,float(this->sizeBoard.x) + 10,float(this->sizeBoard.y * 0.9),float(this->sizeBoard.x) + 20,float(this->sizeBoard.y * 0.91)
-End turn,90,40,float(this->sizeBoard.x) + 10,float(this->sizeBoard.y * 0.9),float(this->sizeBoard.x) + 20,float(this->sizeBoard.y * 0.91)
-Sell apart,105,40,float(this->sizeBoard.x) + 255,float(this->sizeBoard.y * 0.9),float(this->sizeBoard.x) + 265,float(this->sizeBoard.y * 0.91)
-Sell hostel,110,40,,float(this->sizeBoard.y * 0.9),,float(this->sizeBoard.y * 0.91)
-Buy apart,105,40,float(this->sizeBoard.x) + 125,float(this->sizeBoard.y * 0.9),float(this->sizeBoard.x) + 135,float(this->sizeBoard.y * 0.91)
-Buy hostel,105,40,,float(this->sizeBoard.y * 0.9),,float(this->sizeBoard.y * 0.91)
-Abandon,80,40,float(this->sizeBoard.x) + 565,float(this->sizeBoard.y * 0.9),float(this->sizeBoard.x) + 570,float(this->sizeBoard.y * 0.91)
-,,,,,,
-Pay free,90,40,float(this->sizeBoard.x) + 125,float(this->sizeBoard.y * 0.9),float(this->sizeBoard.x) + 135,float(this->sizeBoard.y * 0.91)
+sizeXButton,sizeYButton,posXButton,posYButton,Text,posXText,posYText
+110,40,10,0.8,Roll Dices,20,0.81
+100,40,10,0.8,End turn,20,0.81
+105,40,245,0.8,Sell apart,255,0.81
+115,40,490,0.8,Sell hostel,500,0.81
+105,40,130,0.8,Buy apart,140,0.81
+115,40,360,0.8,Buy hostel,370,0.81
+90,40,565,0.9,Abandon,570,0.91
+90,40,125,0.8,Pay free,135,0.81

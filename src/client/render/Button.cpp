@@ -71,7 +71,8 @@ void Button::deselect() {
 }
 
 void Button::hover(sf::Vector2i cursorPos) {
-    if (this->getRectangle().getFillColor() != sf::Color::Green) {
+    if (this->getRectangle().getFillColor() != sf::Color::Green &&
+        this->getRectangle().getFillColor() != sf::Color::Red) {
         if (this->getRectangle().getGlobalBounds().contains(float(cursorPos.x), float(cursorPos.y))) {
             this->getRectangle().setFillColor(sf::Color::Cyan);
         } else {
@@ -87,6 +88,10 @@ void Button::setFocus(sf::Vector2i cursorPos) {
     } else {
         this->deselect();
     }
+}
+
+void Button::setColor(sf::Color changeColorButton) {
+    this->buttonColor = changeColorButton;
 }
 
 void Button::draw(sf::RenderWindow &window) {
