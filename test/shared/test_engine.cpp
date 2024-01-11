@@ -18,8 +18,8 @@ BOOST_AUTO_TEST_CASE(Test_init_game_command) {
 
     Engine *theEngine = new engine::Engine;
     CommandTypeId a=INITGAME;
-    std::vector<state::Token> b{state::BOAT,state::CAR};
-    std::vector<std::string>c{"abc","def"};
+    std::vector<state::Token> b{state::BOAT,state::CAR,state::DOG};
+    std::vector<std::string>c{"abc","def","ghi"};
 
     InitGameCommand initgame=InitGameCommand(3,b,c,a);
     theEngine->addCommand(&initgame);

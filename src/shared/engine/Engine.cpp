@@ -17,10 +17,11 @@ engine::Engine::Engine() {
 
 
 void engine::Engine::addCommand(engine::Command *cmd) {
-    this->currentCommands.push_back(*cmd);
+    this->currentCommands.push_back(cmd);
 }
 
 int engine::Engine::executeCommand() {
-    this->currentCommands[0].execute(this->getState());
+
+    this->currentCommands[0]->execute(this->getState());
     return 0;
 }
