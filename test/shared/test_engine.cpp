@@ -6,10 +6,25 @@
 
 using namespace ::engine;
 
-BOOST_AUTO_TEST_CASE(Test_command){
+BOOST_AUTO_TEST_CASE(Test_engine) {
 
-    Engine* theEngine = new Engine();
+    Engine *theEngine = new Engine();
     //RollDicesCommand->rollDices(theEngine->state);
-        BOOST_CHECK(1);
+    BOOST_CHECK(1);
+
+}
+
+BOOST_AUTO_TEST_CASE(Test_init_game_command) {
+
+    Engine *theEngine = new engine::Engine;
+    CommandTypeId a=INITGAME;
+    std::vector<state::Token> b{state::BOAT,state::CAR};
+    std::vector<std::string>c{"abc","def"};
+
+    InitGameCommand initgame=InitGameCommand(3,b,c,theEngine->getState(),a);
+    theEngine->addCommand(&initgame);
+    theEngine->update()
+    //RollDicesCommand->rollDices(theEngine->state);
+    BOOST_CHECK(1);
 
 }

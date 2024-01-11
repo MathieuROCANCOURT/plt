@@ -15,7 +15,7 @@ engine::Engine::Engine() {
 }
 
 void engine::Engine::update(state::State &state) {
-    this->currentCommands[0].execute(state);
+    this->currentCommands[0].execute();
 
 }
 
