@@ -21,10 +21,10 @@ BOOST_AUTO_TEST_CASE(Test_init_game_command) {
     std::vector<state::Token> b{state::BOAT,state::CAR};
     std::vector<std::string>c{"abc","def"};
 
-    InitGameCommand initgame=InitGameCommand(3,b,c,theEngine->getState(),a);
+    InitGameCommand initgame=InitGameCommand(3,b,c,a);
     theEngine->addCommand(&initgame);
-    theEngine->update()
+    theEngine->executeCommand();
     //RollDicesCommand->rollDices(theEngine->state);
-    BOOST_CHECK(1);
+    BOOST_CHECK_EQUAL(theEngine->getState().getNbPlayer(),3);
 
 }

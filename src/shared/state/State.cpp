@@ -351,7 +351,8 @@ std::map<int, Box> State::getBoard() {
 
 
 
-void State::setCurrentPlayer(const Player &currentPlayer) {
+
+void State::setCurrentPlayer(Player currentPlayer) {
     int count = 0;
     for (auto player: this->getListPlayer()) {
         if (currentPlayer == player) {

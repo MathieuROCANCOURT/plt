@@ -1,9 +1,9 @@
 #include "InitGameCommand.h"
 
 
-void engine::InitGameCommand::initPlayerInGame(state::State &state) {
 
-    //std::string names[] = {"A", "B", "C", "D", "E", "F"};
+
+void engine::InitGameCommand::execute(state::State &state) {
 
     if (this->nbPlayerToInit > 1 and this->nbPlayerToInit < 7) {
         state.modifyNbPlayer(this->nbPlayerToInit);
@@ -13,19 +13,17 @@ void engine::InitGameCommand::initPlayerInGame(state::State &state) {
             state.addPlayer(*newPlayer);
         }
     }
-
 }
 
-void engine::InitGameCommand::execute() {
-    initPlayerInGame(state);
-}
+
 
 engine::InitGameCommand::InitGameCommand(int nbPlayer, std::vector<state::Token> pion,
-                                              std::vector<std::string> nomPlayer, state::State &state,
+                                              std::vector<std::string> nomPlayer,
                                               CommandTypeId typeID) : engine::Command(typeID) {
     this->nbPlayerToInit = nbPlayer;
     this->tabpion = pion;
     this->name = nomPlayer;
+
 }
 
 
