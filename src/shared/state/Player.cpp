@@ -9,8 +9,8 @@ Player::Player(std::string name, Token token) : name(name), money(15000000), deb
 }
 
 
-void Player::setPosition(int) {
-    this->position = position;
+void Player::setPosition(int pos) {
+    this->position = pos;
 }
 
 int Player::getPosition() {
@@ -54,9 +54,11 @@ Token Player::getToken(){
 }
 
 bool Player::operator==(const Player &other) const {
-    return (this->name == other.name);
+    return (this->IdPlayerTour == other.IdPlayerTour);
 }
-
+bool Player::operator!=(const Player &other) const {
+    return (this->IdPlayerTour != other.IdPlayerTour);
+}
 int Player::getFreeJailCard() {
     return this->freeJailCard;
 }
@@ -85,6 +87,30 @@ Debt Player::getDebt() {
 
 int Player::getNbdouble() {
     return this->NbDouble;
+}
+
+Playing Player::getIdPlayerTour() {
+    return this->IdPlayerTour;
+}
+
+void Player::setIdPlayerTour(Playing idPlayer) {
+    this->IdPlayerTour=idPlayer;
+}
+
+void Player::setNbTotalHostel(int NbTotalHostel) {
+    this->nbTotalHostel=NbTotalHostel;
+}
+
+void Player::setNbTotalApart(int NbTotalApart) {
+    this->nbTotalAppart=NbTotalApart;
+}
+
+int Player::getNbTotalHostel() {
+    return this->nbTotalHostel;
+}
+
+int Player::getNbTotalApart() {
+    return this->nbTotalAppart;
 }
 
 

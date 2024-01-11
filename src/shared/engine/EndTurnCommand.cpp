@@ -36,3 +36,5 @@ void engine::EndTurnCommand::changeTurn(state::State& state) {
 void engine::EndTurnCommand::execute(state::State &state) {
     changeTurn(state);
 }
+
+engine::EndTurnCommand::EndTurnCommand(engine::CommandTypeId typeId) : Command(typeId) {}

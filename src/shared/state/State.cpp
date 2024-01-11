@@ -102,14 +102,14 @@ void State::modifyNbDouble(bool isDouble) {
     // test non effectué
 }
 
-void State::modifyPosition(Player player, int position) {
+void State::modifyPosition(Player *player, int position) {
 
     if (position < 41 and position > 0) {
-        player.setPosition(position);
+        player->setPosition(position);
     }
 
     // test non effectue
-    cout << "le joueur est sur la case " << player.getPosition() << endl;
+    cout << "le joueur est sur la case " << player->getPosition() << endl;
 }
 
 void State::modifyTurn(Playing tour) {
@@ -353,11 +353,35 @@ std::map<int, Box> State::getBoard() {
 
 
 void State::setCurrentPlayer(Player currentPlayer) {
-    int count = 0;
-    for (auto player: this->getListPlayer()) {
-        if (currentPlayer == player) {
-            this->indiceCurrentPlayer = count;
-        }
-        count++;
-    }
+    //this->turn=currentPlayer.
 }
+
+Player *State::getCurrentPlayerptr()  {
+
+    Player *currentPlayer;
+
+    Playing turn = this->turn;
+    if (turn == PLAYERA) {
+        currentPlayer = &listPlayer[0];
+    }
+    if (turn == PLAYERB) {
+        currentPlayer = &listPlayer[1];
+    }
+    if (turn == PLAYERC) {
+        currentPlayer = &listPlayer[2];
+    }
+    if (turn == PLAYERD) {
+        currentPlayer = &listPlayer[3];
+    }
+    if (turn == PLAYERE) {
+        currentPlayer = &listPlayer[4];
+    }
+    if (turn == PLAYERF) {
+        currentPlayer = &listPlayer[5];
+    }
+
+    return currentPlayer;
+}
+
+
+

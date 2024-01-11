@@ -21,7 +21,10 @@ void engine::Engine::addCommand(engine::Command *cmd) {
 }
 
 int engine::Engine::executeCommand() {
-
-    this->currentCommands[0]->execute(this->getState());
+    if(this->currentCommands.empty()== true){
+        return 0;
+    }
+    this->currentCommands.front()->execute(this->getState());
+    this->currentCommands.erase(this->currentCommands.begin());
     return 0;
 }

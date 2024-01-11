@@ -19,7 +19,7 @@ void engine::RollDicesCommand::rollDices(state::State &state) {
     std::random_device rd;
     std::mt19937 gen(rd());
     // Définit la plage de nombres aléatoires que vous voulez générer
-    std::uniform_int_distribution<> dis(1, 6); // Pour des nombres entre 1 et 100
+    std::uniform_int_distribution<> dis(1, 6); // Pour des nombres entre 1 et 6
     // Génère 2 entiers aléatoires
     int randomNumber1 = dis(gen);
     int randomNumber2 = dis(gen);
@@ -28,21 +28,21 @@ void engine::RollDicesCommand::rollDices(state::State &state) {
 
     /*Identification de la situation du joueur*/
 
-    state::Player playerCurrent = state.getCurrentPlayer();
+    state::Player* playerCurrent = state.getCurrentPlayerptr();
 
-    if (playerCurrent.getGameStatus() == state::PLAYINGFREE) {
+    if (playerCurrent->getGameStatus() == state::PLAYINGFREE) {
         if (state.getNbDouble() == 3) {
             moveInJail(state);
         } else {
             int score = state.getScoreDices();
-            int position = playerCurrent.getPosition();
-            int futurPosition = (position + score) % 40 + 1;
+            int position = playerCurrent->getPosition();
+            int futurPosition = (position + score) % 40 ;
             moveToken(state, position, futurPosition, true);
         }
     } else {
         if (state.getIsDouble()) {
             freeByDices(state);
-        } else if (playerCurrent.getNbTurnInJail() == 3) {
+        } else if (playerCurrent->getNbTurnInJail() == 3) {
             freeMandatory(state);
         }
     }
@@ -61,7 +61,7 @@ engine::RollDicesCommand::moveToken(state::State &state, int currentPosition, in
 
     if (futurPosition < 41 and futurPosition > 0) {
         state::Player playerCurrent = state.getCurrentPlayer();
-        state.modifyPosition(playerCurrent, futurPosition);
+        state.modifyPosition(&playerCurrent, futurPosition);
 
         std::map<int, state::Box> board = state.getBoard();
         state::Box currentBox = board.at(futurPosition);
@@ -283,6 +283,10 @@ void engine::RollDicesCommand::propertyBox(state::State &state, int position) {
         }
     }
 }
+
+engine::RollDicesCommand::RollDicesCommand(engine::CommandTypeId typeId) : Command(typeId) {}
+
+
 
 
 
