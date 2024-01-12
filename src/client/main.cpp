@@ -33,9 +33,7 @@ int main(int argc, char *argv[]) {
 
             Render *r;
             r = new Render(currentState);
-            while (r->getWindow().isOpen()) {
-                r->drawGame();
-            }
+            r->drawGame();
             // Add card
             /*sf::Texture cardTexture;
             if (!cardTexture.loadFromFile("./../res/ChanceCards/win_rugby.png")) {

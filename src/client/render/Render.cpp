@@ -104,7 +104,7 @@ void Render::drawChoosePlayer(int nbPlayer) {
                                           55 + float(160 * 4), 160));
     listButtonAction.addButton(new Button(100, 30, 30 + float(160 * 5), 160, "EXIT",
                                           55 + float(160 * 5), 160, sf::Color::Red));
-    sf::Vector2i cursorPos;
+    static sf::Vector2i cursorPos;
     vector<state::Player> listPlayerTmp;
 
     while (windowChoice.isOpen()) {
@@ -174,37 +174,40 @@ void Render::drawChoosePlayer(int nbPlayer) {
 
 
 void Render::drawGame() {
-    static sf::Event event{};
+    sf::Event event{};
     static sf::Vector2i cursorPos;
 
-    this->gameInfo->setPlayerInformation(this->currentState.getListPlayer());
-    this->gameInfo->setBankInformation(this->currentState.getBank());
+    while (this->window.isOpen()) {
+        this->gameInfo->setPlayerInformation(this->currentState.getListPlayer());
+        this->gameInfo->setBankInformation(this->currentState.getBank());
 
-    this->window.clear(sf::Color::White);
+        this->window.clear(sf::Color::White);
 
-    /* Control event */
-    while (this->window.pollEvent(event)) {
-        switch (event.type) {
-            case sf::Event::Closed:
-                this->window.close();
-                break;
-            case sf::Event::MouseButtonPressed:
-                if (event.mouseButton.button == sf::Mouse::Left) {
-                    cursorPos = sf::Mouse::getPosition(this->getWindow());
-                }
-                break;
-            case sf::Event::MouseMoved:
-                cursorPos = sf::Mouse::getPosition(this->window);
-                break;
-            default:
-                break;
+        /* Control event */
+        while (this->window.pollEvent(event)) {
+            switch (event.type) {
+                case sf::Event::Closed:
+                    this->window.close();
+                    break;
+                case sf::Event::MouseButtonPressed:
+                    this->gameInfo->setButtonInteractive();
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                        cursorPos = sf::Mouse::getPosition(this->getWindow());
+                    }
+                    break;
+                case sf::Event::MouseMoved:
+                    cursorPos = sf::Mouse::getPosition(this->window);
+                    break;
+                default:
+                    break;
+            }
         }
-    }
-    /* Display window with elements */
-    this->gameBoard->draw(this->window);
-    this->gameInfo->draw(this->window, cursorPos, event);
+        /* Display window with elements */
+        this->gameBoard->draw(this->window);
+        this->gameInfo->draw(this->window, cursorPos, event);
 
-    this->window.display();
+        this->window.display();
+    }
 }
 
 void Render::debt(int player) {

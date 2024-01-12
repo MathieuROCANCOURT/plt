@@ -54,6 +54,7 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, state::State currentSta
                                sf::Color::Red));
         }
     }
+    this->setButtonInteractive();
     this->listPlayer = this->currentState.getListPlayer();
     this->bank = this->currentState.getBank();
 
@@ -77,24 +78,28 @@ void GameInformation::setButtonInteractive() {
     static int startTurnIndex[6] = {0, 2, 3, 4, 5, 6};
     static int endTurnIndex[6] = {1, 2, 3, 4, 5, 6};
 
-    vector<Button *> startTurnButton;
-    vector<Button *> endTurnButton;
-
-    for (int index: startTurnIndex) {
-        startTurnButton.push_back(this->listButtonAction[index]);
-    }
-    for (int index: endTurnIndex) {
-        endTurnButton.push_back(this->listButtonAction[index]);
-    }
+    vector<Button *> TurnButton;
 
     if (this->buttonInteractive->getListButtons().empty() ||
         this->buttonInteractive->getFocus() == this->listButtonAction[1]) {
-        this->buttonInteractive->changeListButton(startTurnButton);
+        this->listButtonAction[1]->deselect();
+        for (int index: startTurnIndex) {
+            TurnButton.push_back(this->listButtonAction[index]);
+        }
+        this->buttonInteractive->changeListButton(TurnButton);
     } else if (this->buttonInteractive->getFocus() == this->listButtonAction[0]) {
-        this->buttonInteractive->changeListButton(endTurnButton);
+        this->listButtonAction[0]->deselect();
+        for (int index: endTurnIndex) {
+            TurnButton.push_back(this->listButtonAction[index]);
+        }
+        this->buttonInteractive->changeListButton(TurnButton);
     } else if (this->buttonInteractive->getFocus() == this->listButtonAction[6]) {
+        this->listButtonAction[6]->deselect();
         this->playerInfo->setListPlayer(this->currentState.getListPlayer());
-        this->buttonInteractive->changeListButton(startTurnButton);
+        for (int index: startTurnIndex) {
+            TurnButton.push_back(this->listButtonAction[index]);
+        }
+        this->buttonInteractive->changeListButton(TurnButton);
     }
 }
 
@@ -104,7 +109,6 @@ void GameInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos, sf:
     this->bankInfo->draw(window, cursorPos);
 
     /* Buttons Actions */
-    this->setButtonInteractive();
     this->buttonInteractive->draw(window, cursorPos, event);
 
     this->playerInfo->draw(window, cursorPos, event);
