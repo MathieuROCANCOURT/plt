@@ -9,9 +9,11 @@ BOOST_AUTO_TEST_CASE(TestStaticAssert) {
 BOOST_AUTO_TEST_CASE(TestButtonPlayer) {
     std::vector<state::Player> listPlayer{*new state::Player("TEST", state::BOAT)};
     state::State initState = *new state::State();
+    initState.addPlayer(*new state::Player("TEST", state::BOAT));
+
     render::GameInformation gameInformation = *new render::GameInformation(sf::Vector2u(0, 0), initState);
     for (int nbPlayer = 2; nbPlayer <= 6; nbPlayer++) {
-        listPlayer.push_back(*new state::Player("TEST", state::IRON));
+        listPlayer.push_back(*new state::Player("TEST1", state::IRON));
         gameInformation.setPlayerInformation(listPlayer);
         BOOST_CHECK_EQUAL(nbPlayer, gameInformation.getPlayerInformation().size());
     }
