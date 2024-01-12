@@ -109,4 +109,30 @@ BOOST_AUTO_TEST_CASE(TestFillColorCase) {
     BOOST_CHECK_EQUAL(sf::Color(0x66666FF).toInteger(), listC[27]->getSquare().getFillColor().toInteger());
 }
 
+BOOST_AUTO_TEST_CASE(TestSpriteToken) {
+    render::Token token = *new render::Token(state::BOAT);
+    BOOST_CHECK_EQUAL((int) token.getObj(), state::BOAT);
+}
+
+BOOST_AUTO_TEST_CASE(TestSpriteBoard) {
+    render::Board board = *new render::Board();
+    BOOST_CHECK_GT((int) board.getSize().x, 0);
+    BOOST_CHECK_GT((int) board.getSize().y, 0);
+}
+
+BOOST_AUTO_TEST_CASE(TestGameBoard) {
+    std::vector<state::Player> listPlayer{
+            *new state::Player("TEST", state::BOAT),
+            *new state::Player("TEST1", state::IRON),
+            *new state::Player("TEST2", state::CAR),
+            *new state::Player("TEST3", state::HAT),
+            *new state::Player("TEST4", state::DOG),
+            *new state::Player("TEST5", state::SHOE)
+    };
+
+    render::GameBoard board = *new render::GameBoard(listPlayer);
+    BOOST_CHECK_GT((int) board.getSizeBoard().x, 0);
+    BOOST_CHECK_GT((int) board.getSizeBoard().y, 0);
+}
+
 /* vim: set sw=2 sts=2 et : */

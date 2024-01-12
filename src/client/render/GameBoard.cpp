@@ -5,7 +5,7 @@ using namespace std;
 using namespace render;
 
 GameBoard::GameBoard(vector<state::Player> listPlayer) : listPlayer(std::move(listPlayer)) {
-    this->board = *new Board();
+    this->board = new Board();
     for (state::Player player: this->listPlayer) {
         this->dictTokenPlayer.emplace(new Token(player.getToken()), player);
     }
@@ -13,11 +13,11 @@ GameBoard::GameBoard(vector<state::Player> listPlayer) : listPlayer(std::move(li
 }
 
 sf::Vector2u GameBoard::getSizeBoard() {
-    return this->board.getSize();
+    return this->board->getSize();
 }
 
 sf::Sprite GameBoard::getSpriteBoard() {
-    return this->board.getSprite();
+    return this->board->getSprite();
 }
 
 void GameBoard::updatePos() {
@@ -32,8 +32,4 @@ void GameBoard::draw(sf::RenderWindow &window) {
     for (auto tokenPlayer: this->dictTokenPlayer) {
         tokenPlayer.first->draw(window);
     }
-}
-
-GameBoard::~GameBoard() {
-    delete this;
 }
