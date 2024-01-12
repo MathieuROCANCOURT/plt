@@ -32,12 +32,12 @@ void TextField::setFocus(sf::Vector2i cursorPos) {
     }
 }
 
-void TextField::setText(const std::string& string1) {
-    this->getText()->setStringText(string1);
+void TextField::setText(string string1) {
+    this->getText()->setStringText(std::move(string1));
     this->text = this->getText()->getStringText();
 }
 
-void TextField::setColor(const sf::Color & color) {
+void TextField::setColor(sf::Color color) {
     this->getRectangle().setFillColor(color);
 }
 

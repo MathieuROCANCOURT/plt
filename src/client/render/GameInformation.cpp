@@ -60,6 +60,11 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, state::State currentSta
 
     this->playerInfo = new PlayerInformation(this->listPlayer, this->sizeBoard);
     this->bankInfo = new BankInformation(this->bank, this->sizeBoard);
+
+    this->textInformation = new Text("Turn of" + this->currentState.getCurrentPlayer().getName() + ".",
+                                     float(this->sizeBoard.x * 1.2),
+                                     float(this->sizeBoard.y * 0.75),
+                                     20);
 }
 
 std::vector<state::Player> GameInformation::getPlayerInformation() {
@@ -80,19 +85,28 @@ void GameInformation::setButtonInteractive() {
 
     vector<Button *> TurnButton;
 
-    if (this->buttonInteractive->getListButtons().empty() ||
-        this->buttonInteractive->getFocus() == this->listButtonAction[1]) {
-        this->listButtonAction[1]->deselect();
-        for (int index: startTurnIndex) {
-            TurnButton.push_back(this->listButtonAction[index]);
-        }
-        this->buttonInteractive->changeListButton(TurnButton);
-    } else if (this->buttonInteractive->getFocus() == this->listButtonAction[0]) {
+    if (this->buttonInteractive->getFocus() == this->listButtonAction[0]) {
         this->listButtonAction[0]->deselect();
         for (int index: endTurnIndex) {
             TurnButton.push_back(this->listButtonAction[index]);
         }
         this->buttonInteractive->changeListButton(TurnButton);
+        this->textInformation->setStringText("Tu as obtenu " + to_string(this->currentState.getScoreDices()) + ", Double:" +
+                                                     to_string(this->currentState.getIsDouble()) + ", Nombre de double:" +
+                                                     to_string(this->currentState.getNbDouble()));
+    } else if (this->buttonInteractive->getListButtons().empty()) {
+        this->listButtonAction[1]->deselect();
+        for (int index: startTurnIndex) {
+            TurnButton.push_back(this->listButtonAction[index]);
+        }
+        this->buttonInteractive->changeListButton(TurnButton);
+    } else if (this->buttonInteractive->getFocus() == this->listButtonAction[1]){
+        this->listButtonAction[1]->deselect();
+        for (int index: startTurnIndex) {
+            TurnButton.push_back(this->listButtonAction[index]);
+        }
+        this->buttonInteractive->changeListButton(TurnButton);
+        this->textInformation->setStringText("Fin du tour de " + this->currentState.getCurrentPlayer().getName() + ".");
     } else if (this->buttonInteractive->getFocus() == this->listButtonAction[6]) {
         this->listButtonAction[6]->deselect();
         this->playerInfo->setListPlayer(this->currentState.getListPlayer());
@@ -100,6 +114,7 @@ void GameInformation::setButtonInteractive() {
             TurnButton.push_back(this->listButtonAction[index]);
         }
         this->buttonInteractive->changeListButton(TurnButton);
+        this->textInformation->setStringText("Abandon de " + this->currentState.getCurrentPlayer().getName() + ".");
     }
 }
 
@@ -117,6 +132,7 @@ void GameInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos, sf:
 
     this->playerInfo->draw(window, cursorPos, event);
     this->bankInfo->draw(window, cursorPos);
+    this->textInformation->draw(window);
 }
 
 GameInformation::~GameInformation() = default;

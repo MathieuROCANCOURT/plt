@@ -34,9 +34,9 @@ std::string Text::getStringText() {
     return this->text;
 }
 
-void Text::setStringText(const string& switchText){
-    this->text = switchText;
-    this->blocText.setString(switchText);
+void Text::setStringText(string switchText){
+    this->text = std::move(switchText);
+    this->blocText.setString(this->text);
 }
 
 void Text::draw(sf::RenderWindow & window) {
