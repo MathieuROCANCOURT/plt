@@ -60,8 +60,8 @@ engine::RollDicesCommand::moveToken(state::State &state, int currentPosition, in
     }
 
     if (futurPosition < 41 and futurPosition > 0) {
-        state::Player playerCurrent = state.getCurrentPlayer();
-        state.modifyPosition(&playerCurrent, futurPosition);
+        state::Player *playerCurrent = state.getCurrentPlayerptr();
+        playerCurrent->setPosition( futurPosition);
 
         std::map<int, state::Box> board = state.getBoard();
         state::Box currentBox = board.at(futurPosition);
