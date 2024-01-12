@@ -111,6 +111,10 @@ void GameInformation::draw(sf::RenderWindow &window, sf::Vector2i cursorPos, sf:
     /* Buttons Actions */
     this->buttonInteractive->draw(window, cursorPos, event);
 
+    if (event.type == sf::Event::MouseButtonReleased) {
+        this->setButtonInteractive();
+    }
+
     this->playerInfo->draw(window, cursorPos, event);
     this->bankInfo->draw(window, cursorPos);
 }

@@ -190,7 +190,6 @@ void Render::drawGame() {
                     this->window.close();
                     break;
                 case sf::Event::MouseButtonPressed:
-                    this->gameInfo->setButtonInteractive();
                     if (event.mouseButton.button == sf::Mouse::Left) {
                         cursorPos = sf::Mouse::getPosition(this->getWindow());
                     }
