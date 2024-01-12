@@ -50,6 +50,7 @@ Bank::Bank() : nbApart(32), nbHostel(12) {
     long long purchaseprice;
     long long rent[6];
     long long apparthostel;
+    //instanciation ville
     for (int i = 0; i < 22; i++) {
         std::getline(sstream, record);
         istringstream line(record);
@@ -71,7 +72,9 @@ Bank::Bank() : nbApart(32), nbHostel(12) {
 
         bankProperties.push_back(City(pos, name, purchaseprice, rent, color, apparthostel
         ));
+
     }
+    //instanciation gare
     long long rentStation[4];
     for (int i = 0; i < 4; i++) {
         std::getline(sstream, record);
@@ -91,6 +94,7 @@ Bank::Bank() : nbApart(32), nbHostel(12) {
         }
         bankProperties.push_back(Station(pos, name, purchaseprice, rentStation));
     }
+    //instanciation service
     for (int i = 0; i < 2; i++) {
         std::getline(sstream, record);
         istringstream line(record);
@@ -107,6 +111,7 @@ Bank::Bank() : nbApart(32), nbHostel(12) {
 
         bankProperties.push_back(Service(pos, name, purchaseprice));
     }
+
 }
 
 std::vector<Property> Bank::getBankProperties() {

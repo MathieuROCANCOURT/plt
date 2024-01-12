@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <state.h>
+#include "engine.h"
 #include "render.h"
 #include <cstring>
 #include <iostream>
@@ -34,6 +35,7 @@ int main(int argc, char *argv[]) {
             Render *r;
             r = new Render(currentState);
             r->drawGame();
+
             // Add card
             /*sf::Texture cardTexture;
             if (!cardTexture.loadFromFile("./../res/ChanceCards/win_rugby.png")) {

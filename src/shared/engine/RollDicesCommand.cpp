@@ -1,6 +1,7 @@
 #include "RollDicesCommand.h"
 #include <random>
 
+#include <iostream>
 
 void engine::RollDicesCommand::payTheBank(state::State &state, long long int valueMoney) {
     state::Player playerCurrent = state.getCurrentPlayer();
@@ -122,7 +123,7 @@ void engine::RollDicesCommand::communityBox(state::State &state) {
 void engine::RollDicesCommand::cardEffect(state::State &state, state::Card card) {
 
     state::Player playerCurrent = state.getCurrentPlayer();
-
+    std::cout<<card.getText()<<std::endl;
     if (card.getFreeJail()) {
         state.modifyNbFreeJailCard(playerCurrent, true);
         return;

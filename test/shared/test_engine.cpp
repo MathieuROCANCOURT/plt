@@ -48,8 +48,8 @@ BOOST_AUTO_TEST_CASE(Test_init_game_endturn) {
     theEngine->addCommand(&endturn);
     theEngine->executeCommand();
     //RollDicesCommand->rollDices(theEngine->state);
-    BOOST_CHECK_EQUAL(theEngine->getState().getCurrentPlayer().getName(),
-                      theEngine->getState().getListPlayer()[1].getName());
+    BOOST_CHECK_EQUAL(theEngine->getState().getCurrentPlayer().getIdPlayerTour(),
+                      theEngine->getState().getListPlayer()[1].getIdPlayerTour());
 
 }
 
@@ -74,6 +74,7 @@ BOOST_AUTO_TEST_CASE(Test_roll_dices) {
     //RollDicesCommand->rollDices(theEngine->state);
     int t1 = theEngine->getState().getCurrentPlayerptr()->getPosition();
     int t2 = 1 + theEngine->getState().getScoreDices();
+    std::cout<<t1<<std::endl;
     BOOST_CHECK_EQUAL(t1,t2);
 
 }
