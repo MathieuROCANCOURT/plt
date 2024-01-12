@@ -64,13 +64,16 @@ BOOST_AUTO_TEST_CASE(Test_roll_dices) {
     theEngine->addCommand(&initgame);
     theEngine->executeCommand();
 
+
+
     CommandTypeId a1 = ROLLDICES;
     RollDicesCommand roll = RollDicesCommand(a1);
     theEngine->addCommand(&roll);
     theEngine->executeCommand();
 
     //RollDicesCommand->rollDices(theEngine->state);
-    BOOST_CHECK_EQUAL(theEngine->getState().getCurrentPlayer().getPosition(),
-                      1+ theEngine->getState().getScoreDices());
+    int t1 = theEngine->getState().getCurrentPlayerptr()->getPosition();
+    int t2 = 1 + theEngine->getState().getScoreDices();
+    BOOST_CHECK_EQUAL(t1,t2);
 
 }
