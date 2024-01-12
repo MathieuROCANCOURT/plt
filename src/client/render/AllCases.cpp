@@ -1,3 +1,5 @@
+#include <sstream>
+#include <fstream>
 #include "AllCases.h"
 #include "config.h"
 
@@ -44,6 +46,33 @@ AllCases::AllCases(sf::Vector2u sizeBoard, vector<state::Property> listProperty,
         }
         posX_case += float(this->sizeBoard.x * 0.03);
     }
+
+    /*string path = RES_DIR;
+    // Lire fichier Bank.csv
+    auto fileContent = ostringstream{};
+    ifstream input_file(path + "CSV/Bank.csv");
+    if (!input_file.is_open()) {
+        perror("Could not open the file");
+        exit(EXIT_FAILURE);
+    }
+    fileContent << input_file.rdbuf();
+    istringstream sstream(fileContent.str());
+    //Variables to recuperate in csv file
+    string record, nameProperty;
+    int positionProperty;
+
+
+    for (int i = 0; i < 28; i++) {
+        getline(sstream, record);
+        istringstream line(record);
+        getline(line, record, ',');
+        positionProperty = stoi(record);
+        getline(line, record, ',');
+        nameProperty = record;
+        transform(nameProperty.begin(), nameProperty.end(), nameProperty.begin(), ::tolower);
+        getline(line, record, '\n');
+
+    }*/
 }
 
 std::vector<Cases *> AllCases::getListCases() {
@@ -132,16 +161,16 @@ void render::AllCases::hover(sf::RenderWindow &window, sf::Vector2i cursorPos) {
                     fileName += "PublicService/satellite";
                     break;
                 case 24:
-                    fileName += "Station/station_europe";
+                    fileName += "Station/station_lille";
                     break;
                 case 25:
-                    fileName += "Station/station_saint-charles";
+                    fileName += "Station/station_marseille";
                     break;
                 case 26:
-                    fileName += "Station/station_montparnasse";
+                    fileName += "Station/station_paris";
                     break;
                 case 27:
-                    fileName += "Station/station_part-dieu";
+                    fileName += "Station/station_lyon";
                     break;
                 default:
                     perror("Number error Case.");
