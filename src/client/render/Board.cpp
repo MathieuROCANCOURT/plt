@@ -20,3 +20,5 @@ sf::Sprite Board::getSprite() {
 sf::Vector2u Board::getSize(){
     return this->textureBoard.getSize();
 }
+
+Board::~Board() = default;

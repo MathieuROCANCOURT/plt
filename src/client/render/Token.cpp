@@ -59,3 +59,5 @@ void Token::posUpdate(state::Player player) {
 void Token::draw(sf::RenderWindow &window) {
     window.draw(this->sprite);
 }
+
+Token::~Token() = default;

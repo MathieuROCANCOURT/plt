@@ -61,7 +61,7 @@ GameInformation::GameInformation(sf::Vector2u sizeBoard, state::State currentSta
     this->playerInfo = new PlayerInformation(this->listPlayer, this->sizeBoard);
     this->bankInfo = new BankInformation(this->bank, this->sizeBoard);
 
-    this->textInformation = new Text("Turn of" + this->currentState.getCurrentPlayer().getName() + ".",
+    this->textInformation = new Text("Turn of " + this->currentState.getCurrentPlayer().getName() + ".",
                                      float(this->sizeBoard.x * 1.2),
                                      float(this->sizeBoard.y * 0.75),
                                      20);

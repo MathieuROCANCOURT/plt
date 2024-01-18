@@ -33,3 +33,5 @@ void GameBoard::draw(sf::RenderWindow &window) {
         tokenPlayer.first->draw(window);
     }
 }
+
+GameBoard::~GameBoard() = default;
