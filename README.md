@@ -15,6 +15,8 @@ Nous allons implémenter un Monopoly sur le modèle du Monopoly France de la ver
 
 Les ressources visuelles de notre projet se trouvent dans le dossier https://github.com/MathieuROCANCOURT/plt/tree/master/res.
 
+:warning: Les ressources visuelles sont protégées par MONOPOLY. Veuillez ne pas les employer à des fins commerciales.
+
 ## Rapport
 
 De plus amples détails sur nos étapes de développement sont fournies dans notre rapport, disponible en suivant le lien https://github.com/MathieuROCANCOURT/plt/blob/master/rapport/Rapport.md.
